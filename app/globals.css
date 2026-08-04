@@ -1,0 +1,222 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-highlight: var(--highlight);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  color-scheme: light;
+
+  /* ─── User Design System ─────────────────────────────────────────
+     Background:          Soft White      #FAFBFC
+     Surface/Cards:       Pure White      #FFFFFF
+     Secondary BG:        Light Gray      #F3F6F9
+     Primary:             Electric Blue   #2563EB
+     Secondary:           Indigo          #4F46E5
+     Accent:              Cyan            #06B6D4
+     Success:             Emerald         #10B981
+     Heading:             Rich Navy       #0F172A
+     Body Text:           Slate           #475569
+     Border:                              #E2E8F0
+     Hover:                               #1D4ED8
+  ─────────────────────────────────────────────────────────────── */
+
+  /* Backgrounds */
+  --background: oklch(0.985 0.003 250);   /* #FAFBFC soft white */
+  --card:        oklch(1 0 0);             /* #FFFFFF pure white */
+  --popover:     oklch(1 0 0);             /* #FFFFFF pure white */
+
+  /* Foreground — Rich Navy #0F172A for headings, high contrast */
+  --foreground:         oklch(0.16 0.040 255);
+  --card-foreground:    oklch(0.16 0.040 255);
+  --popover-foreground: oklch(0.16 0.040 255);
+
+  /* Primary — Electric Blue #2563EB */
+  --primary:            oklch(0.546 0.222 265);
+  --primary-foreground: oklch(1 0 0);
+
+  /* Secondary — Light Gray bg #F3F6F9 with Navy text */
+  --secondary:            oklch(0.964 0.005 250);
+  --secondary-foreground: oklch(0.16 0.040 255);
+
+  /* Muted — Light Gray */
+  --muted:            oklch(0.964 0.005 250);
+  --muted-foreground: oklch(0.455 0.038 255);   /* Slate #475569 */
+
+  /* Accent — Cyan #06B6D4 */
+  --accent:            oklch(0.964 0.005 250);
+  --accent-foreground: oklch(0.16 0.040 255);
+
+  --destructive: oklch(0.577 0.245 27.325);
+
+  /* Border #E2E8F0 */
+  --border: oklch(0.920 0.008 255);
+  --input:  oklch(0.920 0.008 255);
+  --ring:   oklch(0.546 0.222 265);   /* Electric Blue */
+
+  /* ─── Brand = Electric Blue #2563EB ─── */
+  --brand:            oklch(0.546 0.222 265);
+  --brand-foreground: oklch(1 0 0);
+
+  /* Hover = #1D4ED8 (darker blue) */
+  --brand-hover: oklch(0.480 0.222 265);
+
+  /* Highlight — Cyan #06B6D4 */
+  --highlight: oklch(0.717 0.148 210);
+
+  /* Ink = footer — Rich Navy #0F172A */
+  --ink:            oklch(0.16 0.040 255);
+  --ink-foreground: oklch(0.985 0.003 250);
+
+  /* Surface — Secondary BG #F3F6F9 */
+  --surface: oklch(0.964 0.005 250);
+
+  /* Success Emerald #10B981 */
+  --success: oklch(0.700 0.160 165);
+
+  /* Charts using palette */
+  --chart-1: oklch(0.546 0.222 265);   /* Electric Blue */
+  --chart-2: oklch(0.520 0.240 280);   /* Indigo */
+  --chart-3: oklch(0.717 0.148 210);   /* Cyan */
+  --chart-4: oklch(0.700 0.160 165);   /* Emerald */
+  --chart-5: oklch(0.16  0.040 255);   /* Navy */
+
+  --radius: 0.625rem;
+
+  /* Sidebar */
+  --sidebar:                    oklch(0.964 0.005 250);
+  --sidebar-foreground:         oklch(0.16  0.040 255);
+  --sidebar-primary:            oklch(0.546 0.222 265);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent:             oklch(0.920 0.008 255);
+  --sidebar-accent-foreground:  oklch(0.16  0.040 255);
+  --sidebar-border:             oklch(0.920 0.008 255);
+  --sidebar-ring:               oklch(0.546 0.222 265);
+}
+
+/* Dark mode intentionally disabled — design system light theme only */
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease both;
+}
+
+.animate-slide-left {
+  animation: slide-left 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-slide-right {
+  animation: slide-right 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-count-up {
+  animation: count-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animation-delay-100 { animation-delay: 100ms; }
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-300 { animation-delay: 300ms; }
+.animation-delay-400 { animation-delay: 400ms; }
+.animation-delay-500 { animation-delay: 500ms; }
+.animation-delay-600 { animation-delay: 600ms; }
+.animation-delay-700 { animation-delay: 700ms; }
+.animation-delay-800 { animation-delay: 800ms; }
