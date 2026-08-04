@@ -14,22 +14,9 @@ export const metadata: Metadata = {
   title: 'Ornitech — Expert AI Solutions & Software Development Services',
   description:
     'Ornitech builds reliable software, mobile, and web products, partnering with startups and enterprises to ship expert IT solutions that scale.',
-  generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
+    icon: '/logo.png',
+    shortcut: '/favicon.ico',
     apple: '/apple-icon.png',
   },
 }
