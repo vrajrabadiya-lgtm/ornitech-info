@@ -33,17 +33,24 @@ export function CaseStudies() {
   const visible = CASES.filter((c) => filter === "All" || c.category === filter)
 
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
-      <div className={`mx-auto max-w-2xl text-center transition-all duration-700 ${inView ? "animate-fade-up" : "opacity-0 translate-y-8"}`}>
-        <h2 className="text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
-          Our Work <span className="text-brand">Case Studies</span>
+    <section ref={ref as React.RefObject<HTMLElement>} className="relative mx-auto max-w-7xl px-5 py-20 lg:px-8">
+      {/* Ambient background */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="liquid-gradient animate-liquid-float absolute -left-24 top-1/4 h-[400px] w-[400px] opacity-55" />
+        <div className="liquid-gradient animate-liquid-float-slow absolute right-0 top-0 h-[350px] w-[350px] opacity-45" />
+        <div className="ambient-glow absolute right-0 bottom-0 h-[350px] w-[600px] opacity-50" />
+      </div>
+
+      <div className={`relative mx-auto max-w-2xl text-center transition-all duration-700 ${inView ? "animate-blur-in" : "opacity-0 translate-y-8"}`}>
+        <h2 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl glass-text-primary">
+          Our Work <span className="bg-gradient-to-r from-brand to-highlight bg-clip-text text-transparent">Case Studies</span>
         </h2>
-        <p className="mt-4 leading-relaxed text-muted-foreground">
+        <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
           Real products, real outcomes. A look at how we turn briefs into shipped, measurable results.
         </p>
       </div>
 
-      <div className="mt-8 flex flex-wrap justify-center gap-2.5">
+      <div className="relative mt-8 flex flex-wrap justify-center gap-2.5">
         {FILTERS.map((f) => (
           <button
             key={f}
@@ -51,8 +58,8 @@ export function CaseStudies() {
             onClick={() => setFilter(f)}
             className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300 ${
               filter === f
-                ? "bg-brand text-brand-foreground scale-105 shadow-md shadow-brand/20"
-                : "border border-border text-muted-foreground hover:border-brand hover:text-brand"
+                ? "glass-chip text-brand scale-105 shadow-md shadow-brand/20"
+                : "glass-chip text-muted-foreground hover:text-brand"
             }`}
           >
             {f}
@@ -60,15 +67,15 @@ export function CaseStudies() {
         ))}
       </div>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div className="relative mt-10 grid gap-6 md:grid-cols-2">
         {visible.map((c, i) => (
           <article
             key={c.title}
-            className="animate-scale-in group overflow-hidden rounded-3xl border border-border transition-all duration-500 hover:shadow-xl hover:shadow-brand/5 hover:-translate-y-1"
+            className="glass-card animate-scale-in group overflow-hidden rounded-[2rem] transition-all duration-500 hover:shadow-2xl hover:shadow-brand/10 hover:-translate-y-1"
             style={{ animationDelay: `${i * 100}ms` }}
           >
             <div className={`p-5 ${c.tint}`}>
-              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-3xl">
                 <Image
                   src={c.image || "/placeholder.svg"}
                   alt={c.title}
@@ -80,7 +87,7 @@ export function CaseStudies() {
             </div>
             <div className="p-6">
               <p className="text-[11px] font-semibold tracking-widest text-brand">{c.tag}</p>
-              <h3 className="mt-2 text-xl font-bold">{c.title}</h3>
+              <h3 className="mt-2 text-xl font-bold glass-text-primary">{c.title}</h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">{c.body}</p>
               <Link
                 href="/portfolio"
@@ -93,10 +100,10 @@ export function CaseStudies() {
         ))}
       </div>
 
-      <div className="mt-10 flex justify-center">
+      <div className="relative mt-10 flex justify-center">
         <Link
           href="/portfolio"
-          className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold transition-all hover:border-brand hover:text-brand hover:gap-3"
+          className="glass-chip inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-foreground transition-all hover:gap-3 hover:text-brand"
         >
           See our case studies <ArrowRight className="h-4 w-4" />
         </Link>

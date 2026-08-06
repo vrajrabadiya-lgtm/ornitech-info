@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import { 
-  ChevronDown, Menu, X, ArrowRight, 
+import {
+  ChevronDown, Menu, X, ArrowRight,
   HeartPulse, Landmark, ShoppingBag, GraduationCap, Plane, Building2, Truck, Clapperboard, Dumbbell, UtensilsCrossed, Factory, Store,
   Users, UserPlus, Briefcase, LayoutGrid, BookOpen, Mail
 } from "lucide-react"
@@ -14,701 +14,282 @@ export function SiteHeader() {
   const [activeMenu, setActiveMenu] = useState<"services" | "technologies" | "industries" | "company" | null>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null)
+  const [scrolled, setScrolled] = useState(false)
+  const headerRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) setActiveMenu(null)
+    }
+    document.addEventListener("mousedown", handleClick)
+    return () => document.removeEventListener("mousedown", handleClick)
+  }, [])
 
   return (
-    <header 
-      className="relative sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur-md"
+    <header
+      ref={headerRef}
+      className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-300",
+        scrolled ? "glass-nav shadow-sm" : "bg-white/80 backdrop-blur-md border-b border-white/50"
+      )}
       onMouseLeave={() => setActiveMenu(null)}
     >
-      <nav className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5 lg:px-8">
+      <nav className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-5 lg:px-8">
         {/* Logo */}
-        <Link href="/" aria-label="Ornitech home" onMouseEnter={() => setActiveMenu(null)}>
+        <Link href="/" aria-label="Ornitech home" onMouseEnter={() => setActiveMenu(null)} className="transition-transform duration-200 hover:scale-[1.02]">
           <Logo />
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Nav */}
         <ul className="hidden items-center gap-1 lg:flex">
-          {/* Services */}
-          <li onMouseEnter={() => setActiveMenu("services")}>
-            <Link
-              href="/services"
-              className={cn(
-                "flex items-center gap-1 rounded-md px-3.5 py-2 text-[15px] font-medium transition-colors hover:text-brand",
-                activeMenu === "services" ? "text-brand font-semibold" : "text-foreground/80"
-              )}
-            >
-              Services
-              <ChevronDown className={cn("h-4 w-4 text-muted-foreground transition-transform duration-200", activeMenu === "services" && "rotate-180 text-brand")} />
-            </Link>
-          </li>
-
-          {/* Technologies */}
-          <li onMouseEnter={() => setActiveMenu("technologies")}>
-            <Link
-              href="/technologies"
-              className={cn(
-                "flex items-center gap-1 rounded-md px-3.5 py-2 text-[15px] font-medium transition-colors hover:text-brand",
-                activeMenu === "technologies" ? "text-brand font-semibold" : "text-foreground/80"
-              )}
-            >
-              Technologies
-              <ChevronDown className={cn("h-4 w-4 text-muted-foreground transition-transform duration-200", activeMenu === "technologies" && "rotate-180 text-brand")} />
-            </Link>
-          </li>
-
-          {/* Industries */}
-          <li onMouseEnter={() => setActiveMenu("industries")}>
-            <Link
-              href="/industries"
-              className={cn(
-                "flex items-center gap-1 rounded-md px-3.5 py-2 text-[15px] font-medium transition-colors hover:text-brand",
-                activeMenu === "industries" ? "text-brand font-semibold" : "text-foreground/80"
-              )}
-            >
-              Industries
-              <ChevronDown className={cn("h-4 w-4 text-muted-foreground transition-transform duration-200", activeMenu === "industries" && "rotate-180 text-brand")} />
-            </Link>
-          </li>
-
-          {/* Portfolio */}
+          {(["services", "technologies", "industries"] as const).map((key) => (
+            <li key={key} onMouseEnter={() => setActiveMenu(key)}>
+              <Link
+                href={`/${key}`}
+                className={cn(
+                  "flex items-center gap-1 rounded-xl px-3.5 py-2 text-[14px] font-medium transition-all",
+                  activeMenu === key ? "text-brand bg-brand/5" : "text-foreground/75 hover:text-brand hover:bg-brand/5"
+                )}
+              >
+                {key.charAt(0).toUpperCase() + key.slice(1)}
+                <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform duration-200", activeMenu === key && "rotate-180 text-brand")} />
+              </Link>
+            </li>
+          ))}
           <li onMouseEnter={() => setActiveMenu(null)}>
-            <Link
-              href="/portfolio"
-              className="flex items-center gap-1 rounded-md px-3.5 py-2 text-[15px] font-medium text-foreground/80 transition-colors hover:text-brand"
-            >
+            <Link href="/portfolio" className="flex items-center rounded-xl px-3.5 py-2 text-[14px] font-medium text-foreground/75 transition-all hover:text-brand hover:bg-brand/5">
               Portfolio
             </Link>
           </li>
-
-          {/* Company */}
           <li onMouseEnter={() => setActiveMenu("company")}>
             <Link
               href="/about"
               className={cn(
-                "flex items-center gap-1 rounded-md px-3.5 py-2 text-[15px] font-medium transition-colors hover:text-brand",
-                activeMenu === "company" ? "text-brand font-semibold" : "text-foreground/80"
+                "flex items-center gap-1 rounded-xl px-3.5 py-2 text-[14px] font-medium transition-all",
+                activeMenu === "company" ? "text-brand bg-brand/5" : "text-foreground/75 hover:text-brand hover:bg-brand/5"
               )}
             >
               Company
-              <ChevronDown className={cn("h-4 w-4 text-muted-foreground transition-transform duration-200", activeMenu === "company" && "rotate-180 text-brand")} />
+              <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform duration-200", activeMenu === "company" && "rotate-180 text-brand")} />
             </Link>
           </li>
         </ul>
 
-        {/* Right CTA Buttons */}
-        <div className="hidden items-center gap-3 lg:flex" onMouseEnter={() => setActiveMenu(null)}>
-          <Link
-            href="/contact"
-            className="rounded-full border border-border px-5 py-2 text-sm font-semibold text-foreground transition-colors hover:border-brand hover:text-brand"
-          >
+        {/* CTA Buttons */}
+        <div className="hidden items-center gap-2.5 lg:flex" onMouseEnter={() => setActiveMenu(null)}>
+          <Link href="/contact" className="glass-chip rounded-full px-5 py-2 text-sm font-semibold text-foreground transition-all hover:text-brand">
             Hire Us
           </Link>
-          <Link
-            href="/contact"
-            className="rounded-full bg-brand px-5 py-2 text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand/90"
-          >
+          <Link href="/contact" className="rounded-full bg-brand px-5 py-2 text-sm font-semibold text-white shadow-md shadow-brand/20 transition-all hover:bg-brand/90 hover:shadow-lg hover:shadow-brand/25">
             Contact Us
           </Link>
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile toggle */}
         <button
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border lg:hidden"
+          className="glass-chip inline-flex h-10 w-10 items-center justify-center rounded-xl lg:hidden"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </nav>
 
-      {/* SINGLE ABSOLUTE CENTERED MEGA-MENU CONTAINER (Anchored to Header Center) */}
+      {/* Mega-menu panel */}
       <div
         className={cn(
-          "absolute left-1/2 top-[74px] z-50 w-[min(1100px,calc(100vw-2rem))] -translate-x-1/2 pt-2 transition-all duration-200",
+          "absolute left-1/2 top-[68px] z-50 w-[min(1100px,calc(100vw-2rem))] -translate-x-1/2 pt-2 transition-all duration-200",
           activeMenu !== null ? "visible opacity-100 translate-y-0 pointer-events-auto" : "invisible opacity-0 translate-y-2 pointer-events-none"
         )}
       >
-        <div className="overflow-hidden rounded-2xl border border-border bg-popover shadow-2xl">
-          {/* Services Card */}
+        <div className="overflow-hidden rounded-3xl border border-white/60 bg-white shadow-2xl shadow-blue-900/15" style={{ backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)" }}>
+
+          {/* Services */}
           {activeMenu === "services" && (
-            <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr]">
-              <div className="flex flex-col justify-between gap-6 bg-muted/40 p-7">
+            <div className="grid lg:grid-cols-[240px_1fr]">
+              <div className="flex flex-col justify-between gap-6 bg-gradient-to-b from-brand/5 to-brand/10 p-7">
                 <div>
                   <h3 className="text-lg font-bold text-foreground">Services</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Full-stack delivery across mobile, web, software, design, data, and cloud. A single partner for every layer of your product.
-                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Full-stack delivery across mobile, web, software, design, data, and cloud.</p>
                 </div>
-                <Link
-                  href="/services"
-                  onClick={() => setActiveMenu(null)}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-brand-foreground shadow-md transition-all hover:bg-brand/90 w-fit"
-                >
+                <Link href="/services" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-md w-fit transition-all hover:bg-brand/90">
                   Explore all <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
-
-              <div className="grid grid-cols-2 gap-x-2 gap-y-1.5 p-5">
-                <Link href="/services/web-development" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-black/5 font-mono text-xs font-bold text-foreground">N</span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Web Development</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Fast, SEO-ready web platforms.</span>
-                  </div>
-                </Link>
-
-                <Link href="/services/mobile-app-development" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 font-bold text-blue-600 text-xs">F</span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Mobile App Development</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Native & cross-platform iOS and Android.</span>
-                  </div>
-                </Link>
-
-                <Link href="/services/software-development" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 font-bold text-indigo-600 text-xs">TS</span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Software Development</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Custom, scalable software end to end.</span>
-                  </div>
-                </Link>
-
-                <Link href="/services/vibe-coding-development" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-purple-500/10 font-bold text-purple-600 text-xs">V</span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Vibe Coding Development</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Ship faster with AI-assisted development.</span>
-                  </div>
-                </Link>
-
-                <Link href="/services/ai-development-services" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 font-bold text-violet-600 text-xs">AI</span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">AI Development Services</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Build intelligent AI-powered products.</span>
-                  </div>
-                </Link>
-
-                <Link href="/services/ai-integration-services" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 font-bold text-amber-600 text-xs">🤖</span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">AI Integration Services</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Layer intelligence onto what you run.</span>
-                  </div>
-                </Link>
-
-                <Link href="/services/ui-ux-design" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-rose-500/10 font-bold text-rose-600 text-xs">🎨</span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">UI/UX Design</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Research-led, conversion-focused design.</span>
-                  </div>
-                </Link>
-
-                <Link href="/services/qa-testing" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 font-bold text-emerald-600 text-xs">Q</span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">QA & Testing Services</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Ship with confidence, every release.</span>
-                  </div>
-                </Link>
-
-                <Link href="/services/cloud-devops-security" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 font-bold text-amber-600 text-xs">☁️</span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Cloud, DevOps & Security</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Resilient infra, automated delivery.</span>
-                  </div>
-                </Link>
-
-                <Link href="/services/data-analytics" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-500/10 font-bold text-orange-600 text-xs">📊</span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Data Analytics</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Turn raw data into decisions.</span>
-                  </div>
-                </Link>
-
-                <Link href="/services/dedicated-development-team" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sky-500/10 font-bold text-sky-600 text-xs">D</span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Dedicated Development Team</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">A full team, exclusively yours.</span>
-                  </div>
-                </Link>
-
-                <Link href="/services/staff-augmentation" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 font-bold text-emerald-600 text-xs">S</span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Staff Augmentation</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Extend your team on demand.</span>
-                  </div>
-                </Link>
+              <div className="grid grid-cols-2 gap-x-2 gap-y-1 p-5">
+                {[
+                  { href: "/services/web-development", icon: "N", color: "bg-slate-100 text-slate-700", label: "Web Development", desc: "Fast, SEO-ready web platforms." },
+                  { href: "/services/mobile-app-development", icon: "F", color: "bg-blue-100 text-blue-700", label: "Mobile App Development", desc: "Native & cross-platform iOS and Android." },
+                  { href: "/services/software-development", icon: "TS", color: "bg-indigo-100 text-indigo-700", label: "Software Development", desc: "Custom, scalable software end to end." },
+                  { href: "/services/vibe-coding-development", icon: "V", color: "bg-purple-100 text-purple-700", label: "Vibe Coding Development", desc: "Ship faster with AI-assisted development." },
+                  { href: "/services/ai-development-services", icon: "AI", color: "bg-violet-100 text-violet-700", label: "AI Development Services", desc: "Build intelligent AI-powered products." },
+                  { href: "/services/ai-integration-services", icon: "🤖", color: "bg-amber-100 text-amber-700", label: "AI Integration Services", desc: "Layer intelligence onto what you run." },
+                  { href: "/services/ui-ux-design", icon: "🎨", color: "bg-rose-100 text-rose-700", label: "UI/UX Design", desc: "Research-led, conversion-focused design." },
+                  { href: "/services/qa-testing", icon: "Q", color: "bg-emerald-100 text-emerald-700", label: "QA & Testing Services", desc: "Ship with confidence, every release." },
+                  { href: "/services/cloud-devops-security", icon: "☁️", color: "bg-sky-100 text-sky-700", label: "Cloud, DevOps & Security", desc: "Resilient infra, automated delivery." },
+                  { href: "/services/data-analytics", icon: "📊", color: "bg-orange-100 text-orange-700", label: "Data Analytics", desc: "Turn raw data into decisions." },
+                  { href: "/services/dedicated-development-team", icon: "D", color: "bg-cyan-100 text-cyan-700", label: "Dedicated Development Team", desc: "A full team, exclusively yours." },
+                  { href: "/services/staff-augmentation", icon: "S", color: "bg-teal-100 text-teal-700", label: "Staff Augmentation", desc: "Extend your team on demand." },
+                ].map((item) => (
+                  <Link key={item.href} href={item.href} onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-2xl p-2.5 transition-colors hover:bg-brand/5">
+                    <span className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-xs font-bold ${item.color}`}>{item.icon}</span>
+                    <div>
+                      <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">{item.label}</span>
+                      <span className="mt-0.5 block text-xs text-muted-foreground">{item.desc}</span>
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
           )}
 
-          {/* Technologies Card */}
+          {/* Technologies */}
           {activeMenu === "technologies" && (
-            <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr]">
-              <div className="flex flex-col justify-between gap-6 bg-muted/40 p-7">
+            <div className="grid lg:grid-cols-[240px_1fr]">
+              <div className="flex flex-col justify-between gap-6 bg-gradient-to-b from-brand/5 to-brand/10 p-7">
                 <div>
                   <h3 className="text-lg font-bold text-foreground">Technologies</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Empowering innovation with modern technologies across frontend, backend, mobile, and cloud, built to scale and adapt to your business.
-                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Modern stack across frontend, backend, mobile, and cloud.</p>
                 </div>
-                <Link
-                  href="/technologies"
-                  onClick={() => setActiveMenu(null)}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-brand-foreground shadow-md transition-all hover:bg-brand/90 w-fit"
-                >
+                <Link href="/technologies" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-md w-fit transition-all hover:bg-brand/90">
                   Explore all <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
-
               <div className="grid grid-cols-3 gap-x-8 gap-y-6 p-7">
-                <div>
-                  <Link href="/technologies/front-end" onClick={() => setActiveMenu(null)} className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-brand">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-sky-500/10 text-sky-500 font-bold text-xs">⚛</span> Front-End
-                  </Link>
-                  <ul className="mt-3 space-y-2 pl-[36px]">
-                    <li><Link href="/technologies/front-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">React</Link></li>
-                    <li><Link href="/technologies/front-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Angular</Link></li>
-                    <li><Link href="/technologies/front-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Vue.js</Link></li>
-                    <li><Link href="/technologies/front-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Next.js</Link></li>
-                    <li><Link href="/technologies/front-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">.NET</Link></li>
-                    <li><Link href="/technologies/front-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">HTML/CSS</Link></li>
-                    <li><Link href="/technologies/front-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">TypeScript</Link></li>
-                    <li><Link href="/technologies/front-end" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:underline">View All →</Link></li>
-                  </ul>
-                </div>
-
-                <div>
-                  <Link href="/technologies/back-end" onClick={() => setActiveMenu(null)} className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-brand">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 font-bold text-xs">🟢</span> Back-End
-                  </Link>
-                  <ul className="mt-3 space-y-2 pl-[36px]">
-                    <li><Link href="/technologies/back-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Node.Js</Link></li>
-                    <li><Link href="/technologies/back-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">NestJS</Link></li>
-                    <li><Link href="/technologies/back-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Python</Link></li>
-                    <li><Link href="/technologies/back-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Express</Link></li>
-                    <li><Link href="/technologies/back-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">.NET</Link></li>
-                    <li><Link href="/technologies/back-end" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">GraphQL</Link></li>
-                    <li><Link href="/technologies/back-end" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:underline">View All →</Link></li>
-                  </ul>
-                </div>
-
-                <div>
-                  <Link href="/technologies/database" onClick={() => setActiveMenu(null)} className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-brand">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-600 font-bold text-xs">🛢</span> Database
-                  </Link>
-                  <ul className="mt-3 space-y-2 pl-[36px]">
-                    <li><Link href="/technologies/database" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">PostgreSQL</Link></li>
-                    <li><Link href="/technologies/database" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">MongoDB</Link></li>
-                    <li><Link href="/technologies/database" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">MySQL</Link></li>
-                    <li><Link href="/technologies/database" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Firebase</Link></li>
-                    <li><Link href="/technologies/database" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">SQLite</Link></li>
-                    <li><Link href="/technologies/database" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Supabase</Link></li>
-                    <li><Link href="/technologies/database" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:underline">View All →</Link></li>
-                  </ul>
-                </div>
-
-                <div>
-                  <Link href="/technologies/ui-ux-design" onClick={() => setActiveMenu(null)} className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-brand">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-rose-500/10 text-rose-600 font-bold text-xs">❖</span> UI/UX Design
-                  </Link>
-                  <ul className="mt-3 space-y-2 pl-[36px]">
-                    <li><Link href="/technologies/ui-ux-design" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Figma</Link></li>
-                    <li><Link href="/technologies/ui-ux-design" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Adobe XD</Link></li>
-                    <li><Link href="/technologies/ui-ux-design" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Photoshop</Link></li>
-                    <li><Link href="/technologies/ui-ux-design" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Sketch</Link></li>
-                    <li><Link href="/technologies/ui-ux-design" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Balsamiq</Link></li>
-                    <li><Link href="/technologies/ui-ux-design" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:underline">View All →</Link></li>
-                  </ul>
-                </div>
-
-                <div>
-                  <Link href="/technologies/mobile" onClick={() => setActiveMenu(null)} className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-brand">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-500/10 text-blue-600 font-bold text-xs">📱</span> Mobile App
-                  </Link>
-                  <ul className="mt-3 space-y-2 pl-[36px]">
-                    <li><Link href="/technologies/mobile" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Flutter</Link></li>
-                    <li><Link href="/technologies/mobile" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">React Native</Link></li>
-                    <li><Link href="/technologies/mobile" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Kotlin</Link></li>
-                    <li><Link href="/technologies/mobile" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Android</Link></li>
-                    <li><Link href="/technologies/mobile" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Swift</Link></li>
-                    <li><Link href="/technologies/mobile" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:underline">View All →</Link></li>
-                  </ul>
-                </div>
-
-                <div>
-                  <Link href="/technologies/cloud-services" onClick={() => setActiveMenu(null)} className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-brand">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-500/10 text-amber-600 font-bold text-xs">☁</span> Cloud Services
-                  </Link>
-                  <ul className="mt-3 space-y-2 pl-[36px]">
-                    <li><Link href="/technologies/cloud-services" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">AWS EC2</Link></li>
-                    <li><Link href="/technologies/cloud-services" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">AWS S3</Link></li>
-                    <li><Link href="/technologies/cloud-services" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">AWS Lambda</Link></li>
-                    <li><Link href="/technologies/cloud-services" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">Microsoft Azure</Link></li>
-                    <li><Link href="/technologies/cloud-services" onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">GCP</Link></li>
-                    <li><Link href="/technologies/cloud-services" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:underline">View All →</Link></li>
-                  </ul>
-                </div>
+                {[
+                  { href: "/technologies/front-end", icon: "⚛", color: "bg-sky-100 text-sky-600", label: "Front-End", items: ["React", "Angular", "Vue.js", "Next.js", "TypeScript", "HTML/CSS"] },
+                  { href: "/technologies/back-end", icon: "🟢", color: "bg-emerald-100 text-emerald-600", label: "Back-End", items: ["Node.js", "NestJS", "Python", "Express", ".NET", "GraphQL"] },
+                  { href: "/technologies/database", icon: "🛢", color: "bg-indigo-100 text-indigo-600", label: "Database", items: ["PostgreSQL", "MongoDB", "MySQL", "Firebase", "Supabase", "SQLite"] },
+                  { href: "/technologies/ui-ux-design", icon: "❖", color: "bg-rose-100 text-rose-600", label: "UI/UX Design", items: ["Figma", "Adobe XD", "Photoshop", "Sketch", "Balsamiq"] },
+                  { href: "/technologies/mobile", icon: "📱", color: "bg-blue-100 text-blue-600", label: "Mobile App", items: ["Flutter", "React Native", "Kotlin", "Android", "Swift"] },
+                  { href: "/technologies/cloud-services", icon: "☁", color: "bg-amber-100 text-amber-600", label: "Cloud Services", items: ["AWS EC2", "AWS S3", "AWS Lambda", "Azure", "GCP"] },
+                ].map((cat) => (
+                  <div key={cat.href}>
+                    <Link href={cat.href} onClick={() => setActiveMenu(null)} className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-brand">
+                      <span className={`flex h-7 w-7 items-center justify-center rounded-lg text-xs font-bold ${cat.color}`}>{cat.icon}</span>
+                      {cat.label}
+                    </Link>
+                    <ul className="mt-3 space-y-1.5 pl-9">
+                      {cat.items.map((item) => (
+                        <li key={item}><Link href={cat.href} onClick={() => setActiveMenu(null)} className="text-xs text-muted-foreground hover:text-brand">{item}</Link></li>
+                      ))}
+                      <li><Link href={cat.href} onClick={() => setActiveMenu(null)} className="text-xs font-semibold text-brand hover:underline">View All →</Link></li>
+                    </ul>
+                  </div>
+                ))}
               </div>
             </div>
           )}
 
-          {/* Industries Card */}
+          {/* Industries */}
           {activeMenu === "industries" && (
-            <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr]">
-              <div className="flex flex-col justify-between gap-6 bg-muted/40 p-7">
+            <div className="grid lg:grid-cols-[240px_1fr]">
+              <div className="flex flex-col justify-between gap-6 bg-gradient-to-b from-brand/5 to-brand/10 p-7">
                 <div>
                   <h3 className="text-lg font-bold text-foreground">Industries</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Deep domain expertise across 12+ verticals. Software solutions shaped around how your industry actually works.
-                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Deep domain expertise across 12+ verticals.</p>
                 </div>
-                <Link
-                  href="/industries"
-                  onClick={() => setActiveMenu(null)}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-brand-foreground shadow-md transition-all hover:bg-brand/90 w-fit"
-                >
+                <Link href="/industries" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-md w-fit transition-all hover:bg-brand/90">
                   View all <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
-
               <div className="grid grid-cols-3 gap-x-3 gap-y-2 p-5">
-                <Link href="/industries/healthcare-medtech" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-500/10 text-red-500">
-                    <HeartPulse className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Healthcare & MedTech</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Patient portals, EMR, telehealth</span>
-                  </div>
-                </Link>
-
-                <Link href="/industries/fintech-banking" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500">
-                    <Landmark className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Fintech & Banking</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Payments, lending, trading platforms</span>
-                  </div>
-                </Link>
-
-                <Link href="/industries/ecommerce-retail" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-purple-500/10 text-purple-500">
-                    <ShoppingBag className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">E-commerce & Retail</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Storefronts, inventory, checkout</span>
-                  </div>
-                </Link>
-
-                <Link href="/industries/education-edtech" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500">
-                    <GraduationCap className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Education & EdTech</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">LMS, assessments, virtual classrooms</span>
-                  </div>
-                </Link>
-
-                <Link href="/industries/travel-hospitality" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-500">
-                    <Plane className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Travel & Hospitality</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Booking engines, OTA, hotel management</span>
-                  </div>
-                </Link>
-
-                <Link href="/industries/real-estate-proptech" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-500">
-                    <Building2 className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Real Estate & PropTech</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Listings, CRM, virtual tours</span>
-                  </div>
-                </Link>
-
-                <Link href="/industries/logistics-supply-chain" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-500/10 text-orange-500">
-                    <Truck className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Logistics & Supply Chain</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Fleet tracking, WMS, last-mile delivery</span>
-                  </div>
-                </Link>
-
-                <Link href="/industries/media-entertainment" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-pink-500/10 text-pink-500">
-                    <Clapperboard className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Media & Entertainment</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Streaming, CMS, OTT platforms</span>
-                  </div>
-                </Link>
-
-                <Link href="/industries/fitness-wellness" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-500/10 text-teal-500">
-                    <Dumbbell className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Fitness & Wellness</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Workout apps, wearables, nutrition</span>
-                  </div>
-                </Link>
-
-                <Link href="/industries/food-restaurant" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-rose-500/10 text-rose-500">
-                    <UtensilsCrossed className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Food & Restaurant</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Online ordering, delivery, POS systems</span>
-                  </div>
-                </Link>
-
-                <Link href="/industries/manufacturing" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-500/10 text-slate-500">
-                    <Factory className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Manufacturing</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">ERP, IoT integration, production ops</span>
-                  </div>
-                </Link>
-
-                <Link href="/industries/on-demand-marketplace" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-500">
-                    <Store className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">On-Demand Marketplace</span>
-                    <span className="mt-0.5 block text-xs text-muted-foreground">Multi-vendor, gig, and delivery apps</span>
-                  </div>
-                </Link>
+                {[
+                  { href: "/industries/healthcare-medtech", Icon: HeartPulse, color: "bg-red-100 text-red-600", label: "Healthcare & MedTech", desc: "Patient portals, EMR, telehealth" },
+                  { href: "/industries/fintech-banking", Icon: Landmark, color: "bg-blue-100 text-blue-600", label: "Fintech & Banking", desc: "Payments, lending, trading" },
+                  { href: "/industries/ecommerce-retail", Icon: ShoppingBag, color: "bg-purple-100 text-purple-600", label: "E-commerce & Retail", desc: "Storefronts, inventory, checkout" },
+                  { href: "/industries/education-edtech", Icon: GraduationCap, color: "bg-amber-100 text-amber-600", label: "Education & EdTech", desc: "LMS, assessments, classrooms" },
+                  { href: "/industries/travel-hospitality", Icon: Plane, color: "bg-cyan-100 text-cyan-600", label: "Travel & Hospitality", desc: "Booking engines, hotel management" },
+                  { href: "/industries/real-estate-proptech", Icon: Building2, color: "bg-emerald-100 text-emerald-600", label: "Real Estate & PropTech", desc: "Listings, CRM, virtual tours" },
+                  { href: "/industries/logistics-supply-chain", Icon: Truck, color: "bg-orange-100 text-orange-600", label: "Logistics & Supply Chain", desc: "Fleet tracking, WMS, delivery" },
+                  { href: "/industries/media-entertainment", Icon: Clapperboard, color: "bg-pink-100 text-pink-600", label: "Media & Entertainment", desc: "Streaming, CMS, OTT platforms" },
+                  { href: "/industries/fitness-wellness", Icon: Dumbbell, color: "bg-teal-100 text-teal-600", label: "Fitness & Wellness", desc: "Workout apps, wearables" },
+                  { href: "/industries/food-restaurant", Icon: UtensilsCrossed, color: "bg-rose-100 text-rose-600", label: "Food & Restaurant", desc: "Ordering, delivery, POS" },
+                  { href: "/industries/manufacturing", Icon: Factory, color: "bg-slate-100 text-slate-600", label: "Manufacturing", desc: "ERP, IoT, production ops" },
+                  { href: "/industries/on-demand-marketplace", Icon: Store, color: "bg-violet-100 text-violet-600", label: "On-Demand Marketplace", desc: "Multi-vendor, gig apps" },
+                ].map(({ href, Icon, color, label, desc }) => (
+                  <Link key={href} href={href} onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-2xl p-2.5 transition-colors hover:bg-brand/5">
+                    <span className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl ${color}`}><Icon className="h-4 w-4" /></span>
+                    <div>
+                      <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">{label}</span>
+                      <span className="mt-0.5 block text-xs text-muted-foreground">{desc}</span>
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
           )}
 
-          {/* Company Card */}
+          {/* Company */}
           {activeMenu === "company" && (
-            <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr]">
-              <div className="flex flex-col justify-between gap-6 bg-muted/40 p-7">
+            <div className="grid lg:grid-cols-[240px_1fr]">
+              <div className="flex flex-col justify-between gap-6 bg-gradient-to-b from-brand/5 to-brand/10 p-7">
                 <div>
                   <h3 className="text-lg font-bold text-foreground">Company</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    A software agency built on craft and reliability, partnering with startups and enterprises since day one.
-                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">A software agency built on craft and reliability.</p>
                 </div>
-                <Link
-                  href="/contact"
-                  onClick={() => setActiveMenu(null)}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-brand-foreground shadow-md transition-all hover:bg-brand/90 w-fit"
-                >
+                <Link href="/contact" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-md w-fit transition-all hover:bg-brand/90">
                   Get in touch <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
-
               <div className="grid grid-cols-2 gap-4 p-6">
-                <Link href="/about" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-accent">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-600">
-                    <Users className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">About Us</span>
-                    <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">Our story, mission, and the team behind the work</span>
-                  </div>
-                </Link>
-
-                <Link href="/contact" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-accent">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-orange-600">
-                    <UserPlus className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Hire Us</span>
-                    <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">Bring our engineers and designers onto your project</span>
-                  </div>
-                </Link>
-
-                <Link href="/careers" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-accent">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600">
-                    <Briefcase className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Careers</span>
-                    <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">Open roles. Join a team that ships great software.</span>
-                  </div>
-                </Link>
-
-                <Link href="/portfolio" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-accent">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-purple-500/10 text-purple-600">
-                    <LayoutGrid className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Portfolio</span>
-                    <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">Case studies and work we are proud of</span>
-                  </div>
-                </Link>
-
-                <Link href="/blog" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-accent">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600">
-                    <BookOpen className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Blog</span>
-                    <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">Insights, tutorials, and engineering articles</span>
-                  </div>
-                </Link>
-
-                <Link href="/contact" onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-accent">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-600">
-                    <Mail className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">Contact</span>
-                    <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">Talk to us. Offices in Canada, India, and Ireland.</span>
-                  </div>
-                </Link>
+                {[
+                  { href: "/about", Icon: Users, color: "bg-blue-100 text-blue-600", label: "About Us", desc: "Our story, mission, and the team" },
+                  { href: "/contact", Icon: UserPlus, color: "bg-orange-100 text-orange-600", label: "Hire Us", desc: "Bring our engineers onto your project" },
+                  { href: "/careers", Icon: Briefcase, color: "bg-emerald-100 text-emerald-600", label: "Careers", desc: "Open roles. Join our team." },
+                  { href: "/portfolio", Icon: LayoutGrid, color: "bg-purple-100 text-purple-600", label: "Portfolio", desc: "Case studies and work we're proud of" },
+                  { href: "/blog", Icon: BookOpen, color: "bg-amber-100 text-amber-600", label: "Blog", desc: "Insights, tutorials, engineering articles" },
+                  { href: "/contact", Icon: Mail, color: "bg-cyan-100 text-cyan-600", label: "Contact", desc: "Offices in Canada, India, and Ireland" },
+                ].map(({ href, Icon, color, label, desc }) => (
+                  <Link key={label} href={href} onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-2xl p-3 transition-colors hover:bg-brand/5">
+                    <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${color}`}><Icon className="h-4 w-4" /></span>
+                    <div>
+                      <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">{label}</span>
+                      <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">{desc}</span>
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
           )}
         </div>
       </div>
 
-      {/* Mobile Drawer Navigation */}
-      <div className={cn("border-t border-border bg-background lg:hidden", mobileOpen ? "block" : "hidden")}>
-        <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4" aria-label="Mobile">
-          <Link href="/" onClick={() => setMobileOpen(false)} className="rounded-lg px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted">
-            Home
-          </Link>
-
-          <div>
-            <button
-              onClick={() => setMobileSubmenu(mobileSubmenu === "services" ? null : "services")}
-              className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted"
-            >
-              <span>Services</span>
-              <ChevronDown className={cn("h-4 w-4 transition-transform", mobileSubmenu === "services" && "rotate-180")} />
-            </button>
-            {mobileSubmenu === "services" && (
-              <div className="ml-3 mt-1 flex flex-col border-l border-border pl-3 space-y-1">
-                <Link href="/services" onClick={() => setMobileOpen(false)} className="py-1 text-xs font-semibold text-brand">
-                  Explore all Services →
-                </Link>
-                <Link href="/services/web-development" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Web Development</Link>
-                <Link href="/services/mobile-app-development" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Mobile App Development</Link>
-                <Link href="/services/software-development" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Software Development</Link>
-                <Link href="/services/vibe-coding-development" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Vibe Coding Development</Link>
-                <Link href="/services/ai-development-services" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">AI Development Services</Link>
-                <Link href="/services/ai-integration-services" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">AI Integration Services</Link>
-                <Link href="/services/ui-ux-design" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">UI/UX Design</Link>
-                <Link href="/services/qa-testing" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">QA & Testing Services</Link>
-                <Link href="/services/cloud-devops-security" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Cloud, DevOps & Security</Link>
-                <Link href="/services/data-analytics" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Data Analytics</Link>
-                <Link href="/services/dedicated-development-team" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Dedicated Development Team</Link>
-                <Link href="/services/staff-augmentation" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Staff Augmentation</Link>
-              </div>
-            )}
-          </div>
-
-          <div>
-            <button
-              onClick={() => setMobileSubmenu(mobileSubmenu === "technologies" ? null : "technologies")}
-              className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted"
-            >
-              <span>Technologies</span>
-              <ChevronDown className={cn("h-4 w-4 transition-transform", mobileSubmenu === "technologies" && "rotate-180")} />
-            </button>
-            {mobileSubmenu === "technologies" && (
-              <div className="ml-3 mt-1 flex flex-col border-l border-border pl-3 space-y-1">
-                <Link href="/technologies" onClick={() => setMobileOpen(false)} className="py-1 text-xs font-semibold text-brand">
-                  Explore all Technologies →
-                </Link>
-                <Link href="/technologies/front-end" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Front-End</Link>
-                <Link href="/technologies/back-end" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Back-End</Link>
-                <Link href="/technologies/database" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Database</Link>
-                <Link href="/technologies/ui-ux-design" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">UI/UX Design</Link>
-                <Link href="/technologies/mobile" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Mobile App</Link>
-                <Link href="/technologies/cloud-services" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Cloud Services</Link>
-              </div>
-            )}
-          </div>
-
-          <div>
-            <button
-              onClick={() => setMobileSubmenu(mobileSubmenu === "industries" ? null : "industries")}
-              className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted"
-            >
-              <span>Industries</span>
-              <ChevronDown className={cn("h-4 w-4 transition-transform", mobileSubmenu === "industries" && "rotate-180")} />
-            </button>
-            {mobileSubmenu === "industries" && (
-              <div className="ml-3 mt-1 flex flex-col border-l border-border pl-3 space-y-1">
-                <Link href="/industries" onClick={() => setMobileOpen(false)} className="py-1 text-xs font-semibold text-brand">
-                  View all Industries →
-                </Link>
-                <Link href="/industries/healthcare-medtech" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Healthcare & MedTech</Link>
-                <Link href="/industries/fintech-banking" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Fintech & Banking</Link>
-                <Link href="/industries/ecommerce-retail" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">E-commerce & Retail</Link>
-                <Link href="/industries/education-edtech" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Education & EdTech</Link>
-                <Link href="/industries/travel-hospitality" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Travel & Hospitality</Link>
-                <Link href="/industries/real-estate-proptech" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Real Estate & PropTech</Link>
-                <Link href="/industries/logistics-supply-chain" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Logistics & Supply Chain</Link>
-                <Link href="/industries/media-entertainment" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Media & Entertainment</Link>
-                <Link href="/industries/fitness-wellness" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Fitness & Wellness</Link>
-                <Link href="/industries/food-restaurant" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Food & Restaurant</Link>
-                <Link href="/industries/manufacturing" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Manufacturing</Link>
-                <Link href="/industries/on-demand-marketplace" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">On-Demand Marketplace</Link>
-              </div>
-            )}
-          </div>
-
-          <Link href="/portfolio" onClick={() => setMobileOpen(false)} className="rounded-lg px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted">
-            Portfolio
-          </Link>
-
-          <div>
-            <button
-              onClick={() => setMobileSubmenu(mobileSubmenu === "company" ? null : "company")}
-              className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted"
-            >
-              <span>Company</span>
-              <ChevronDown className={cn("h-4 w-4 transition-transform", mobileSubmenu === "company" && "rotate-180")} />
-            </button>
-            {mobileSubmenu === "company" && (
-              <div className="ml-3 mt-1 flex flex-col border-l border-border pl-3 space-y-1">
-                <Link href="/about" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">About Us</Link>
-                <Link href="/contact" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Hire Us</Link>
-                <Link href="/careers" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Careers</Link>
-                <Link href="/portfolio" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Portfolio</Link>
-                <Link href="/blog" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Blog</Link>
-                <Link href="/contact" onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">Contact</Link>
-              </div>
-            )}
-          </div>
-
-          <div className="mt-4 flex flex-col gap-2 pt-2 border-t border-border">
-            <Link
-              href="/contact"
-              onClick={() => setMobileOpen(false)}
-              className="rounded-full bg-brand px-5 py-2.5 text-center text-sm font-semibold text-brand-foreground"
-            >
-              Contact Us
-            </Link>
+      {/* Mobile drawer */}
+      <div className={cn("border-t border-white/40 bg-white/90 backdrop-blur-xl lg:hidden", mobileOpen ? "block" : "hidden")}>
+        <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
+          <Link href="/" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold text-foreground hover:bg-brand/5 hover:text-brand">Home</Link>
+          {[
+            { key: "services", label: "Services", href: "/services", items: [["Web Development","/services/web-development"],["Mobile App Development","/services/mobile-app-development"],["Software Development","/services/software-development"],["AI Development Services","/services/ai-development-services"],["AI Integration Services","/services/ai-integration-services"],["UI/UX Design","/services/ui-ux-design"],["QA & Testing","/services/qa-testing"],["Cloud, DevOps & Security","/services/cloud-devops-security"],["Data Analytics","/services/data-analytics"],["Dedicated Team","/services/dedicated-development-team"],["Staff Augmentation","/services/staff-augmentation"]] },
+            { key: "technologies", label: "Technologies", href: "/technologies", items: [["Front-End","/technologies/front-end"],["Back-End","/technologies/back-end"],["Database","/technologies/database"],["UI/UX Design","/technologies/ui-ux-design"],["Mobile App","/technologies/mobile"],["Cloud Services","/technologies/cloud-services"]] },
+            { key: "industries", label: "Industries", href: "/industries", items: [["Healthcare & MedTech","/industries/healthcare-medtech"],["Fintech & Banking","/industries/fintech-banking"],["E-commerce & Retail","/industries/ecommerce-retail"],["Education & EdTech","/industries/education-edtech"],["Travel & Hospitality","/industries/travel-hospitality"],["Logistics","/industries/logistics-supply-chain"],["Fitness & Wellness","/industries/fitness-wellness"],["Food & Restaurant","/industries/food-restaurant"]] },
+            { key: "company", label: "Company", href: "/about", items: [["About Us","/about"],["Careers","/careers"],["Blog","/blog"],["Portfolio","/portfolio"],["Contact","/contact"]] },
+          ].map(({ key, label, href, items }) => (
+            <div key={key}>
+              <button onClick={() => setMobileSubmenu(mobileSubmenu === key ? null : key)} className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-semibold text-foreground hover:bg-brand/5 hover:text-brand">
+                <span>{label}</span>
+                <ChevronDown className={cn("h-4 w-4 transition-transform", mobileSubmenu === key && "rotate-180")} />
+              </button>
+              {mobileSubmenu === key && (
+                <div className="ml-3 mt-1 flex flex-col border-l border-border pl-3 space-y-0.5">
+                  <Link href={href} onClick={() => setMobileOpen(false)} className="py-1 text-xs font-semibold text-brand">View all →</Link>
+                  {items.map(([name, path]) => (
+                    <Link key={path} href={path} onClick={() => setMobileOpen(false)} className="py-1 text-xs text-muted-foreground hover:text-foreground">{name}</Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+          <Link href="/portfolio" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold text-foreground hover:bg-brand/5 hover:text-brand">Portfolio</Link>
+          <div className="mt-3 flex flex-col gap-2 border-t border-border pt-3">
+            <Link href="/contact" onClick={() => setMobileOpen(false)} className="rounded-full bg-brand px-5 py-2.5 text-center text-sm font-semibold text-white">Contact Us</Link>
           </div>
         </nav>
       </div>

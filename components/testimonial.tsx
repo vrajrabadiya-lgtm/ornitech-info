@@ -1,118 +1,156 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight, Star } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 
 const REVIEWS = [
-  {
-    quote: "Ornitech felt like an extension of our own team. They shipped a complex marketplace in record time, and the quality held up under real traffic from day one.",
-    name: "Sophia Rodriguez",
-    location: "Singapore",
-    avatar: "/avatars/sophia.png",
-  },
-  {
-    quote: "They took a vague idea and turned it into a polished product our customers love. Communication was clear, and every milestone landed on schedule.",
-    name: "Daniel Okafor",
-    location: "United Kingdom",
-    avatar: "/avatars/a1.png",
-  },
-  {
-    quote: "The engineering quality is exceptional. Our app has scaled to hundreds of thousands of users without a single major incident.",
-    name: "Amelia Chen",
-    location: "Canada",
-    avatar: "/avatars/a2.png",
-  },
+  { quote: "Ornitech felt like an extension of our own team. They shipped a complex marketplace in record time, and the quality held up under real traffic from day one.", name: "Sophia Rodriguez", role: "CEO, RetailHub", location: "Singapore", avatar: "/avatars/sophia.png" },
+  { quote: "They took a vague idea and turned it into a polished product our customers love. Communication was clear, and every milestone landed on schedule.", name: "Daniel Okafor", role: "Founder, PayFlow", location: "United Kingdom", avatar: "/avatars/a1.png" },
+  { quote: "The engineering quality is exceptional. Our app has scaled to hundreds of thousands of users without a single major incident.", name: "Amelia Chen", role: "CTO, MedConnect", location: "Canada", avatar: "/avatars/a2.png" },
 ]
 
+const INTERVAL = 4500
+
 export function Testimonial() {
-  const [i, setI] = useState(0)
+  const [current, setCurrent] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [progress, setProgress] = useState(0)
   const { ref, inView } = useInView(0.2)
-  const r = REVIEWS[i]
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const progressRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const r = REVIEWS[current]
 
-  const prev = () => setI((v) => (v - 1 + REVIEWS.length) % REVIEWS.length)
-  const next = () => setI((v) => (v + 1) % REVIEWS.length)
+  const goTo = (idx: number) => {
+    setCurrent(idx)
+    setProgress(0)
+  }
 
+  const prev = () => goTo((current - 1 + REVIEWS.length) % REVIEWS.length)
+  const next = () => goTo((current + 1) % REVIEWS.length)
+
+  // Start/stop auto-advance
   useEffect(() => {
-    if (paused) return
-    const timer = setInterval(() => setI((v) => (v + 1) % REVIEWS.length), 4000)
-    return () => clearInterval(timer)
-  }, [paused])
+    if (!inView || paused) {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+      if (progressRef.current) clearInterval(progressRef.current)
+      return
+    }
+
+    setProgress(0)
+
+    // Progress bar — updates every 50ms
+    progressRef.current = setInterval(() => {
+      setProgress((p) => {
+        if (p >= 100) return 100
+        return p + (50 / INTERVAL) * 100
+      })
+    }, 50)
+
+    // Slide advance
+    intervalRef.current = setInterval(() => {
+      setCurrent((v) => (v + 1) % REVIEWS.length)
+      setProgress(0)
+    }, INTERVAL)
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+      if (progressRef.current) clearInterval(progressRef.current)
+    }
+  }, [inView, paused, current])
 
   return (
     <section
       ref={ref as React.RefObject<HTMLElement>}
-      className="relative py-20"
+      className="relative overflow-hidden py-24"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      style={{
-        backgroundImage: "radial-gradient(currentColor 1px, transparent 1px)",
-        backgroundSize: "22px 22px",
-        color: "var(--border)",
-      }}
     >
-      <div className={`mx-auto max-w-3xl px-5 text-center text-foreground lg:px-8 transition-all duration-700 ${inView ? "animate-fade-up" : "opacity-0 translate-y-8"}`}>
-        <h2 className="text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
-          What <span className="text-brand">Our Clients</span> are Saying
-        </h2>
-        <p className="mt-4 leading-relaxed text-muted-foreground">
-          The partnerships behind our work, in their own words.
-        </p>
+      {/* Ambient blobs */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50/40" />
+      <div className="pointer-events-none absolute left-1/4 top-1/2 h-[450px] w-[450px] -translate-y-1/2 liquid-gradient opacity-40 animate-liquid-float" />
+      <div className="pointer-events-none absolute right-1/4 bottom-0 h-[350px] w-[350px] liquid-gradient opacity-30 animate-liquid-float-slow" />
+      <div className="pointer-events-none absolute right-0 top-0 h-[300px] w-[300px] liquid-gradient opacity-25 animate-liquid-float" />
 
-        <div className="mt-10 flex justify-center gap-1 text-highlight">
-          {Array.from({ length: 5 }).map((_, s) => (
-            <Star key={s} className="h-5 w-5 fill-current" />
-          ))}
+      <div className={`relative mx-auto max-w-3xl px-5 lg:px-8 transition-all duration-700 ${inView ? "animate-blur-in" : "opacity-0"}`}>
+        {/* Header */}
+        <div className="text-center">
+          <span className="glass-chip inline-flex items-center rounded-full px-3.5 py-1 text-[11px] font-semibold tracking-widest text-brand uppercase">
+            Client Stories
+          </span>
+          <h2 className="mt-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl" style={{ letterSpacing: "-0.03em" }}>
+            What Our Clients Say
+          </h2>
         </div>
 
-        <div key={i} className="animate-fade-in">
-          <blockquote className="mx-auto mt-6 max-w-2xl text-xl font-medium leading-relaxed text-pretty text-foreground/90">
+        {/* Review card */}
+        <div key={current} className="animate-fade-in mt-10 glass-card rounded-3xl p-8 sm:p-10">
+          {/* Stars */}
+          <div className="flex gap-1 text-amber-400">
+            {Array.from({ length: 5 }).map((_, s) => <Star key={s} className="h-4 w-4 fill-current" />)}
+          </div>
+
+          <blockquote className="mt-5 text-lg font-medium leading-relaxed text-foreground/90" style={{ letterSpacing: "-0.01em" }}>
             &ldquo;{r.quote}&rdquo;
           </blockquote>
 
-          <div className="mt-8 flex flex-col items-center gap-3">
-            <span className="relative h-16 w-16 overflow-hidden rounded-full ring-2 ring-background transition-transform duration-300 hover:scale-110">
-              <Image src={r.avatar || "/placeholder.svg"} alt={r.name} fill className="object-cover" sizes="64px" />
+          <div className="mt-6 flex items-center gap-4 border-t border-white/40 pt-6">
+            <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-white/60">
+              <Image src={r.avatar || "/placeholder.svg"} alt={r.name} fill className="object-cover" sizes="48px" />
             </span>
             <div>
-              <p className="font-bold">{r.name}</p>
-              <p className="text-sm text-muted-foreground">{r.location}</p>
+              <p className="font-bold text-foreground">{r.name}</p>
+              <p className="text-sm text-muted-foreground">{r.role} · {r.location}</p>
+            </div>
+            <div className="ml-auto flex gap-2">
+              <button
+                type="button"
+                onClick={prev}
+                aria-label="Previous"
+                className="glass-chip flex h-9 w-9 items-center justify-center rounded-full transition-all hover:text-brand"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                aria-label="Next"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-white transition-all hover:bg-brand/90"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Dot indicators */}
-        <div className="mt-6 flex justify-center gap-2">
-          {REVIEWS.map((_, idx) => (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => setI(idx)}
-              className={`h-2 rounded-full transition-all duration-300 ${idx === i ? "w-6 bg-brand" : "w-2 bg-border"}`}
-              aria-label={`Go to review ${idx + 1}`}
-            />
-          ))}
-        </div>
+        {/* Dot indicators + progress */}
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <div className="flex gap-2">
+            {REVIEWS.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => goTo(idx)}
+                aria-label={`Review ${idx + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${idx === current ? "w-6 bg-brand" : "w-1.5 bg-border hover:bg-brand/40"}`}
+              />
+            ))}
+          </div>
 
-        <div className="mt-6 flex justify-center gap-3">
-          <button
-            type="button"
-            onClick={prev}
-            aria-label="Previous testimonial"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background transition-all hover:border-brand hover:text-brand hover:scale-110"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button
-            type="button"
-            onClick={next}
-            aria-label="Next testimonial"
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-ink-foreground transition-all hover:bg-brand hover:scale-110"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
+          {/* Auto-play progress bar */}
+          {!paused && inView && (
+            <div className="h-0.5 w-24 overflow-hidden rounded-full bg-border">
+              <div
+                className="h-full rounded-full bg-brand transition-none"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          )}
+
+          {paused && (
+            <p className="text-[10px] font-medium text-muted-foreground tracking-wide">Paused — move mouse away to resume</p>
+          )}
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowRight, Check } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
@@ -21,124 +21,100 @@ const SERVICE_SLUGS: Record<string, string> = {
 }
 
 const SERVICES = [
-  {
-    name: "Web Development",
-    body: "Fast, accessible, SEO-ready websites and web apps built on modern frameworks and a scalable architecture.",
-    points: ["Responsive Web Apps", "Progressive Web Apps", "CMS Integration", "Performance Optimization", "SEO Foundations"],
-  },
-  {
-    name: "Mobile App Development",
-    body: "Native and cross-platform mobile apps that feel great, load fast, and are built to scale with your business.",
-    points: ["iOS & Android Native Apps", "Flutter & React Native", "App Store Optimization", "Maintenance & Support", "API & Backend Integration"],
-  },
-  {
-    name: "Software Development",
-    body: "Custom enterprise software and platforms engineered for reliability, security, and long-term maintainability.",
-    points: ["Custom Enterprise Software", "SaaS Platforms", "System Integrations", "Legacy Modernization", "Microservices Architecture"],
-  },
-  {
-    name: "Vibe Coding Development",
-    body: "AI-assisted development using Claude, Cursor, and GitHub Copilot. Experienced engineers ship features faster without compromising code quality or production standards.",
-    points: ["AI-Assisted Code Generation", "Automated Test Suite Generation", "Documentation Automation", "AI Code Review", "Codebase Acceleration"],
-  },
-  {
-    name: "AI Development Services",
-    body: "From LLM apps to computer vision, we design and ship AI features that solve real business problems.",
-    points: ["LLM & RAG Applications", "Model Fine-Tuning", "Computer Vision", "Predictive Analytics", "MLOps Pipelines"],
-  },
-  {
-    name: "AI Integration Services",
-    body: "Embed AI into your existing products and workflows with secure, well-governed integrations.",
-    points: ["OpenAI & Anthropic APIs", "Workflow Automation", "Chatbots & Assistants", "Data Pipeline Integration", "Governance & Safety"],
-  },
-  {
-    name: "UI/UX Design",
-    body: "Research-driven interfaces and design systems that turn complex products into intuitive experiences.",
-    points: ["User Research", "Wireframes & Prototypes", "Design Systems", "Usability Testing", "Interaction Design"],
-  },
-  {
-    name: "QA & Testing Services",
-    body: "Comprehensive quality assurance so your product ships with confidence and stays reliable in production.",
-    points: ["Manual & Exploratory Testing", "Test Automation (Cypress, Playwright)", "Performance & Load Testing", "Security Testing (OWASP)", "CI/CD Test Integration"],
-  },
-  {
-    name: "Cloud, DevOps & Security",
-    body: "Automated, secure infrastructure and pipelines that let your teams deploy quickly and safely.",
-    points: ["AWS, GCP & Azure", "CI/CD Pipelines", "Kubernetes & Containers", "Monitoring & Observability", "Security Hardening"],
-  },
-  {
-    name: "Data Analytics",
-    body: "Turn raw data into decisions with pipelines, dashboards, and analytics your whole team can trust.",
-    points: ["Data Warehousing", "ETL Pipelines", "BI Dashboards", "Data Visualization", "Reporting Automation"],
-  },
-  {
-    name: "Dedicated Development Team",
-    body: "A vetted, fully managed team that works as an extension of yours, aligned to your goals and timeline.",
-    points: ["Handpicked Engineers", "Full Project Ownership", "Agile Delivery", "Transparent Reporting", "Flexible Scaling"],
-  },
-  {
-    name: "Staff Augmentation",
-    body: "Scale your capacity on demand with senior engineers who plug straight into your existing workflow.",
-    points: ["On-Demand Talent", "Fast Onboarding", "Time-Zone Alignment", "No Overhead", "Long-Term Retention"],
-  },
+  { name: "Web Development", body: "Fast, accessible, SEO-ready websites and web apps built on modern frameworks and a scalable architecture.", points: ["Responsive Web Apps", "Progressive Web Apps", "CMS Integration", "Performance Optimization", "SEO Foundations"] },
+  { name: "Mobile App Development", body: "Native and cross-platform mobile apps that feel great, load fast, and are built to scale with your business.", points: ["iOS & Android Native Apps", "Flutter & React Native", "App Store Optimization", "Maintenance & Support", "API & Backend Integration"] },
+  { name: "Software Development", body: "Custom enterprise software and platforms engineered for reliability, security, and long-term maintainability.", points: ["Custom Enterprise Software", "SaaS Platforms", "System Integrations", "Legacy Modernization", "Microservices Architecture"] },
+  { name: "Vibe Coding Development", body: "AI-assisted development using Claude, Cursor, and GitHub Copilot. Experienced engineers ship features faster without compromising code quality.", points: ["AI-Assisted Code Generation", "Automated Test Suite Generation", "Documentation Automation", "AI Code Review", "Codebase Acceleration"] },
+  { name: "AI Development Services", body: "From LLM apps to computer vision, we design and ship AI features that solve real business problems.", points: ["LLM & RAG Applications", "Model Fine-Tuning", "Computer Vision", "Predictive Analytics", "MLOps Pipelines"] },
+  { name: "AI Integration Services", body: "Embed AI into your existing products and workflows with secure, well-governed integrations.", points: ["OpenAI & Anthropic APIs", "Workflow Automation", "Chatbots & Assistants", "Data Pipeline Integration", "Governance & Safety"] },
+  { name: "UI/UX Design", body: "Research-driven interfaces and design systems that turn complex products into intuitive experiences.", points: ["User Research", "Wireframes & Prototypes", "Design Systems", "Usability Testing", "Interaction Design"] },
+  { name: "QA & Testing Services", body: "Comprehensive quality assurance so your product ships with confidence and stays reliable in production.", points: ["Manual & Exploratory Testing", "Test Automation (Cypress, Playwright)", "Performance & Load Testing", "Security Testing (OWASP)", "CI/CD Test Integration"] },
+  { name: "Cloud, DevOps & Security", body: "Automated, secure infrastructure and pipelines that let your teams deploy quickly and safely.", points: ["AWS, GCP & Azure", "CI/CD Pipelines", "Kubernetes & Containers", "Monitoring & Observability", "Security Hardening"] },
+  { name: "Data Analytics", body: "Turn raw data into decisions with pipelines, dashboards, and analytics your whole team can trust.", points: ["Data Warehousing", "ETL Pipelines", "BI Dashboards", "Data Visualization", "Reporting Automation"] },
+  { name: "Dedicated Development Team", body: "A vetted, fully managed team that works as an extension of yours, aligned to your goals and timeline.", points: ["Handpicked Engineers", "Full Project Ownership", "Agile Delivery", "Transparent Reporting", "Flexible Scaling"] },
+  { name: "Staff Augmentation", body: "Scale your capacity on demand with senior engineers who plug straight into your existing workflow.", points: ["On-Demand Talent", "Fast Onboarding", "Time-Zone Alignment", "No Overhead", "Long-Term Retention"] },
 ]
 
 export function Services() {
-  const [active, setActive] = useState(3)
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
   const { ref, inView } = useInView(0.1)
   const current = SERVICES[active]
 
+  useEffect(() => {
+    if (!inView || paused) return
+    const timer = setInterval(() => setActive((v) => (v + 1) % SERVICES.length), 3000)
+    return () => clearInterval(timer)
+  }, [inView, paused])
+
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
-      <div className={`max-w-2xl transition-all duration-700 ${inView ? "animate-fade-up" : "opacity-0 translate-y-8"}`}>
-        <h2 className="text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">Services we offer</h2>
-        <p className="mt-4 leading-relaxed text-muted-foreground">
-          From idea to launch and beyond. A full-stack partner across every layer of your product.
-        </p>
+    <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-24">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="liquid-gradient animate-liquid-float-slow absolute -right-24 -top-24 h-[500px] w-[500px] opacity-40" />
+        <div className="liquid-gradient animate-liquid-float absolute -left-24 bottom-0 h-[450px] w-[450px] opacity-38" />
+        <div className="ambient-glow absolute left-1/2 top-1/2 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-35" />
       </div>
 
-      <div className={`mt-10 grid gap-6 lg:grid-cols-[340px_1fr] transition-all duration-700 delay-100 ${inView ? "animate-fade-up" : "opacity-0 translate-y-8"}`}>
-        <div className="flex flex-col gap-1.5 rounded-2xl bg-ink p-3">
-          {SERVICES.map((s, i) => (
-            <button
-              key={s.name}
-              type="button"
-              onClick={() => setActive(i)}
-              aria-pressed={i === active}
-              className={`rounded-xl px-4 py-3 text-left text-sm font-semibold transition-all duration-200 ${
-                i === active
-                  ? "bg-brand text-brand-foreground translate-x-1 shadow-md"
-                  : "text-ink-foreground/70 hover:bg-white/5 hover:text-ink-foreground hover:translate-x-1"
-              }`}
-            >
-              {s.name}
-            </button>
-          ))}
+      <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
+        <div className={`max-w-2xl transition-all duration-700 ${inView ? "animate-blur-in" : "opacity-0 translate-y-8"}`}>
+          <span className="glass-chip inline-flex items-center rounded-full px-3.5 py-1 text-[11px] font-semibold tracking-widest text-brand uppercase">What We Do</span>
+          <h2 className="mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl text-foreground" style={{ letterSpacing: "-0.03em" }}>Services we offer</h2>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">From idea to launch and beyond. A full-stack partner across every layer of your product.</p>
         </div>
 
-        <div key={active} className="animate-fade-up rounded-2xl border border-border p-8 lg:p-10">
-          <h3 className="text-2xl font-bold">{current.name}</h3>
-          <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">{current.body}</p>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
-            {current.points.map((p, i) => (
-              <li
-                key={p}
-                className="animate-slide-left flex items-center gap-3 text-sm font-medium"
-                style={{ animationDelay: `${i * 60}ms` }}
-              >
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent text-brand transition-transform duration-200 hover:scale-110">
-                  <Check className="h-3.5 w-3.5" />
-                </span>
-                {p}
-              </li>
-            ))}
-          </ul>
-          <Link
-            href={`/services/${SERVICE_SLUGS[current.name]}`}
-            className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand transition-all hover:gap-3"
+        <div className={`mt-10 grid gap-6 lg:grid-cols-[320px_1fr] transition-all duration-700 delay-100 ${inView ? "animate-blur-in" : "opacity-0 translate-y-8"}`}>
+          {/* Sidebar */}
+          <div
+            className="glass-card flex flex-col gap-1 rounded-3xl p-3"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
           >
-            See more <ArrowRight className="h-4 w-4" />
-          </Link>
+            {SERVICES.map((s, i) => (
+              <button
+                key={s.name}
+                type="button"
+                onClick={() => { setActive(i); setPaused(true) }}
+                aria-pressed={i === active}
+                className={`group flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-semibold transition-all duration-200 ${
+                  i === active
+                    ? "glass-chip text-brand translate-x-1"
+                    : "text-foreground/65 hover:bg-white/50 hover:text-foreground hover:translate-x-1"
+                }`}
+              >
+                <span className={`h-1.5 w-1.5 shrink-0 rounded-full transition-all ${i === active ? "bg-brand scale-125" : "bg-border group-hover:bg-brand/50"}`} />
+                {s.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Detail panel */}
+          <div key={active} className="glass-card animate-blur-in rounded-3xl p-8 lg:p-10">
+            <div className="flex items-start justify-between gap-4">
+              <h3 className="text-2xl font-bold text-foreground" style={{ letterSpacing: "-0.02em" }}>{current.name}</h3>
+              <span className="glass-chip shrink-0 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-brand">
+                {String(active + 1).padStart(2, "0")} / {String(SERVICES.length).padStart(2, "0")}
+              </span>
+            </div>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">{current.body}</p>
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+              {current.points.map((p, i) => (
+                <li key={p} className="animate-slide-left flex items-center gap-3 text-sm font-medium text-foreground" style={{ animationDelay: `${i * 60}ms` }}>
+                  <span className="glass-chip flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-brand">
+                    <Check className="h-3.5 w-3.5" />
+                  </span>
+                  {p}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 flex items-center gap-4">
+              <Link href={`/services/${SERVICE_SLUGS[current.name]}`} className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand/25 transition-all hover:gap-3 hover:shadow-lg hover:shadow-brand/30">
+                Learn more <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/services" className="glass-chip inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:text-brand hover:gap-3">
+                All services <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>
