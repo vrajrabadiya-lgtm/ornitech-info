@@ -27,6 +27,7 @@ export function Testimonial() {
   return (
     <section
       ref={ref as React.RefObject<HTMLElement>}
+      id="testimonials"
       className="glass-section relative overflow-hidden py-24"
     >
       {/* Ambient liquid orbs */}
