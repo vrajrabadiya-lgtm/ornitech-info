@@ -71,7 +71,7 @@ export function SiteHeader() {
                   href={`/${key}`}
                   className={cn(
                     "flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-medium transition-all",
-                    activeMenu === key ? "text-brand bg-white/70 backdrop-blur-xl shadow-sm" : "text-foreground/75 hover:text-brand hover:bg-white/70 hover:backdrop-blur-xl hover:shadow-sm"
+                    activeMenu === key ? "text-brand bg-white shadow-sm" : "text-foreground/75 hover:text-brand hover:bg-white hover:shadow-sm"
                   )}
                 >
                   {key.charAt(0).toUpperCase() + key.slice(1)}
@@ -80,7 +80,7 @@ export function SiteHeader() {
               </li>
             ))}
             <li onMouseEnter={() => setActiveMenu(null)}>
-              <Link href="/portfolio" className="flex items-center rounded-full px-4 py-2 text-[14px] font-medium text-foreground/75 transition-all hover:text-brand hover:bg-white/70 hover:backdrop-blur-xl hover:shadow-sm">
+              <Link href="/portfolio" className="flex items-center rounded-full px-4 py-2 text-[14px] font-medium text-foreground/75 transition-all hover:text-brand hover:bg-white hover:shadow-sm">
                 Portfolio
               </Link>
             </li>
@@ -89,7 +89,7 @@ export function SiteHeader() {
                 href="/about"
                 className={cn(
                   "flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-medium transition-all",
-                  activeMenu === "company" ? "text-brand bg-white/70 backdrop-blur-xl shadow-sm" : "text-foreground/75 hover:text-brand hover:bg-white/70 hover:backdrop-blur-xl hover:shadow-sm"
+                  activeMenu === "company" ? "text-brand bg-white shadow-sm" : "text-foreground/75 hover:text-brand hover:bg-white hover:shadow-sm"
                 )}
               >
                 Company
