@@ -39,7 +39,7 @@ export default function PrivacyPolicyPage() {
 
             <h2 className="text-xl font-bold text-foreground mt-6">4. Contact Us</h2>
             <p>
-              If you have questions or comments about this Privacy Policy, please email us at <a href="mailto:info@ornitech.com" className="text-brand hover:underline">info@ornitech.com</a>.
+              If you have questions or comments about this Privacy Policy, please email us at <a href="mailto:contact@ornitech.in" className="text-brand hover:underline">contact@ornitech.in</a>.
             </p>
           </div>
         </div>

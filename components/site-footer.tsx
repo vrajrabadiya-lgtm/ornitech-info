@@ -118,7 +118,7 @@ export function SiteFooter() {
               ))}
               <li className="flex items-center gap-2 text-white/55">
                 <MapPin className="h-4 w-4" />
-                <a href="mailto:info@ornitech.com" className="hover:text-white transition-colors">info@ornitech.com</a>
+                <a href="mailto:contact@ornitech.in" className="hover:text-white transition-colors">contact@ornitech.in</a>
               </li>
             </ul>
           </div>

@@ -33,7 +33,7 @@ export default function TermsPage() {
 
             <h2 className="text-xl font-bold text-foreground mt-6">4. Contact Information</h2>
             <p>
-              For legal inquiries regarding these Terms, contact us at <a href="mailto:info@ornitech.com" className="text-brand hover:underline">info@ornitech.com</a>.
+              For legal inquiries regarding these Terms, contact us at <a href="mailto:contact@ornitech.in" className="text-brand hover:underline">contact@ornitech.in</a>.
             </p>
           </div>
         </div>

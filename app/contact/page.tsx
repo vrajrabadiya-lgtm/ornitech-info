@@ -171,8 +171,8 @@ export default function ContactPage() {
                 <div className="rounded-3xl border border-border bg-card p-6 shadow-sm">
                   <h3 className="text-lg font-bold text-foreground">Direct Contact</h3>
                   <div className="mt-4 space-y-4 text-xs">
-                    <a href="mailto:info@ornitech.com" className="flex items-center gap-3 text-muted-foreground hover:text-brand">
-                      <Mail className="h-4 w-4 text-brand" /> info@ornitech.com
+                    <a href="mailto:contact@ornitech.in" className="flex items-center gap-3 text-muted-foreground hover:text-brand">
+                      <Mail className="h-4 w-4 text-brand" /> contact@ornitech.in
                     </a>
                     <a href="tel:+14256234723" className="flex items-center gap-3 text-muted-foreground hover:text-brand">
                       <Phone className="h-4 w-4 text-brand" /> +1 (425) 623-4723 (Canada)
