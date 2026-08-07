@@ -53,7 +53,7 @@ export function SiteHeader() {
         ref={headerRef}
         className={cn(
           "w-full max-w-6xl rounded-full transition-all duration-300 pointer-events-auto",
-          scrolled ? "glass-nav shadow-md shadow-blue-900/5" : "bg-white/60 backdrop-blur-xl border border-white/40 shadow-sm"
+          scrolled ? "glass-nav shadow-md shadow-blue-900/5" : "bg-white/60 backdrop-blur-xxl border border-white/40 shadow-sm"
         )}
         onMouseLeave={() => setActiveMenu(null)}
       >
