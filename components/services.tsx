@@ -49,23 +49,29 @@ export function Services() {
 
   return (
     <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-24">
+      {/* Liquid background fluid orbs */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="liquid-gradient animate-liquid-float-slow absolute -right-24 -top-24 h-[500px] w-[500px] opacity-40" />
-        <div className="liquid-gradient animate-liquid-float absolute -left-24 bottom-0 h-[450px] w-[450px] opacity-38" />
-        <div className="ambient-glow absolute left-1/2 top-1/2 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-35" />
+        <div className="liquid-orb-blue animate-liquid-float-slow absolute -right-24 -top-24 h-[550px] w-[550px] opacity-70" />
+        <div className="liquid-orb-sky animate-liquid-float absolute -left-24 bottom-0 h-[480px] w-[480px] opacity-60" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         <div className={`max-w-2xl transition-all duration-700 ${inView ? "animate-blur-in" : "opacity-0 translate-y-8"}`}>
-          <span className="glass-chip inline-flex items-center rounded-full px-3.5 py-1 text-[11px] font-semibold tracking-widest text-brand uppercase">What We Do</span>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl text-foreground" style={{ letterSpacing: "-0.03em" }}>Services we offer</h2>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">From idea to launch and beyond. A full-stack partner across every layer of your product.</p>
+          <span className="glass-chip inline-flex items-center rounded-full px-4 py-1.5 text-[11px] font-bold tracking-widest text-blue-600 uppercase border border-blue-100 shadow-sm">
+            What We Do
+          </span>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-balance sm:text-5xl text-slate-900" style={{ letterSpacing: "-0.03em" }}>
+            Services we offer
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            From initial strategy to cloud-scale deployment. A full-stack partner across every layer of your product.
+          </p>
         </div>
 
         <div className={`mt-10 grid gap-6 lg:grid-cols-[320px_1fr] transition-all duration-700 delay-100 ${inView ? "animate-blur-in" : "opacity-0 translate-y-8"}`}>
-          {/* Sidebar */}
+          {/* Sidebar Liquid Glass Panel */}
           <div
-            className="glass-card flex flex-col gap-1 rounded-3xl p-3"
+            className="glass-card flex flex-col gap-1.5 rounded-[2rem] p-3.5 shadow-xl shadow-slate-200/40 border border-white/90"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
@@ -75,42 +81,49 @@ export function Services() {
                 type="button"
                 onClick={() => { setActive(i); setPaused(true) }}
                 aria-pressed={i === active}
-                className={`group flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-semibold transition-all duration-200 ${
-                  i === active
-                    ? "glass-chip text-brand translate-x-1"
-                    : "text-foreground/65 hover:bg-white/50 hover:text-foreground hover:translate-x-1"
-                }`}
+                className={`group flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-bold transition-all duration-300 ${i === active
+                    ? "glass-chip text-blue-600 translate-x-1 shadow-md shadow-blue-500/10 border-white"
+                    : "text-slate-600 hover:bg-white/60 hover:text-slate-900 hover:translate-x-1"
+                  }`}
               >
-                <span className={`h-1.5 w-1.5 shrink-0 rounded-full transition-all ${i === active ? "bg-brand scale-125" : "bg-border group-hover:bg-brand/50"}`} />
+                <span className={`h-2 w-2 shrink-0 rounded-full transition-all ${i === active ? "bg-blue-600 scale-125" : "bg-slate-300 group-hover:bg-blue-400"}`} />
                 {s.name}
               </button>
             ))}
           </div>
 
-          {/* Detail panel */}
-          <div key={active} className="glass-card animate-blur-in rounded-3xl p-8 lg:p-10">
+          {/* Detail panel Liquid Glass Card */}
+          <div key={active} className="glass-card animate-blur-in rounded-[2.2rem] p-8 lg:p-10 shadow-2xl shadow-slate-200/50 border border-white">
             <div className="flex items-start justify-between gap-4">
-              <h3 className="text-2xl font-bold text-foreground" style={{ letterSpacing: "-0.02em" }}>{current.name}</h3>
-              <span className="glass-chip shrink-0 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-brand">
+              <h3 className="text-2xl sm:text-3xl font-black text-slate-900" style={{ letterSpacing: "-0.02em" }}>{current.name}</h3>
+              <span className="glass-chip shrink-0 rounded-full px-3.5 py-1.5 text-xs font-black uppercase tracking-widest text-blue-600 border border-blue-100">
                 {String(active + 1).padStart(2, "0")} / {String(SERVICES.length).padStart(2, "0")}
               </span>
             </div>
-            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">{current.body}</p>
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">{current.body}</p>
+
+            <ul className="mt-8 grid gap-3.5 sm:grid-cols-2">
               {current.points.map((p, i) => (
-                <li key={p} className="animate-slide-left flex items-center gap-3 text-sm font-medium text-foreground" style={{ animationDelay: `${i * 60}ms` }}>
-                  <span className="glass-chip flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-brand">
-                    <Check className="h-3.5 w-3.5" />
+                <li key={p} className="animate-slide-left flex items-center gap-3 text-sm font-semibold text-slate-800" style={{ animationDelay: `${i * 60}ms` }}>
+                  <span className="glass-chip flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-blue-600 shadow-sm border border-blue-100">
+                    <Check className="h-3.5 w-3.5 stroke-[3]" />
                   </span>
                   {p}
                 </li>
               ))}
             </ul>
-            <div className="mt-8 flex items-center gap-4">
-              <Link href={`/services/${SERVICE_SLUGS[current.name]}`} className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand/25 transition-all hover:gap-3 hover:shadow-lg hover:shadow-brand/30">
+
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <Link
+                href={`/services/${SERVICE_SLUGS[current.name]}`}
+                className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition-all hover:gap-3 hover:bg-blue-700 hover:shadow-blue-600/35"
+              >
                 Learn more <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/services" className="glass-chip inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:text-brand hover:gap-3">
+              <Link
+                href="/services"
+                className="glass-chip inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-slate-800 transition-all hover:text-blue-600 hover:gap-3 border border-slate-200/80"
+              >
                 All services <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

@@ -63,62 +63,65 @@ export function Testimonial() {
   return (
     <section
       ref={ref as React.RefObject<HTMLElement>}
-      className="relative overflow-hidden py-24"
+      className="relative overflow-hidden py-24 bg-white"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Ambient blobs */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50/40" />
-      <div className="pointer-events-none absolute left-1/4 top-1/2 h-[450px] w-[450px] -translate-y-1/2 liquid-gradient opacity-40 animate-liquid-float" />
-      <div className="pointer-events-none absolute right-1/4 bottom-0 h-[350px] w-[350px] liquid-gradient opacity-30 animate-liquid-float-slow" />
-      <div className="pointer-events-none absolute right-0 top-0 h-[300px] w-[300px] liquid-gradient opacity-25 animate-liquid-float" />
+      {/* Ambient liquid orbs */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="liquid-orb-blue animate-liquid-float absolute left-1/4 top-1/2 h-[450px] w-[450px] -translate-y-1/2 opacity-65" />
+        <div className="liquid-orb-sky animate-liquid-float-slow absolute right-1/4 bottom-0 h-[380px] w-[380px] opacity-60" />
+      </div>
 
       <div className={`relative mx-auto max-w-3xl px-5 lg:px-8 transition-all duration-700 ${inView ? "animate-blur-in" : "opacity-0"}`}>
         {/* Header */}
         <div className="text-center">
-          <span className="glass-chip inline-flex items-center rounded-full px-3.5 py-1 text-[11px] font-semibold tracking-widest text-brand uppercase">
+          <span className="glass-chip inline-flex items-center rounded-full px-4 py-1.5 text-[11px] font-bold tracking-widest text-blue-600 uppercase border border-blue-100 shadow-sm">
             Client Stories
           </span>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl" style={{ letterSpacing: "-0.03em" }}>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl" style={{ letterSpacing: "-0.03em" }}>
             What Our Clients Say
           </h2>
         </div>
 
-        {/* Review card */}
-        <div key={current} className="animate-fade-in mt-10 glass-card rounded-3xl p-8 sm:p-10">
+        {/* Review Liquid Glass Card */}
+        <div key={current} className="animate-fade-in mt-10 glass-card rounded-[2.2rem] p-8 sm:p-10 shadow-2xl shadow-slate-200/50 border border-white">
           {/* Stars */}
           <div className="flex gap-1 text-amber-400">
             {Array.from({ length: 5 }).map((_, s) => <Star key={s} className="h-4 w-4 fill-current" />)}
           </div>
 
-          <blockquote className="mt-5 text-lg font-medium leading-relaxed text-foreground/90" style={{ letterSpacing: "-0.01em" }}>
+          <blockquote className="mt-5 text-lg sm:text-xl font-semibold leading-relaxed text-slate-900" style={{ letterSpacing: "-0.01em" }}>
             &ldquo;{r.quote}&rdquo;
           </blockquote>
 
-          <div className="mt-6 flex items-center gap-4 border-t border-white/40 pt-6">
-            <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-white/60">
-              <Image src={r.avatar || "/placeholder.svg"} alt={r.name} fill className="object-cover" sizes="48px" />
-            </span>
-            <div>
-              <p className="font-bold text-foreground">{r.name}</p>
-              <p className="text-sm text-muted-foreground">{r.role} · {r.location}</p>
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 pt-6">
+            <div className="flex items-center gap-3">
+              <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-white shadow-md">
+                <Image src={r.avatar || "/placeholder.svg"} alt={r.name} fill className="object-cover" sizes="48px" />
+              </span>
+              <div>
+                <p className="font-extrabold text-slate-900">{r.name}</p>
+                <p className="text-xs font-semibold text-slate-500">{r.role} · {r.location}</p>
+              </div>
             </div>
-            <div className="ml-auto flex gap-2">
+
+            <div className="flex gap-2">
               <button
                 type="button"
                 onClick={prev}
                 aria-label="Previous"
-                className="glass-chip flex h-9 w-9 items-center justify-center rounded-full transition-all hover:text-brand"
+                className="glass-chip flex h-10 w-10 items-center justify-center rounded-full text-slate-700 transition-all hover:text-blue-600 border border-slate-200/80 shadow-sm"
               >
-                <ChevronLeft className="h-4 w-4" />
+                <ChevronLeft className="h-4 w-4 stroke-[2.5]" />
               </button>
               <button
                 type="button"
                 onClick={next}
                 aria-label="Next"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-white transition-all hover:bg-brand/90"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white shadow-md shadow-blue-600/25 transition-all hover:bg-blue-700"
               >
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRight className="h-4 w-4 stroke-[2.5]" />
               </button>
             </div>
           </div>
@@ -133,23 +136,22 @@ export function Testimonial() {
                 type="button"
                 onClick={() => goTo(idx)}
                 aria-label={`Review ${idx + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${idx === current ? "w-6 bg-brand" : "w-1.5 bg-border hover:bg-brand/40"}`}
+                className={`h-2 rounded-full transition-all duration-300 ${idx === current ? "w-7 bg-blue-600 shadow-sm" : "w-2 bg-slate-200 hover:bg-blue-300"}`}
               />
             ))}
           </div>
 
-          {/* Auto-play progress bar */}
           {!paused && inView && (
-            <div className="h-0.5 w-24 overflow-hidden rounded-full bg-border">
+            <div className="h-1 w-24 overflow-hidden rounded-full bg-slate-100 border border-slate-200/60">
               <div
-                className="h-full rounded-full bg-brand transition-none"
+                className="h-full rounded-full bg-blue-600 transition-none"
                 style={{ width: `${progress}%` }}
               />
             </div>
           )}
 
           {paused && (
-            <p className="text-[10px] font-medium text-muted-foreground tracking-wide">Paused — move mouse away to resume</p>
+            <p className="text-[10px] font-bold text-slate-400 tracking-wide">Paused — move mouse away to resume</p>
           )}
         </div>
       </div>

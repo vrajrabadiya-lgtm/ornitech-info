@@ -36,7 +36,7 @@ export function SiteHeader() {
       ref={headerRef}
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
-        scrolled ? "glass-nav shadow-sm" : "bg-white/80 backdrop-blur-md border-b border-white/50"
+        scrolled ? "glass-nav shadow-sm" : "bg-white/80 backdrop-blur-md border-b border-slate-200/60"
       )}
       onMouseLeave={() => setActiveMenu(null)}
     >
@@ -267,10 +267,10 @@ export function SiteHeader() {
         <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
           <Link href="/" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold text-foreground hover:bg-brand/5 hover:text-brand">Home</Link>
           {[
-            { key: "services", label: "Services", href: "/services", items: [["Web Development","/services/web-development"],["Mobile App Development","/services/mobile-app-development"],["Software Development","/services/software-development"],["AI Development Services","/services/ai-development-services"],["AI Integration Services","/services/ai-integration-services"],["UI/UX Design","/services/ui-ux-design"],["QA & Testing","/services/qa-testing"],["Cloud, DevOps & Security","/services/cloud-devops-security"],["Data Analytics","/services/data-analytics"],["Dedicated Team","/services/dedicated-development-team"],["Staff Augmentation","/services/staff-augmentation"]] },
-            { key: "technologies", label: "Technologies", href: "/technologies", items: [["Front-End","/technologies/front-end"],["Back-End","/technologies/back-end"],["Database","/technologies/database"],["UI/UX Design","/technologies/ui-ux-design"],["Mobile App","/technologies/mobile"],["Cloud Services","/technologies/cloud-services"]] },
-            { key: "industries", label: "Industries", href: "/industries", items: [["Healthcare & MedTech","/industries/healthcare-medtech"],["Fintech & Banking","/industries/fintech-banking"],["E-commerce & Retail","/industries/ecommerce-retail"],["Education & EdTech","/industries/education-edtech"],["Travel & Hospitality","/industries/travel-hospitality"],["Logistics","/industries/logistics-supply-chain"],["Fitness & Wellness","/industries/fitness-wellness"],["Food & Restaurant","/industries/food-restaurant"]] },
-            { key: "company", label: "Company", href: "/about", items: [["About Us","/about"],["Careers","/careers"],["Blog","/blog"],["Portfolio","/portfolio"],["Contact","/contact"]] },
+            { key: "services", label: "Services", href: "/services", items: [["Web Development", "/services/web-development"], ["Mobile App Development", "/services/mobile-app-development"], ["Software Development", "/services/software-development"], ["AI Development Services", "/services/ai-development-services"], ["AI Integration Services", "/services/ai-integration-services"], ["UI/UX Design", "/services/ui-ux-design"], ["QA & Testing", "/services/qa-testing"], ["Cloud, DevOps & Security", "/services/cloud-devops-security"], ["Data Analytics", "/services/data-analytics"], ["Dedicated Team", "/services/dedicated-development-team"], ["Staff Augmentation", "/services/staff-augmentation"]] },
+            { key: "technologies", label: "Technologies", href: "/technologies", items: [["Front-End", "/technologies/front-end"], ["Back-End", "/technologies/back-end"], ["Database", "/technologies/database"], ["UI/UX Design", "/technologies/ui-ux-design"], ["Mobile App", "/technologies/mobile"], ["Cloud Services", "/technologies/cloud-services"]] },
+            { key: "industries", label: "Industries", href: "/industries", items: [["Healthcare & MedTech", "/industries/healthcare-medtech"], ["Fintech & Banking", "/industries/fintech-banking"], ["E-commerce & Retail", "/industries/ecommerce-retail"], ["Education & EdTech", "/industries/education-edtech"], ["Travel & Hospitality", "/industries/travel-hospitality"], ["Logistics", "/industries/logistics-supply-chain"], ["Fitness & Wellness", "/industries/fitness-wellness"], ["Food & Restaurant", "/industries/food-restaurant"]] },
+            { key: "company", label: "Company", href: "/about", items: [["About Us", "/about"], ["Careers", "/careers"], ["Blog", "/blog"], ["Portfolio", "/portfolio"], ["Contact", "/contact"]] },
           ].map(({ key, label, href, items }) => (
             <div key={key}>
               <button onClick={() => setMobileSubmenu(mobileSubmenu === key ? null : key)} className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-semibold text-foreground hover:bg-brand/5 hover:text-brand">

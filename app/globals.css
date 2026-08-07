@@ -69,40 +69,45 @@
   ─────────────────────────────────────────────────────────────── */
 
   /* Backgrounds */
-  --background: oklch(1 0 0);              /* #FFFFFF pure white */
-  --card:        oklch(1 0 0);             /* #FFFFFF pure white */
-  --popover:     oklch(1 0 0);             /* #FFFFFF pure white */
+  --background: oklch(1 0 0);
+  /* #FFFFFF pure white */
+  --card: oklch(1 0 0);
+  /* #FFFFFF pure white */
+  --popover: oklch(1 0 0);
+  /* #FFFFFF pure white */
 
   /* Foreground — Rich Navy #0F172A for headings, high contrast */
-  --foreground:         oklch(0.16 0.040 255);
-  --card-foreground:    oklch(0.16 0.040 255);
+  --foreground: oklch(0.16 0.040 255);
+  --card-foreground: oklch(0.16 0.040 255);
   --popover-foreground: oklch(0.16 0.040 255);
 
   /* Primary — Electric Blue #2563EB */
-  --primary:            oklch(0.546 0.222 265);
+  --primary: oklch(0.546 0.222 265);
   --primary-foreground: oklch(1 0 0);
 
   /* Secondary — Light Gray bg #F3F6F9 with Navy text */
-  --secondary:            oklch(0.964 0.005 250);
+  --secondary: oklch(0.964 0.005 250);
   --secondary-foreground: oklch(0.16 0.040 255);
 
   /* Muted — Light Gray */
-  --muted:            oklch(0.964 0.005 250);
-  --muted-foreground: oklch(0.455 0.038 255);   /* Slate #475569 */
+  --muted: oklch(0.964 0.005 250);
+  --muted-foreground: oklch(0.455 0.038 255);
+  /* Slate #475569 */
 
   /* Accent — Cyan #06B6D4 */
-  --accent:            oklch(0.964 0.005 250);
+  --accent: oklch(0.964 0.005 250);
   --accent-foreground: oklch(0.16 0.040 255);
 
   --destructive: oklch(0.577 0.245 27.325);
 
   /* Border #E2E8F0 */
   --border: oklch(0.920 0.008 255);
-  --input:  oklch(0.920 0.008 255);
-  --ring:   oklch(0.546 0.222 265);   /* Electric Blue */
+  --input: oklch(0.920 0.008 255);
+  --ring: oklch(0.546 0.222 265);
+  /* Electric Blue */
 
   /* ─── Brand = Electric Blue #2563EB ─── */
-  --brand:            oklch(0.546 0.222 265);
+  --brand: oklch(0.546 0.222 265);
   --brand-foreground: oklch(1 0 0);
 
   /* Hover = #1D4ED8 (darker blue) */
@@ -112,7 +117,7 @@
   --highlight: oklch(0.717 0.148 210);
 
   /* Ink = footer — Rich Navy #0F172A */
-  --ink:            oklch(0.16 0.040 255);
+  --ink: oklch(0.16 0.040 255);
   --ink-foreground: oklch(0.985 0.003 250);
 
   /* Surface — Secondary BG #F3F6F9 */
@@ -122,23 +127,28 @@
   --success: oklch(0.700 0.160 165);
 
   /* Charts using palette */
-  --chart-1: oklch(0.546 0.222 265);   /* Electric Blue */
-  --chart-2: oklch(0.520 0.240 280);   /* Indigo */
-  --chart-3: oklch(0.717 0.148 210);   /* Cyan */
-  --chart-4: oklch(0.700 0.160 165);   /* Emerald */
-  --chart-5: oklch(0.16  0.040 255);   /* Navy */
+  --chart-1: oklch(0.546 0.222 265);
+  /* Electric Blue */
+  --chart-2: oklch(0.520 0.240 280);
+  /* Indigo */
+  --chart-3: oklch(0.717 0.148 210);
+  /* Cyan */
+  --chart-4: oklch(0.700 0.160 165);
+  /* Emerald */
+  --chart-5: oklch(0.16 0.040 255);
+  /* Navy */
 
   --radius: 0.625rem;
 
   /* Sidebar */
-  --sidebar:                    oklch(0.964 0.005 250);
-  --sidebar-foreground:         oklch(0.16  0.040 255);
-  --sidebar-primary:            oklch(0.546 0.222 265);
+  --sidebar: oklch(0.964 0.005 250);
+  --sidebar-foreground: oklch(0.16 0.040 255);
+  --sidebar-primary: oklch(0.546 0.222 265);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent:             oklch(0.920 0.008 255);
-  --sidebar-accent-foreground:  oklch(0.16  0.040 255);
-  --sidebar-border:             oklch(0.920 0.008 255);
-  --sidebar-ring:               oklch(0.546 0.222 265);
+  --sidebar-accent: oklch(0.920 0.008 255);
+  --sidebar-accent-foreground: oklch(0.16 0.040 255);
+  --sidebar-border: oklch(0.920 0.008 255);
+  --sidebar-ring: oklch(0.546 0.222 265);
 }
 
 /* Dark mode intentionally disabled — design system light theme only */
@@ -148,44 +158,90 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(32px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slide-left {
-  from { opacity: 0; transform: translateX(-32px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slide-right {
-  from { opacity: 0; transform: translateX(32px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes scale-in {
-  from { opacity: 0; transform: scale(0.92); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes count-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-up {
@@ -212,134 +268,169 @@
   animation: count-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.animation-delay-100 { animation-delay: 100ms; }
-.animation-delay-200 { animation-delay: 200ms; }
-.animation-delay-300 { animation-delay: 300ms; }
-.animation-delay-400 { animation-delay: 400ms; }
-.animation-delay-500 { animation-delay: 500ms; }
-.animation-delay-600 { animation-delay: 600ms; }
-.animation-delay-700 { animation-delay: 700ms; }
-.animation-delay-800 { animation-delay: 800ms; }
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+
+.animation-delay-600 {
+  animation-delay: 600ms;
+}
+
+.animation-delay-700 {
+  animation-delay: 700ms;
+}
+
+.animation-delay-800 {
+  animation-delay: 800ms;
+}
 
 /* ══════════════════════════════════════════════
-   Apple Liquid Glass + Glassmorphism (Light Mode)
+   Apple Liquid Glass (Light Mode) Design System
    ══════════════════════════════════════════════ */
 
-/* Frosted glass surface — the core Apple liquid glass look */
+/* Tech dot grid pattern */
+.tech-grid-bg {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Core Apple Liquid Glass Surface */
 .glass {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.65),
-    rgba(255, 255, 255, 0.30)
-  );
-  -webkit-backdrop-filter: blur(28px) saturate(200%) brightness(1.05);
-  backdrop-filter: blur(28px) saturate(200%) brightness(1.05);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.82),
+      rgba(255, 255, 255, 0.52));
+  -webkit-backdrop-filter: blur(32px) saturate(210%) brightness(1.03);
+  backdrop-filter: blur(32px) saturate(210%) brightness(1.03);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.85),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.15),
-    0 8px 32px rgba(37, 99, 235, 0.10),
-    0 2px 8px rgba(31, 38, 135, 0.06);
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.25),
+    0 12px 36px -4px rgba(31, 38, 135, 0.06),
+    0 4px 12px rgba(15, 23, 42, 0.03);
 }
 
-/* Stronger frosted glass for cards / panels */
+/* Apple Liquid Glass Card (Squircle Cards) */
 .glass-card {
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.78),
-    rgba(255, 255, 255, 0.42)
-  );
-  -webkit-backdrop-filter: blur(40px) saturate(220%) brightness(1.06);
-  backdrop-filter: blur(40px) saturate(220%) brightness(1.06);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.88),
+      rgba(255, 255, 255, 0.62));
+  -webkit-backdrop-filter: blur(40px) saturate(220%) brightness(1.04);
+  backdrop-filter: blur(40px) saturate(220%) brightness(1.04);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.20),
-    inset 1px 0 0 rgba(255, 255, 255, 0.50),
-    0 24px 64px rgba(37, 99, 235, 0.12),
-    0 4px 16px rgba(31, 38, 135, 0.08);
+    inset 0 2px 0 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.3),
+    0 20px 48px -6px rgba(15, 23, 42, 0.07),
+    0 6px 16px -2px rgba(31, 38, 135, 0.04);
 }
 
-/* Ultra-light frosted surface for chips / pills */
+/* Ultra-light Apple Liquid Pill / Chip */
 .glass-chip {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.70),
-    rgba(255, 255, 255, 0.40)
-  );
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.60);
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.92),
+      rgba(255, 255, 255, 0.68));
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.80),
-    0 4px 16px rgba(37, 99, 235, 0.08);
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+    0 4px 16px rgba(37, 99, 235, 0.06);
 }
 
-/* Translucent glass for navigation bars */
+/* Translucent Apple Glass Navigation Bar */
 .glass-nav {
-  background: rgba(255, 255, 255, 0.55);
-  -webkit-backdrop-filter: blur(24px) saturate(200%);
-  backdrop-filter: blur(24px) saturate(200%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.78);
+  -webkit-backdrop-filter: blur(32px) saturate(210%);
+  backdrop-filter: blur(32px) saturate(210%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 24px -2px rgba(15, 23, 42, 0.04);
 }
 
-/* Liquid gradient blobs — Apple's flowing color effect */
-.liquid-gradient {
-  background: conic-gradient(
-    from 180deg at 50% 50%,
-    rgba(59, 130, 246, 0.35),
-    rgba(37, 99, 235, 0.25),
-    rgba(6, 182, 212, 0.3),
-    rgba(129, 140, 248, 0.3),
-    rgba(59, 130, 246, 0.35)
-  );
-  filter: blur(60px);
+/* Liquid Ethereal Ambient Orbs (Soft fluid glows beneath glass) */
+.liquid-orb-blue {
+  background: radial-gradient(circle at center,
+      rgba(59, 130, 246, 0.16),
+      rgba(147, 51, 234, 0.08),
+      transparent 70%);
+  filter: blur(50px);
   border-radius: 9999px;
 }
 
-/* Soft ambient glow used behind glass panels */
-.ambient-glow {
-  background: radial-gradient(
-    circle at center,
-    rgba(59, 130, 246, 0.18),
-    rgba(6, 182, 212, 0.08),
-    transparent 70%
-  );
-  filter: blur(40px);
+.liquid-orb-sky {
+  background: radial-gradient(circle at center,
+      rgba(14, 165, 233, 0.15),
+      rgba(99, 102, 241, 0.08),
+      transparent 70%);
+  filter: blur(50px);
+  border-radius: 9999px;
 }
 
-/* Apple-style dark text on glass */
+.ambient-glow {
+  background: radial-gradient(circle at center,
+      rgba(37, 99, 235, 0.10),
+      rgba(14, 165, 233, 0.05),
+      transparent 70%);
+  filter: blur(60px);
+}
+
+/* Apple Liquid Dark Text */
 .glass-text-primary {
-  color: rgba(17, 24, 39, 0.92);
+  color: #0F172A;
 }
 
 .glass-text-secondary {
-  color: rgba(17, 24, 39, 0.6);
+  color: #475569;
 }
 
-/* Consistent section wrapper — pure white base with glass feel */
+/* Pure White Base Canvas for Section Wrappers */
 .glass-section {
   background: #ffffff;
   position: relative;
 }
 
-/* Liquid glass hover lift */
+/* Apple Liquid Glass Hover Lift & Specular Sheen */
 .glass-hover {
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.glass-hover:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 24px 64px rgba(31, 38, 135, 0.16);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease;
 }
 
-/* Liquid blob float animation */
+.glass-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow:
+    inset 0 2px 0 0 rgba(255, 255, 255, 1),
+    0 24px 56px -8px rgba(37, 99, 235, 0.12),
+    0 8px 24px -4px rgba(15, 23, 42, 0.06);
+}
+
+/* Fluid float animation for liquid orbs */
 @keyframes liquid-float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -40px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(24px, -30px) scale(1.08);
+  }
 }
 
 .animate-liquid-float {
@@ -352,28 +443,32 @@
 
 /* Glass shimmer sweep */
 @keyframes glass-shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .glass-shimmer {
-  background: linear-gradient(
-    110deg,
-    transparent 25%,
-    rgba(255, 255, 255, 0.5) 50%,
-    transparent 75%
-  );
+  background: linear-gradient(110deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.7) 50%,
+      transparent 75%);
   background-size: 200% 100%;
   animation: glass-shimmer 6s linear infinite;
 }
 
-/* Apple-style blur-in entrance */
+/* Apple entrance blur animation */
 @keyframes blur-in {
   from {
     opacity: 0;
-    filter: blur(12px);
-    transform: translateY(16px);
+    filter: blur(10px);
+    transform: translateY(14px);
   }
+
   to {
     opacity: 1;
     filter: blur(0);
@@ -382,5 +477,5 @@
 }
 
 .animate-blur-in {
-  animation: blur-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: blur-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }

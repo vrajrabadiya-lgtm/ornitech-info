@@ -27,23 +27,29 @@ export function Process() {
 
   return (
     <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-24">
+      {/* Liquid background fluid orbs */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="liquid-gradient animate-liquid-float absolute left-0 top-0 h-[500px] w-[500px] opacity-38" />
-        <div className="liquid-gradient animate-liquid-float-slow absolute right-0 bottom-0 h-[450px] w-[450px] opacity-35" />
-        <div className="ambient-glow absolute right-1/4 top-1/2 h-[400px] w-[600px] -translate-y-1/2 opacity-40" />
+        <div className="liquid-orb-sky animate-liquid-float absolute left-0 top-0 h-[500px] w-[500px] opacity-60" />
+        <div className="liquid-orb-blue animate-liquid-float-slow absolute right-0 bottom-0 h-[480px] w-[480px] opacity-65" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         <div className={`mx-auto max-w-2xl text-center transition-all duration-700 ${inView ? "animate-blur-in" : "opacity-0 translate-y-8"}`}>
-          <span className="glass-chip inline-flex items-center rounded-full px-3.5 py-1 text-[11px] font-semibold tracking-widest text-brand uppercase">How We Work</span>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl" style={{ letterSpacing: "-0.03em" }}>Our Development Process</h2>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">A proven, transparent workflow that takes your idea from concept to a launched, supported product.</p>
+          <span className="glass-chip inline-flex items-center rounded-full px-4 py-1.5 text-[11px] font-bold tracking-widest text-blue-600 uppercase border border-blue-100 shadow-sm">
+            How We Work
+          </span>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl" style={{ letterSpacing: "-0.03em" }}>
+            Our Development Process
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            A proven, transparent workflow that takes your idea from concept to a launched, supported product.
+          </p>
         </div>
 
-        {/* Step icons */}
+        {/* Step icons with Apple Liquid Glass chips */}
         <div className="relative mt-14 flex flex-wrap items-start justify-center gap-x-6 gap-y-6 sm:gap-x-12">
           {/* Connector line */}
-          <div className="pointer-events-none absolute left-1/2 top-8 hidden h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-border to-transparent lg:block" />
+          <div className="pointer-events-none absolute left-1/2 top-8 hidden h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-slate-200 to-transparent lg:block" />
           {STEPS.map((s, i) => {
             const Icon = s.icon
             return (
@@ -55,48 +61,51 @@ export function Process() {
                 onMouseLeave={() => setPaused(false)}
                 className="group relative flex w-20 flex-col items-center gap-2.5 text-center"
               >
-                <span className={`relative flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-500 ${
-                  i === active ? "glass-card text-brand scale-110 shadow-lg shadow-brand/20" : "glass-chip text-muted-foreground group-hover:text-brand group-hover:scale-105"
-                }`}>
-                  <Icon className="h-6 w-6" />
-                  {i === active && <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-brand ring-2 ring-white" />}
+                <span className={`relative flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-500 ${i === active
+                    ? "glass-card text-blue-600 scale-110 shadow-xl shadow-blue-500/20 border-white"
+                    : "glass-chip text-slate-500 group-hover:text-blue-600 group-hover:scale-105"
+                  }`}>
+                  <Icon className="h-6 w-6 stroke-[2.2]" />
+                  {i === active && <span className="absolute -right-1 -top-1 h-3.5 w-3.5 rounded-full bg-blue-600 ring-2 ring-white shadow-sm" />}
                 </span>
-                <span className={`text-xs font-semibold transition-colors duration-300 ${i === active ? "text-brand" : "text-muted-foreground"}`}>{s.name}</span>
+                <span className={`text-xs font-bold transition-colors duration-300 ${i === active ? "text-blue-600" : "text-slate-600"}`}>{s.name}</span>
               </button>
             )
           })}
         </div>
 
         {/* Progress bar */}
-        <div className="mx-auto mt-8 h-1 max-w-xs overflow-hidden rounded-full bg-border">
+        <div className="mx-auto mt-8 h-1.5 max-w-xs overflow-hidden rounded-full bg-slate-100 border border-slate-200/60">
           <div
-            className="h-full rounded-full bg-brand"
+            className="h-full rounded-full bg-blue-600 shadow-sm"
             style={{ width: `${((active + 1) / STEPS.length) * 100}%`, transition: paused ? "none" : "width 3s linear" }}
           />
         </div>
 
-        {/* Detail card */}
-        <div key={active} className="glass-card animate-blur-in mt-10 rounded-[2rem] p-8 lg:p-10">
+        {/* Detail Apple Liquid Glass Card */}
+        <div key={active} className="glass-card animate-blur-in mt-10 rounded-[2.2rem] p-8 lg:p-10 shadow-2xl shadow-slate-200/50 border border-white">
           <div className="grid gap-8 lg:grid-cols-2">
             <div>
-              <span className="glass-chip rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-brand">Step {active + 1}</span>
-              <h3 className="mt-3 text-2xl font-bold text-foreground" style={{ letterSpacing: "-0.02em" }}>{current.name}</h3>
-              <p className="mt-3 text-base leading-relaxed text-muted-foreground">{current.body}</p>
+              <span className="glass-chip rounded-full px-3.5 py-1.5 text-[11px] font-black uppercase tracking-widest text-blue-600 border border-blue-100">
+                Step {active + 1}
+              </span>
+              <h3 className="mt-3 text-2xl sm:text-3xl font-black text-slate-900" style={{ letterSpacing: "-0.02em" }}>{current.name}</h3>
+              <p className="mt-3 text-base leading-relaxed text-slate-600">{current.body}</p>
               <ul className="mt-6 space-y-2.5">
                 {current.steps.map((st, i) => (
-                  <li key={st} className="animate-slide-left flex gap-3 text-sm text-muted-foreground" style={{ animationDelay: `${i * 80}ms` }}>
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
+                  <li key={st} className="animate-slide-left flex gap-3 text-sm font-semibold text-slate-700" style={{ animationDelay: `${i * 80}ms` }}>
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-600" />
                     {st}
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Deliverables</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Deliverables</p>
               <div className="mt-4 grid grid-cols-2 gap-3">
                 {current.deliverables.map((d, i) => (
-                  <div key={d} className="animate-scale-in glass rounded-2xl px-4 py-3 text-center" style={{ animationDelay: `${i * 60}ms` }}>
-                    <p className="text-[11px] font-bold tracking-wide text-foreground">{d}</p>
+                  <div key={d} className="animate-scale-in glass-chip rounded-2xl p-4 text-center border border-white shadow-sm" style={{ animationDelay: `${i * 60}ms` }}>
+                    <p className="text-[11px] font-black tracking-wider text-slate-800">{d}</p>
                   </div>
                 ))}
               </div>

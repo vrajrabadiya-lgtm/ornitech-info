@@ -39,17 +39,21 @@ export function TechStack() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
+      {/* Liquid fluid orbs */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="liquid-gradient animate-liquid-float absolute right-0 top-0 h-[500px] w-[500px] opacity-38" />
-        <div className="liquid-gradient animate-liquid-float-slow absolute left-0 bottom-0 h-[450px] w-[450px] opacity-35" />
-        <div className="ambient-glow absolute left-1/2 bottom-0 h-[400px] w-[700px] -translate-x-1/2 opacity-35" />
+        <div className="liquid-orb-blue animate-liquid-float absolute right-0 top-0 h-[500px] w-[500px] opacity-60" />
+        <div className="liquid-orb-sky animate-liquid-float-slow absolute left-0 bottom-0 h-[450px] w-[450px] opacity-65" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         <div className={`text-center transition-all duration-700 ${inView ? "animate-blur-in" : "opacity-0"}`}>
-          <span className="glass-chip inline-flex items-center rounded-full px-3.5 py-1 text-[11px] font-semibold tracking-widest text-brand uppercase">Battle-Tested Stack</span>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl" style={{ letterSpacing: "-0.03em" }}>Our Tech Expertise</h2>
-          <p className="mt-3 text-base text-muted-foreground">Modern, proven technologies we use to build fast, scalable, and maintainable products.</p>
+          <span className="glass-chip inline-flex items-center rounded-full px-4 py-1.5 text-[11px] font-bold tracking-widest text-blue-600 uppercase border border-blue-100 shadow-sm">
+            Battle-Tested Stack
+          </span>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl" style={{ letterSpacing: "-0.03em" }}>
+            Our Tech Expertise
+          </h2>
+          <p className="mt-3 text-base text-slate-600">Modern, proven technologies we use to build fast, scalable, and maintainable products.</p>
         </div>
 
         {/* Tab pills */}
@@ -59,8 +63,10 @@ export function TechStack() {
               key={t}
               type="button"
               onClick={() => { setActive(t); setPaused(true) }}
-              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
-                active === t ? "bg-brand text-white shadow-lg shadow-brand/25" : "glass-chip text-foreground/70 hover:text-brand"
+              className={`rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-300 ${
+                active === t
+                  ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25 border border-blue-500 scale-105"
+                  : "glass-chip text-slate-600 hover:text-blue-600 border-slate-200/80"
               }`}
             >
               {t}
@@ -68,18 +74,18 @@ export function TechStack() {
           ))}
         </div>
 
-        {/* Tech grid */}
-        <div key={active} className={`mx-auto mt-8 overflow-hidden rounded-3xl bg-gradient-to-br ${TAB_COLORS[active]} p-1`}>
-          <div className="glass rounded-[1.4rem] p-6">
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        {/* Tech Liquid Glass Grid Container */}
+        <div key={active} className="mx-auto mt-8">
+          <div className="glass-card animate-blur-in rounded-[2.2rem] p-6 lg:p-8 shadow-2xl shadow-slate-200/50 border border-white">
+            <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-4">
               {CATEGORIES[active].map((tech, i) => (
                 <div
                   key={tech}
-                  className="animate-scale-in glass-card glass-hover flex items-center gap-3 rounded-2xl px-4 py-3.5 text-sm font-semibold text-foreground cursor-default"
+                  className="animate-scale-in glass-chip glass-hover flex items-center gap-3.5 rounded-2xl px-4 py-3.5 text-sm font-bold text-slate-800 cursor-default border border-white shadow-sm"
                   style={{ animationDelay: `${i * 40}ms` }}
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-brand/10 text-[11px] font-bold text-brand">
-                    {tech.slice(0, 2)}
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-xs font-black text-blue-600 shadow-inner">
+                    {tech.slice(0, 2).toUpperCase()}
                   </span>
                   {tech}
                 </div>
