@@ -235,6 +235,7 @@ export const SERVICES_DATA: ServiceItem[] = [
       { title: "Bug Reporting & Retesting", desc: "Detailed regression logs with reproduction steps." }
     ]
   },
+  /*
   {
     slug: "cloud-devops-security",
     title: "Cloud, DevOps & Security",
@@ -256,6 +257,7 @@ export const SERVICES_DATA: ServiceItem[] = [
       { title: "24/7 Monitoring Setup", desc: "Alerting, log aggregation, and automated recovery." }
     ]
   },
+  */
   {
     slug: "data-analytics",
     title: "Data Analytics",

@@ -25,9 +25,9 @@ const TECH_LINKS = [
 ]
 
 const OFFICES = [
-  { flag: "🇨🇦", country: "Canada", hq: true, address: "106 Shaded Creek Dr, Kitchener, ON N2P 0K7", phone: "+1 (425) 623-4723" },
-  { flag: "🇮🇳", country: "India", address: "Pragati IT Park, B 409-410, Utran, Surat, Gujarat 394105", phone: "+91 97275 72204" },
-  { flag: "🇮🇪", country: "Ireland", address: "20 Hawthorn Close, Clondalkin, Co. Dublin, D22 T6P8", phone: "+353 89 612 9175" },
+  // { flag: "🇨🇦", country: "Canada", hq: true, address: "106 Shaded Creek Dr, Kitchener, ON N2P 0K7", phone: "+1 (425) 623-4723" },
+  { flag: "🇮🇳", country: "India", address: "Pragati IT Park, B 409-410, Utran, Surat, Gujarat 394105", phone: "+91 82008 67325" },
+  // { flag: "🇮🇪", country: "Ireland", address: "20 Hawthorn Close, Clondalkin, Co. Dublin, D22 T6P8", phone: "+353 89 612 9175" },
 ]
 
 export function SiteFooter() {

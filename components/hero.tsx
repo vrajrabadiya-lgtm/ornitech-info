@@ -131,19 +131,21 @@ export function Hero() {
           </div>
 
           <div className="hidden items-center gap-3 sm:flex">
-            <div className="flex -space-x-2">
-              {AVATARS.map((src, i) => (
-                <span key={i} className="relative h-7 w-7 overflow-hidden rounded-full ring-2 ring-white shadow-sm">
-                  <Image src={src || "/placeholder.svg"} alt="" fill className="object-cover" sizes="28px" />
-                </span>
-              ))}
-            </div>
-            <div className="flex items-center gap-1">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-              ))}
-            </div>
-            <span className="text-xs font-semibold text-slate-700">4.9/5 · 600+ Products Delivered</span>
+            <Link href="/#testimonials" className="glass-chip inline-flex items-center gap-3 rounded-full border border-white/90 px-3.5 py-1.5 shadow-sm transition-all hover:border-blue-200 hover:text-blue-600">
+              <div className="flex -space-x-2">
+                {AVATARS.map((src, i) => (
+                  <span key={i} className="relative h-7 w-7 overflow-hidden rounded-full ring-2 ring-white shadow-sm">
+                    <Image src={src || "/placeholder.svg"} alt="" fill className="object-cover" sizes="28px" />
+                  </span>
+                ))}
+              </div>
+              <div className="flex items-center gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+              <span className="text-xs font-semibold text-slate-700">4.9/5 · 600+ Products Delivered</span>
+            </Link>
           </div>
         </div>
 
