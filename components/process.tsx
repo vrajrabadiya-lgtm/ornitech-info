@@ -47,7 +47,7 @@ export function Process() {
         </div>
 
         {/* Step icons with Apple Liquid Glass chips */}
-        <div className="relative mt-14 flex flex-wrap items-start justify-center gap-x-6 gap-y-6 sm:gap-x-12">
+        <div className="relative mt-14 flex flex-wrap items-start justify-center gap-x-4 gap-y-5 sm:gap-x-8">
           {/* Connector line */}
           <div className="pointer-events-none absolute left-1/2 top-8 hidden h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-slate-200 to-transparent lg:block" />
           {STEPS.map((s, i) => {
@@ -59,9 +59,9 @@ export function Process() {
                 onClick={() => { setActive(i); setPaused(true) }}
                 onMouseEnter={() => setPaused(true)}
                 onMouseLeave={() => setPaused(false)}
-                className="group relative flex w-20 flex-col items-center gap-2.5 text-center"
+                className="group relative flex w-16 flex-col items-center gap-2 text-center sm:w-20"
               >
-                <span className={`relative flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-500 ${i === active
+                <span className={`relative flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-500 sm:h-16 sm:w-16 ${i === active
                     ? "glass-card text-blue-600 scale-110 shadow-xl shadow-blue-500/20 border-white"
                     : "glass-chip text-slate-500 group-hover:text-blue-600 group-hover:scale-105"
                   }`}>
@@ -84,7 +84,7 @@ export function Process() {
 
         {/* Detail Apple Liquid Glass Card */}
         <div key={active} className="glass-card animate-blur-in mt-10 rounded-[2.2rem] p-8 lg:p-10 shadow-2xl shadow-slate-200/50 border border-white">
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-2">
             <div>
               <span className="glass-chip rounded-full px-3.5 py-1.5 text-[11px] font-black uppercase tracking-widest text-blue-600 border border-blue-100">
                 Step {active + 1}

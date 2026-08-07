@@ -1,6 +1,6 @@
 import { SiteHeader } from "@/components/site-header"
 import { Hero } from "@/components/hero"
-import { Stats } from "@/components/stats"
+// import { Stats } from "@/components/stats"
 import { Services } from "@/components/services"
 import { CtaBand } from "@/components/cta-band"
 import { Process } from "@/components/process"
@@ -19,7 +19,7 @@ export default function HomePage() {
       <SiteHeader />
       <main>
         <Hero />
-        <Stats />
+        {/* <Stats /> */}
         <Services />
         <CtaBand />
         <Process />

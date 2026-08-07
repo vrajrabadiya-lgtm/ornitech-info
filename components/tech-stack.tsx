@@ -131,7 +131,7 @@ export function TechStack() {
         {/* Tech Liquid Glass Grid Container */}
         <div key={active} className="mx-auto mt-8">
           <div className="glass-card animate-blur-in rounded-[2.2rem] p-6 lg:p-8 shadow-2xl shadow-slate-200/50 border border-white">
-            <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
               {CATEGORIES[active].map((tech, i) => {
                 const Icon = ICON_MAP[tech]
                 return (

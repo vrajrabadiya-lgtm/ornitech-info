@@ -95,7 +95,7 @@ export function Testimonial() {
             &ldquo;{r.quote}&rdquo;
           </blockquote>
 
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 pt-6">
+          <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between border-t border-slate-100 pt-6">
             <div className="flex items-center gap-3">
               <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-white shadow-md">
                 <Image src={r.avatar || "/placeholder.svg"} alt={r.name} fill className="object-cover" sizes="48px" />

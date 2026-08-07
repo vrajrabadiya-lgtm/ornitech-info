@@ -39,7 +39,7 @@ export function Blog() {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
           {POSTS.map((p, i) => (
             <Link
               key={p.slug}

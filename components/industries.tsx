@@ -44,7 +44,7 @@ export function Industries() {
         </div>
 
         {/* Cards grid */}
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {INDUSTRIES.map((ind, i) => {
             const Icon = ind.icon
             return (

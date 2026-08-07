@@ -36,7 +36,7 @@ export function Stats() {
         <div className="liquid-orb-sky animate-liquid-float-slow absolute -left-20 bottom-0 h-[400px] w-[400px] opacity-60" />
       </div>
 
-      <div className="glass-card relative grid gap-8 rounded-[2.5rem] p-8 sm:grid-cols-2 lg:grid-cols-4 lg:p-14 shadow-2xl shadow-slate-200/50 border border-white">
+      <div className="glass-card relative grid gap-6 rounded-[2.5rem] p-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:p-14 shadow-2xl shadow-slate-200/50 border border-white">
         {/* Shimmer sweep */}
         <div className="glass-shimmer pointer-events-none absolute inset-0 rounded-[2.5rem]" />
         {STATS.map((s, i) => (

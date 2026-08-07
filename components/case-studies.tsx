@@ -68,7 +68,7 @@ export function CaseStudies() {
         ))}
       </div>
 
-      <div className="relative mt-10 grid gap-8 md:grid-cols-2">
+      <div className="relative mt-10 grid gap-5 md:grid-cols-2">
         {visible.map((c, i) => (
           <article
             key={c.title}

@@ -46,14 +46,14 @@ export function SiteHeader() {
 
   return (
     <div className={cn(
-      "fixed top-0 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-500 ease-in-out pointer-events-none",
-      hidden ? "-translate-y-full opacity-0" : "translate-y-4 opacity-100"
+      "fixed top-0 left-0 right-0 z-50 flex justify-center px-3 transition-all duration-500 ease-in-out pointer-events-none sm:px-4",
+      hidden ? "-translate-y-full opacity-0" : "translate-y-3 opacity-100 sm:translate-y-4"
     )}>
       <header
         ref={headerRef}
         className={cn(
           "w-full max-w-6xl rounded-full transition-all duration-300 pointer-events-auto",
-          scrolled ? "glass-nav shadow-md shadow-blue-900/5" : "bg-white/60 backdrop-blur-xxl border border-white/40 shadow-sm"
+          "bg-white border border-slate-200/80 shadow-md shadow-blue-900/8"
         )}
         onMouseLeave={() => setActiveMenu(null)}
       >
@@ -71,7 +71,7 @@ export function SiteHeader() {
                   href={`/${key}`}
                   className={cn(
                     "flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-medium transition-all",
-                    activeMenu === key ? "text-brand bg-white shadow-sm" : "text-foreground/75 hover:text-brand hover:bg-white hover:shadow-sm"
+                    activeMenu === key ? "text-brand bg-white backdrop-blur-xl shadow-sm" : "text-foreground/75 hover:text-brand hover:bg-white hover:backdrop-blur-xl hover:shadow-sm"
                   )}
                 >
                   {key.charAt(0).toUpperCase() + key.slice(1)}
@@ -80,7 +80,7 @@ export function SiteHeader() {
               </li>
             ))}
             <li onMouseEnter={() => setActiveMenu(null)}>
-              <Link href="/portfolio" className="flex items-center rounded-full px-4 py-2 text-[14px] font-medium text-foreground/75 transition-all hover:text-brand hover:bg-white hover:shadow-sm">
+              <Link href="/portfolio" className="flex items-center rounded-full px-4 py-2 text-[14px] font-medium text-foreground/75 transition-all hover:text-brand hover:bg-white hover:backdrop-blur-xl hover:shadow-sm">
                 Portfolio
               </Link>
             </li>
@@ -89,7 +89,7 @@ export function SiteHeader() {
                 href="/about"
                 className={cn(
                   "flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-medium transition-all",
-                  activeMenu === "company" ? "text-brand bg-white shadow-sm" : "text-foreground/75 hover:text-brand hover:bg-white hover:shadow-sm"
+                  activeMenu === "company" ? "text-brand bg-white backdrop-blur-xl shadow-sm" : "text-foreground/75 hover:text-brand hover:bg-white hover:backdrop-blur-xl hover:shadow-sm"
                 )}
               >
                 Company
@@ -125,7 +125,7 @@ export function SiteHeader() {
           activeMenu !== null ? "visible opacity-100 translate-y-0 pointer-events-auto" : "invisible opacity-0 translate-y-2 pointer-events-none"
         )}
       >
-        <div className="overflow-hidden rounded-3xl bg-white/30 backdrop-blur-3xl border border-white/50 shadow-2xl shadow-blue-900/10">
+        <div className="overflow-hidden rounded-3xl shadow-2xl shadow-blue-900/12" style={{ background: "rgba(255,255,255,0.85)", backdropFilter: "blur(40px) saturate(180%)", WebkitBackdropFilter: "blur(40px) saturate(180%)", border: "1px solid rgba(226,232,240,0.8)" }}>
 
           {/* Services */}
           {activeMenu === "services" && (

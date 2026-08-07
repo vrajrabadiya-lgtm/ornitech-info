@@ -103,7 +103,7 @@ export function Hero() {
   const currentTab = SHOWCASE_TABS.find((t) => t.id === activeTab) || SHOWCASE_TABS[0]
 
   return (
-    <section id="top" className="relative min-h-[92vh] overflow-hidden bg-white text-slate-900 pt-8 pb-16 lg:pb-24">
+    <section id="top" className="relative min-h-screen overflow-hidden bg-white text-slate-900 pt-8 pb-12 lg:pb-24">
       {/* Background tech grid + subtle radial glow */}
       <div className="pointer-events-none absolute inset-0 tech-grid-bg opacity-70" aria-hidden="true" />
       <div className="pointer-events-none absolute -top-32 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-gradient-to-b from-blue-50/80 via-indigo-50/40 to-transparent blur-3xl opacity-80" aria-hidden="true" />
@@ -193,7 +193,7 @@ export function Hero() {
           <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white/95 shadow-xl shadow-slate-200/50 backdrop-blur-md">
 
             {/* Showcase Tab Navigation */}
-            <div className="flex flex-wrap items-center justify-between border-b border-slate-100 bg-slate-50/80 px-4 py-3 sm:px-6">
+            <div className="flex flex-col gap-3 border-b border-slate-100 bg-slate-50/80 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
               <div className="flex flex-wrap items-center gap-2">
                 {SHOWCASE_TABS.map((tab) => {
                   const Icon = tab.icon
@@ -221,7 +221,7 @@ export function Hero() {
             </div>
 
             {/* Tab Content Display */}
-            <div className="grid gap-8 p-6 lg:grid-cols-12 lg:p-8">
+            <div className="grid gap-6 p-5 lg:grid-cols-12 lg:p-8">
 
               {/* Left Column: Info & Metrics */}
               <div className="flex flex-col justify-between space-y-6 lg:col-span-5">
@@ -239,11 +239,11 @@ export function Hero() {
                 </div>
 
                 {/* Metrics Grid */}
-                <div className="grid grid-cols-3 gap-3 border-t border-slate-100 pt-5">
+                <div className="grid grid-cols-3 gap-2 border-t border-slate-100 pt-5">
                   {currentTab.metrics.map((m) => (
-                    <div key={m.label} className="rounded-2xl bg-slate-50 p-3 border border-slate-100">
-                      <p className="text-xs font-medium text-slate-500">{m.label}</p>
-                      <p className="mt-1 text-base font-black text-slate-900 sm:text-lg">{m.value}</p>
+                    <div key={m.label} className="rounded-2xl bg-slate-50 p-2.5 border border-slate-100">
+                      <p className="text-[10px] font-medium text-slate-500 leading-tight">{m.label}</p>
+                      <p className="mt-1 text-sm font-black text-slate-900 sm:text-base">{m.value}</p>
                     </div>
                   ))}
                 </div>
@@ -278,7 +278,7 @@ export function Hero() {
                   </div>
 
                   {/* Code Editor Body */}
-                  <pre className="mt-4 overflow-x-auto text-xs sm:text-sm font-mono text-slate-200 leading-relaxed">
+                  <pre className="mt-4 overflow-x-auto text-[11px] sm:text-xs font-mono text-slate-200 leading-relaxed whitespace-pre-wrap break-words">
                     <code>{currentTab.codeSnippet}</code>
                   </pre>
 

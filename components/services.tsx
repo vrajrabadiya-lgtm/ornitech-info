@@ -68,7 +68,7 @@ export function Services() {
           </p>
         </div>
 
-        <div className={`mt-10 grid gap-6 lg:grid-cols-[320px_1fr] transition-all duration-700 delay-100 ${inView ? "animate-blur-in" : "opacity-0 translate-y-8"}`}>
+        <div className={`mt-10 grid gap-6 lg:grid-cols-[280px_1fr] transition-all duration-700 delay-100 ${inView ? "animate-blur-in" : "opacity-0 translate-y-8"}`}>
           {/* Sidebar Liquid Glass Panel */}
           <div
             className="glass-card flex flex-col gap-1.5 rounded-[2rem] p-3.5 shadow-xl shadow-slate-200/40 border border-white/90"
