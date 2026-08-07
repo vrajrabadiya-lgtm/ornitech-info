@@ -302,23 +302,6 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Clean Monochrome Client Logos Strip */}
-        <div className="animate-blur-in animation-delay-500 mt-14 border-t border-slate-200/80 pt-10">
-          <p className="text-center text-xs font-bold uppercase tracking-[0.25em] text-slate-400 mb-6">
-            Trusted by Leaders &amp; Fast-Growing Tech Enterprises
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 opacity-70">
-            {["AT&T", "Biocon", "Nextbite", "Masa", "RetailHub", "HealthBridge"].map((brand) => (
-              <span
-                key={brand}
-                className="text-base font-black tracking-wider text-slate-600 transition-colors hover:text-blue-600"
-              >
-                {brand}
-              </span>
-            ))}
-          </div>
-        </div>
-
       </div>
     </section>
   )

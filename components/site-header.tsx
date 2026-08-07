@@ -15,10 +15,23 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10)
+    const onScroll = () => {
+      const currentScrollY = window.scrollY
+      setScrolled(currentScrollY > 10)
+
+      // Hide header when scrolling down past 100px, show when scrolling up
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setHidden(true)
+      } else if (currentScrollY < lastScrollY.current) {
+        setHidden(false)
+      }
+      lastScrollY.current = currentScrollY
+    }
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
@@ -32,84 +45,87 @@ export function SiteHeader() {
   }, [])
 
   return (
-    <header
-      ref={headerRef}
-      className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
-        scrolled ? "glass-nav shadow-sm" : "bg-white/80 backdrop-blur-md border-b border-slate-200/60"
-      )}
-      onMouseLeave={() => setActiveMenu(null)}
-    >
-      <nav className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-5 lg:px-8">
-        {/* Logo */}
-        <Link href="/" aria-label="Ornitech home" onMouseEnter={() => setActiveMenu(null)} className="transition-transform duration-200 hover:scale-[1.02]">
-          <Logo />
-        </Link>
+    <div className={cn(
+      "fixed top-0 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-500 ease-in-out pointer-events-none",
+      hidden ? "-translate-y-full opacity-0" : "translate-y-4 opacity-100"
+    )}>
+      <header
+        ref={headerRef}
+        className={cn(
+          "w-full max-w-6xl rounded-full transition-all duration-300 pointer-events-auto",
+          scrolled ? "glass-nav shadow-md shadow-blue-900/5" : "bg-white/60 backdrop-blur-xl border border-white/40 shadow-sm"
+        )}
+        onMouseLeave={() => setActiveMenu(null)}
+      >
+        <nav className="mx-auto flex h-[60px] w-full items-center justify-between px-6 lg:px-8">
+          {/* Logo */}
+          <Link href="/" aria-label="Ornitech home" onMouseEnter={() => setActiveMenu(null)} className="transition-transform duration-200 hover:scale-[1.02]">
+            <Logo />
+          </Link>
 
-        {/* Desktop Nav */}
-        <ul className="hidden items-center gap-1 lg:flex">
-          {(["services", "technologies", "industries"] as const).map((key) => (
-            <li key={key} onMouseEnter={() => setActiveMenu(key)}>
-              <Link
-                href={`/${key}`}
-                className={cn(
-                  "flex items-center gap-1 rounded-xl px-3.5 py-2 text-[14px] font-medium transition-all",
-                  activeMenu === key ? "text-brand bg-brand/5" : "text-foreground/75 hover:text-brand hover:bg-brand/5"
-                )}
-              >
-                {key.charAt(0).toUpperCase() + key.slice(1)}
-                <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform duration-200", activeMenu === key && "rotate-180 text-brand")} />
+          {/* Desktop Nav */}
+          <ul className="hidden items-center gap-1 lg:flex">
+            {(["services", "technologies", "industries"] as const).map((key) => (
+              <li key={key} onMouseEnter={() => setActiveMenu(key)}>
+                <Link
+                  href={`/${key}`}
+                  className={cn(
+                    "flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-medium transition-all",
+                    activeMenu === key ? "text-brand bg-brand/5" : "text-foreground/75 hover:text-brand hover:bg-brand/5"
+                  )}
+                >
+                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                  <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", activeMenu === key ? "rotate-180 text-brand" : "text-muted-foreground")} />
+                </Link>
+              </li>
+            ))}
+            <li onMouseEnter={() => setActiveMenu(null)}>
+              <Link href="/portfolio" className="flex items-center rounded-full px-4 py-2 text-[14px] font-medium text-foreground/75 transition-all hover:text-brand hover:bg-brand/5">
+                Portfolio
               </Link>
             </li>
-          ))}
-          <li onMouseEnter={() => setActiveMenu(null)}>
-            <Link href="/portfolio" className="flex items-center rounded-xl px-3.5 py-2 text-[14px] font-medium text-foreground/75 transition-all hover:text-brand hover:bg-brand/5">
-              Portfolio
+            <li onMouseEnter={() => setActiveMenu("company")}>
+              <Link
+                href="/about"
+                className={cn(
+                  "flex items-center gap-1 rounded-full px-4 py-2 text-[14px] font-medium transition-all",
+                  activeMenu === "company" ? "text-brand bg-brand/5" : "text-foreground/75 hover:text-brand hover:bg-brand/5"
+                )}
+              >
+                Company
+                <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", activeMenu === "company" ? "rotate-180 text-brand" : "text-muted-foreground")} />
+              </Link>
+            </li>
+          </ul>
+
+          {/* CTA Buttons */}
+          <div className="hidden items-center gap-2.5 lg:flex" onMouseEnter={() => setActiveMenu(null)}>
+            <Link href="/contact" className="glass-chip rounded-full px-5 py-2 text-sm font-semibold text-foreground transition-all hover:text-brand">
+              Hire Us
             </Link>
-          </li>
-          <li onMouseEnter={() => setActiveMenu("company")}>
-            <Link
-              href="/about"
-              className={cn(
-                "flex items-center gap-1 rounded-xl px-3.5 py-2 text-[14px] font-medium transition-all",
-                activeMenu === "company" ? "text-brand bg-brand/5" : "text-foreground/75 hover:text-brand hover:bg-brand/5"
-              )}
-            >
-              Company
-              <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform duration-200", activeMenu === "company" && "rotate-180 text-brand")} />
+            <Link href="/contact" className="rounded-full bg-brand px-5 py-2 text-sm font-semibold text-white shadow-md shadow-brand/20 transition-all hover:bg-brand/90 hover:shadow-lg hover:shadow-brand/25">
+              Contact Us
             </Link>
-          </li>
-        </ul>
+          </div>
 
-        {/* CTA Buttons */}
-        <div className="hidden items-center gap-2.5 lg:flex" onMouseEnter={() => setActiveMenu(null)}>
-          <Link href="/contact" className="glass-chip rounded-full px-5 py-2 text-sm font-semibold text-foreground transition-all hover:text-brand">
-            Hire Us
-          </Link>
-          <Link href="/contact" className="rounded-full bg-brand px-5 py-2 text-sm font-semibold text-white shadow-md shadow-brand/20 transition-all hover:bg-brand/90 hover:shadow-lg hover:shadow-brand/25">
-            Contact Us
-          </Link>
-        </div>
+          {/* Mobile toggle */}
+          <button
+            type="button"
+            onClick={() => setMobileOpen((v) => !v)}
+            className="glass-chip inline-flex h-10 w-10 items-center justify-center rounded-full lg:hidden"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </nav>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          onClick={() => setMobileOpen((v) => !v)}
-          className="glass-chip inline-flex h-10 w-10 items-center justify-center rounded-xl lg:hidden"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-        >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-      </nav>
-
-      {/* Mega-menu panel */}
       <div
         className={cn(
           "absolute left-1/2 top-[68px] z-50 w-[min(1100px,calc(100vw-2rem))] -translate-x-1/2 pt-2 transition-all duration-200",
           activeMenu !== null ? "visible opacity-100 translate-y-0 pointer-events-auto" : "invisible opacity-0 translate-y-2 pointer-events-none"
         )}
       >
-        <div className="overflow-hidden rounded-3xl border border-white/60 bg-white shadow-2xl shadow-blue-900/15" style={{ backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)" }}>
+        <div className="overflow-hidden rounded-3xl bg-white/30 backdrop-blur-3xl border border-white/50 shadow-2xl shadow-blue-900/10">
 
           {/* Services */}
           {activeMenu === "services" && (
@@ -138,7 +154,7 @@ export function SiteHeader() {
                   { href: "/services/dedicated-development-team", icon: "D", color: "bg-cyan-100 text-cyan-700", label: "Dedicated Development Team", desc: "A full team, exclusively yours." },
                   { href: "/services/staff-augmentation", icon: "S", color: "bg-teal-100 text-teal-700", label: "Staff Augmentation", desc: "Extend your team on demand." },
                 ].map((item) => (
-                  <Link key={item.href} href={item.href} onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-2xl p-2.5 transition-colors hover:bg-brand/5">
+                  <Link key={item.href} href={item.href} onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-2xl p-2.5 transition-colors hover:bg-white/40 hover:backdrop-blur-md">
                     <span className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-xs font-bold ${item.color}`}>{item.icon}</span>
                     <div>
                       <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">{item.label}</span>
@@ -153,7 +169,7 @@ export function SiteHeader() {
           {/* Technologies */}
           {activeMenu === "technologies" && (
             <div className="grid lg:grid-cols-[240px_1fr]">
-              <div className="flex flex-col justify-between gap-6 bg-gradient-to-b from-brand/5 to-brand/10 p-7">
+              <div className="flex flex-col justify-between gap-6 bg-gradient-to-b from-brand/5 to-transparent p-7">
                 <div>
                   <h3 className="text-lg font-bold text-foreground">Technologies</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Modern stack across frontend, backend, mobile, and cloud.</p>
@@ -191,7 +207,7 @@ export function SiteHeader() {
           {/* Industries */}
           {activeMenu === "industries" && (
             <div className="grid lg:grid-cols-[240px_1fr]">
-              <div className="flex flex-col justify-between gap-6 bg-gradient-to-b from-brand/5 to-brand/10 p-7">
+              <div className="flex flex-col justify-between gap-6 bg-gradient-to-b from-brand/5 to-transparent p-7">
                 <div>
                   <h3 className="text-lg font-bold text-foreground">Industries</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Deep domain expertise across 12+ verticals.</p>
@@ -215,7 +231,7 @@ export function SiteHeader() {
                   { href: "/industries/manufacturing", Icon: Factory, color: "bg-slate-100 text-slate-600", label: "Manufacturing", desc: "ERP, IoT, production ops" },
                   { href: "/industries/on-demand-marketplace", Icon: Store, color: "bg-violet-100 text-violet-600", label: "On-Demand Marketplace", desc: "Multi-vendor, gig apps" },
                 ].map(({ href, Icon, color, label, desc }) => (
-                  <Link key={href} href={href} onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-2xl p-2.5 transition-colors hover:bg-brand/5">
+                  <Link key={href} href={href} onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-2xl p-2.5 transition-colors hover:bg-white/40 hover:backdrop-blur-md">
                     <span className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl ${color}`}><Icon className="h-4 w-4" /></span>
                     <div>
                       <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">{label}</span>
@@ -230,7 +246,7 @@ export function SiteHeader() {
           {/* Company */}
           {activeMenu === "company" && (
             <div className="grid lg:grid-cols-[240px_1fr]">
-              <div className="flex flex-col justify-between gap-6 bg-gradient-to-b from-brand/5 to-brand/10 p-7">
+              <div className="flex flex-col justify-between gap-6 bg-gradient-to-b from-brand/5 to-transparent p-7">
                 <div>
                   <h3 className="text-lg font-bold text-foreground">Company</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">A software agency built on craft and reliability.</p>
@@ -248,7 +264,7 @@ export function SiteHeader() {
                   { href: "/blog", Icon: BookOpen, color: "bg-amber-100 text-amber-600", label: "Blog", desc: "Insights, tutorials, engineering articles" },
                   { href: "/contact", Icon: Mail, color: "bg-cyan-100 text-cyan-600", label: "Contact", desc: "Offices in Canada, India, and Ireland" },
                 ].map(({ href, Icon, color, label, desc }) => (
-                  <Link key={label} href={href} onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-2xl p-3 transition-colors hover:bg-brand/5">
+                  <Link key={label} href={href} onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-2xl p-3 transition-colors hover:bg-white/40 hover:backdrop-blur-md">
                     <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${color}`}><Icon className="h-4 w-4" /></span>
                     <div>
                       <span className="block text-sm font-semibold text-foreground group-hover/item:text-brand">{label}</span>
@@ -263,7 +279,7 @@ export function SiteHeader() {
       </div>
 
       {/* Mobile drawer */}
-      <div className={cn("border-t border-white/40 bg-white/90 backdrop-blur-xl lg:hidden", mobileOpen ? "block" : "hidden")}>
+      <div className={cn("border-t border-white/40 glass-nav lg:hidden", mobileOpen ? "block" : "hidden")}>
         <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
           <Link href="/" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold text-foreground hover:bg-brand/5 hover:text-brand">Home</Link>
           {[
@@ -294,5 +310,6 @@ export function SiteHeader() {
         </nav>
       </div>
     </header>
+    </div>
   )
 }

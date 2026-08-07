@@ -3,7 +3,11 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { SERVICES_DATA } from "@/lib/site-data"
-import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react"
+import { ArrowRight, Sparkles, Globe, Smartphone, Code2, Zap, Cpu, Bot, Layout, CheckCircle2, Shield, BarChart3, Users, UserPlus } from "lucide-react"
+
+const ICON_MAP: Record<string, React.ElementType> = {
+  Globe, Smartphone, Code2, Zap, Cpu, Bot, Layout, CheckCircle2, Shield, BarChart3, Users, UserPlus
+}
 
 export default function ServicesPage() {
   return (
@@ -30,7 +34,9 @@ export default function ServicesPage() {
         <section className="py-20">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {SERVICES_DATA.map((service) => (
+              {SERVICES_DATA.map((service) => {
+                const Icon = ICON_MAP[service.iconName] || CheckCircle2
+                return (
                 <div
                   key={service.slug}
                   className="group relative flex flex-col justify-between rounded-2xl border border-border bg-card p-6 transition-all duration-200 hover:border-brand/50 hover:shadow-lg"
@@ -38,7 +44,7 @@ export default function ServicesPage() {
                   <div>
                     <div className="flex items-center justify-between">
                       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-brand">
-                        <CheckCircle2 className="h-6 w-6" />
+                        <Icon className="h-6 w-6" />
                       </div>
                       {service.badge && (
                         <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-bold text-brand">
@@ -72,7 +78,8 @@ export default function ServicesPage() {
                     </Link>
                   </div>
                 </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </section>

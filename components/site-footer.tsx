@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { Globe, AtSign, Send, Rss, MapPin, ShieldCheck, FileText, ArrowRight } from "lucide-react"
+import { MapPin, ShieldCheck, FileText, ArrowRight } from "lucide-react"
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa"
 import { Logo } from "@/components/logo"
 import { useInView } from "@/hooks/use-in-view"
 
@@ -30,14 +31,15 @@ const OFFICES = [
 ]
 
 export function SiteFooter() {
-  const { ref, inView } = useInView(0.05)
+  const { ref: footerRef, inView: footerInView } = useInView(0.05)
+  const { ref: textRef, inView: textInView } = useInView(0.01)
 
   return (
-    <footer ref={ref as React.RefObject<HTMLElement>} className="relative overflow-hidden bg-foreground text-background">
+    <footer ref={footerRef as React.RefObject<HTMLElement>} className="relative overflow-hidden bg-foreground text-background">
       {/* Subtle dot pattern */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:24px_24px]" />
 
-      <div className={`relative mx-auto max-w-7xl px-5 pt-16 lg:px-8 transition-all duration-700 ${inView ? "animate-fade-up" : "opacity-0 translate-y-8"}`}>
+      <div className={`relative mx-auto max-w-7xl px-5 pt-16 lg:px-8 transition-all duration-700 ${footerInView ? "animate-fade-up" : "opacity-0 translate-y-8"}`}>
         {/* Top CTA strip */}
         <div className="mb-14 flex flex-col items-start justify-between gap-6 rounded-2xl border border-white/10 bg-white/5 p-6 sm:flex-row sm:items-center">
           <div>
@@ -121,17 +123,39 @@ export function SiteFooter() {
             </ul>
           </div>
         </div>
+      </div>
 
+      {/* Watermark */}
+      <div ref={textRef as React.RefObject<HTMLDivElement>} className="mt-14 pointer-events-none select-none overflow-hidden px-5 lg:px-8 pb-4">
+        <p
+          className="text-center text-[22vw] font-black leading-none tracking-tighter text-white"
+          style={{
+            opacity: textInView ? 1 : 0,
+            transform: textInView ? "translateY(0)" : "translateY(100%)",
+            transition: "opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)",
+          }}
+        >
+          ornitech
+        </p>
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         {/* Bottom bar */}
-        <div className="mt-14 flex flex-col items-center justify-between gap-6 border-t border-white/10 py-8 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-6 border-t border-white/10 py-8 sm:flex-row mt-4">
           <p className="text-sm text-white/40">
             Copyright © 2026 All Rights Reserved By <span className="font-semibold text-white/70">Ornitech</span>
           </p>
           <div className="flex gap-2.5">
-            {[Globe, AtSign, Send, Rss].map((Icon, i) => (
+            {[
+              { Icon: FaGithub, href: "https://github.com/Ornitech-26" },
+              { Icon: FaInstagram, href: "https://www.instagram.com/ornitech_solution?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
+              { Icon: FaLinkedin, href: "https://www.linkedin.com/company/ornitech-solution/posts/?feedView=all" }
+            ].map(({ Icon, href }, i) => (
               <a
                 key={i}
-                href="#"
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Social link"
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/40 transition-all hover:border-brand hover:text-white hover:scale-110"
               >
@@ -140,13 +164,6 @@ export function SiteFooter() {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Watermark */}
-      <div className="pointer-events-none select-none overflow-hidden">
-        <p className="-mb-6 text-center text-[22vw] font-extrabold leading-none tracking-tight text-white/[0.03]">
-          ORNITECH
-        </p>
       </div>
     </footer>
   )

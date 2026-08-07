@@ -3,7 +3,11 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { INDUSTRIES_DATA } from "@/lib/site-data"
-import { ArrowRight, CheckCircle2, Building2 } from "lucide-react"
+import { ArrowRight, CheckCircle2, Building2, HeartPulse, Landmark, ShoppingBag, GraduationCap, Plane, Truck, Clapperboard, Dumbbell, UtensilsCrossed, Factory, Store } from "lucide-react"
+
+const ICON_MAP: Record<string, React.ElementType> = {
+  HeartPulse, Landmark, ShoppingBag, GraduationCap, Plane, Building2, Truck, Clapperboard, Dumbbell, UtensilsCrossed, Factory, Store
+}
 
 export default function IndustriesPage() {
   return (
@@ -30,12 +34,17 @@ export default function IndustriesPage() {
         <section className="py-20">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {INDUSTRIES_DATA.map((ind) => (
+              {INDUSTRIES_DATA.map((ind) => {
+                const Icon = ICON_MAP[ind.iconName] || Building2
+                return (
                 <div
                   key={ind.slug}
                   className="group relative flex flex-col justify-between rounded-2xl border border-border bg-card p-6 transition-all hover:border-brand/50 hover:shadow-lg"
                 >
                   <div>
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-brand">
+                      <Icon className="h-6 w-6" />
+                    </div>
                     <h2 className="text-xl font-bold text-foreground group-hover:text-brand">
                       {ind.title}
                     </h2>
@@ -62,7 +71,8 @@ export default function IndustriesPage() {
                     </Link>
                   </div>
                 </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </section>

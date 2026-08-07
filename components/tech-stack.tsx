@@ -21,6 +21,60 @@ const TAB_COLORS: Record<string, string> = {
   Frameworks: "from-rose-400/20 to-pink-400/10",
 }
 
+import { 
+  SiSwift, SiKotlin, SiFlutter, SiReact, SiApple, SiIonic, SiVuedotjs, SiJavascript, SiTypescript, SiNextdotjs, SiTailwindcss, SiNuxt, SiCss, SiHtml5, SiJquery, SiBootstrap, SiSass, SiNodedotjs, SiPython, SiPhp, SiLaravel, SiPostgresql, SiMongodb, SiMysql, SiRedis, SiGraphql, SiDjango, SiShopify, SiWoocommerce, SiWordpress, SiStrapi, SiContentful, SiSanity, SiBigcommerce, SiExpress, SiNestjs, SiSpringboot, SiDotnet, SiFastapi, SiRubyonrails, SiFlask, SiFastify
+} from "react-icons/si";
+import { FaJava, FaMagento, FaMicrosoft } from "react-icons/fa";
+
+const ICON_MAP: Record<string, React.ElementType> = {
+  Swift: SiSwift,
+  Kotlin: SiKotlin,
+  Flutter: SiFlutter,
+  "React Native": SiReact,
+  Java: FaJava,
+  "Objective-C": SiApple,
+  Ionic: SiIonic,
+  Xamarin: FaMicrosoft,
+  React: SiReact,
+  "Vue.js": SiVuedotjs,
+  JavaScript: SiJavascript,
+  TypeScript: SiTypescript,
+  "Next.js": SiNextdotjs,
+  "Tailwind CSS": SiTailwindcss,
+  Nuxt: SiNuxt,
+  CSS3: SiCss,
+  HTML5: SiHtml5,
+  jQuery: SiJquery,
+  Bootstrap: SiBootstrap,
+  Sass: SiSass,
+  "Node.js": SiNodedotjs,
+  Python: SiPython,
+  PHP: SiPhp,
+  Laravel: SiLaravel,
+  PostgreSQL: SiPostgresql,
+  MongoDB: SiMongodb,
+  MySQL: SiMysql,
+  Redis: SiRedis,
+  GraphQL: SiGraphql,
+  Django: SiDjango,
+  Shopify: SiShopify,
+  WooCommerce: SiWoocommerce,
+  Magento: FaMagento,
+  WordPress: SiWordpress,
+  Strapi: SiStrapi,
+  Contentful: SiContentful,
+  Sanity: SiSanity,
+  BigCommerce: SiBigcommerce,
+  Express: SiExpress,
+  NestJS: SiNestjs,
+  "Spring Boot": SiSpringboot,
+  ".NET": SiDotnet,
+  FastAPI: SiFastapi,
+  "Ruby on Rails": SiRubyonrails,
+  Flask: SiFlask,
+  Fastify: SiFastify,
+};
+
 export function TechStack() {
   const [active, setActive] = useState("Frontend")
   const [paused, setPaused] = useState(false)
@@ -78,18 +132,21 @@ export function TechStack() {
         <div key={active} className="mx-auto mt-8">
           <div className="glass-card animate-blur-in rounded-[2.2rem] p-6 lg:p-8 shadow-2xl shadow-slate-200/50 border border-white">
             <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-4">
-              {CATEGORIES[active].map((tech, i) => (
-                <div
-                  key={tech}
-                  className="animate-scale-in glass-chip glass-hover flex items-center gap-3.5 rounded-2xl px-4 py-3.5 text-sm font-bold text-slate-800 cursor-default border border-white shadow-sm"
-                  style={{ animationDelay: `${i * 40}ms` }}
-                >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-xs font-black text-blue-600 shadow-inner">
-                    {tech.slice(0, 2).toUpperCase()}
-                  </span>
-                  {tech}
-                </div>
-              ))}
+              {CATEGORIES[active].map((tech, i) => {
+                const Icon = ICON_MAP[tech]
+                return (
+                  <div
+                    key={tech}
+                    className="animate-scale-in glass-chip glass-hover flex items-center gap-3.5 rounded-2xl px-4 py-3.5 text-sm font-bold text-slate-800 cursor-default border border-white shadow-sm"
+                    style={{ animationDelay: `${i * 40}ms` }}
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-xs font-black text-blue-600 shadow-inner">
+                      {Icon ? <Icon className="h-5 w-5" /> : tech.slice(0, 2).toUpperCase()}
+                    </span>
+                    {tech}
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
