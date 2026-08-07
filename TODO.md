@@ -1,29 +1,9 @@
-<!--
-# What we ship
-Healthcare App
+# Task: Fix Vercel Deployment - Update pnpm-lock.yaml
 
-HealthBridge
-
-SaaS Platform
-
-TextFlow
-
-Fintech App
-
-PayFlow
-
-Projects
-612+
-Engineers
-100+
-Years
-10+
-Trusted by
-Biocon
-AT&T
-Nextbite
-Masa
-RetailHub
-🇨🇦 🇮🇳 🇮🇪
-3 Global Offices
--->
+## Steps
+- [x] Enable pnpm v9 via corepack
+- [x] Delete node_modules cleanly using Windows `rd`
+- [x] Install everything fresh with pnpm v9 (including react-icons)
+- [x] Verify pnpm-lock.yaml is consistent with package.json
+- [x] Run `npm run dev` and confirm it works
+- [x] Commit and push the updated pnpm-lock.yaml
