@@ -47,7 +47,7 @@ export function SiteHeader() {
   return (
     <div className={cn(
       "fixed top-0 left-0 right-0 z-50 flex justify-center px-3 transition-all duration-500 ease-in-out pointer-events-none sm:px-4",
-      hidden ? "-translate-y-full opacity-0" : "translate-y-3 opacity-100 sm:translate-y-4"
+      hidden ? "lg:-translate-y-full lg:opacity-0" : "translate-y-3 opacity-100 sm:translate-y-4"
     )}>
       <header
         ref={headerRef}
