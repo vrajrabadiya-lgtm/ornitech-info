@@ -5,8 +5,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
+import shapenticImage from "@/assets/project/1000336675.png"
+import myEntryPassImage from "@/assets/project/1000336671.png"
 
-const FILTERS = ["All", "AI / SaaS", "Event Tech", "AI / Computer Vision"]
+const FILTERS = ["All", "AI / SaaS", "Event Tech"]
 
 const CASES = [
   {
@@ -14,7 +16,7 @@ const CASES = [
     category: "AI / SaaS",
     title: "Shapentic — AI Website Builder",
     body: "An AI-powered platform that lets users create modern, fully functional websites simply by entering prompts — no coding or design expertise needed.",
-    image: "/case-studies/shapentic.png",
+    image: shapenticImage,
     tint: "bg-blue-50",
     stack: ["React.js", "Next.js", "Node.js", "OpenAI APIs", "MongoDB", "AWS"],
     link: "https://shapentic.com",
@@ -24,11 +26,12 @@ const CASES = [
     category: "Event Tech",
     title: "MyTicketPass — Smart Ticket Booking",
     body: "A modern digital platform for seamless ticket booking and live event management — helping users discover events and organizers manage ticket sales efficiently.",
-    image: "/case-studies/myticketpass.png",
+    image: myEntryPassImage,
     tint: "bg-violet-50",
     stack: ["React.js", "Next.js", "Node.js", "PostgreSQL", "AWS", "Payment Gateways"],
     link: "https://myticketpass.com",
   },
+  /*
   {
     tag: "AI / COMPUTER VISION / SECURITY",
     category: "AI / Computer Vision",
@@ -39,6 +42,7 @@ const CASES = [
     stack: ["Python", "OpenCV", "TensorFlow", "FaceNet", "MongoDB", "Cloud Integration"],
     link: "/portfolio",
   },
+  */
 ]
 
 export function CaseStudies() {
@@ -47,7 +51,7 @@ export function CaseStudies() {
   const visible = CASES.filter((c) => filter === "All" || c.category === filter)
 
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} className="relative mx-auto max-w-7xl px-5 py-24 lg:px-8">
+    <section ref={ref as React.RefObject<HTMLElement>} className="relative mx-auto max-w-7xl px-5 py-16 lg:py-24 lg:px-8">
       {/* Ambient liquid background orbs */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="liquid-orb-blue animate-liquid-float absolute -left-24 top-1/4 h-[450px] w-[450px] opacity-60" />
@@ -82,25 +86,31 @@ export function CaseStudies() {
         ))}
       </div>
 
-      <div className="relative mt-10 flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
+      <div className={`relative mt-10 flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:overflow-visible md:pb-0 ${
+          visible.length === 1 ? "md:flex md:justify-center"
+          : visible.length === 2 ? "md:grid md:grid-cols-2 md:max-w-3xl md:mx-auto"
+          : "md:grid md:grid-cols-3"
+        }`}>
         {visible.map((c, i) => (
           <article
             key={c.title}
-            className="glass-card animate-scale-in group overflow-hidden rounded-[2.2rem] transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1 border border-white w-[80vw] shrink-0 snap-start md:w-auto"
+            className={`glass-card animate-scale-in group flex flex-col overflow-hidden rounded-[2.2rem] transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1 border border-white w-[80vw] shrink-0 snap-start md:w-auto ${
+              visible.length === 1 ? "md:max-w-lg" : ""
+            }`}
             style={{ animationDelay: `${i * 100}ms` }}
           >
             <div className={`p-4 ${c.tint}`}>
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[1.8rem] border border-slate-200/60 shadow-sm">
+              <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200/60 bg-white shadow-sm">
                 <Image
                   src={c.image || "/placeholder.svg"}
                   alt={c.title}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-contain transition-transform duration-700 group-hover:scale-[1.02]"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
             </div>
-            <div className="p-5 sm:p-6">
+            <div className="flex flex-1 flex-col p-5 sm:p-6">
               <span className="glass-chip rounded-full px-3 py-1 text-[10px] font-black tracking-widest text-blue-600 border border-blue-100 uppercase">
                 {c.tag}
               </span>
@@ -114,7 +124,7 @@ export function CaseStudies() {
               <Link
                 href={c.link}
                 target={c.link.startsWith("http") ? "_blank" : undefined}
-                className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-blue-600 transition-all hover:gap-3"
+                className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-bold text-blue-600 transition-all hover:gap-3"
               >
                 See case study <ArrowRight className="h-4 w-4" />
               </Link>

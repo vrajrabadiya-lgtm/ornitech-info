@@ -19,7 +19,7 @@ export function Process() {
   const current = STEPS[active]
 
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-24">
+    <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-16 lg:py-24">
       {/* Liquid background fluid orbs */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="liquid-orb-sky animate-liquid-float absolute left-0 top-0 h-[500px] w-[500px] opacity-60" />

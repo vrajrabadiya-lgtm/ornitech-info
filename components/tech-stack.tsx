@@ -93,7 +93,7 @@ export function TechStack() {
     <>
       <section
         ref={ref as React.RefObject<HTMLElement>}
-        className="glass-section relative overflow-hidden py-24"
+        className="glass-section relative overflow-hidden py-16 lg:py-24"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >

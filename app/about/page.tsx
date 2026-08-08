@@ -48,7 +48,7 @@ export default function AboutPage() {
               <div className="rounded-2xl border border-border bg-card p-6 text-center">
                 <span className="text-4xl">🇮🇳</span>
                 <h3 className="mt-3 text-lg font-bold">India (R&D Center)</h3>
-                <p className="mt-1 text-xs text-muted-foreground">Pragati IT Park, Utran, Surat, Gujarat</p>
+                <p className="mt-1 text-xs text-muted-foreground">Office No-324, Center Point Co-operative Society, Bali Sheri, Mahidharpura, Surat-395003</p>
                 <p className="mt-2 text-xs font-semibold text-brand">+91 97275 72204</p>
               </div>
 

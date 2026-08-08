@@ -1,0 +1,18 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.image {
+  margin-top: 10px;
+  display: block;
+  width: auto;
+  height: 6rem;
+  object-fit: contain;
+}
+
+.light {
+  filter: brightness(0) invert(1);
+}

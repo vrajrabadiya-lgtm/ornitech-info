@@ -57,14 +57,14 @@ export function SiteHeader() {
         )}
         onMouseLeave={() => setActiveMenu(null)}
       >
-        <nav className="mx-auto flex h-[60px] w-full items-center justify-between px-6 lg:px-8">
+        <nav className="mx-auto flex h-[56px] w-full items-center justify-between px-6 lg:px-8 relative">
           {/* Logo */}
           <Link href="/" aria-label="Ornitech home" onMouseEnter={() => setActiveMenu(null)} className="transition-transform duration-200 hover:scale-[1.02]">
             <Logo />
           </Link>
 
           {/* Desktop Nav */}
-          <ul className="hidden items-center gap-1 lg:flex">
+          <ul className="hidden items-center gap-1 lg:flex absolute left-1/2 -translate-x-1/2">
             {(["services", "technologies", "industries"] as const).map((key) => (
               <li key={key} onMouseEnter={() => setActiveMenu(key)}>
                 <Link
@@ -121,7 +121,7 @@ export function SiteHeader() {
 
       <div
         className={cn(
-          "absolute left-1/2 top-[68px] z-50 w-[min(1100px,calc(100vw-2rem))] -translate-x-1/2 pt-2 transition-all duration-200",
+          "absolute left-1/2 top-[64px] z-50 w-[min(1100px,calc(100vw-2rem))] -translate-x-1/2 pt-2 transition-all duration-200",
           activeMenu !== null ? "visible opacity-100 translate-y-0 pointer-events-auto" : "invisible opacity-0 translate-y-2 pointer-events-none"
         )}
       >

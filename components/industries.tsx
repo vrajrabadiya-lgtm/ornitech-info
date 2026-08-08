@@ -16,7 +16,7 @@ export function Industries() {
   const { ref, inView } = useInView(0.15)
 
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} className="relative overflow-hidden py-24">
+    <section ref={ref as React.RefObject<HTMLElement>} className="relative overflow-hidden py-16 lg:py-24">
       {/* Ambient background */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-50" />
       <div className="pointer-events-none absolute left-1/4 top-0 h-96 w-96 -translate-x-1/2 liquid-gradient opacity-30 animate-liquid-float-slow" />

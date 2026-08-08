@@ -246,7 +246,7 @@ export default function ContactPage() {
                     </div> */}
                     <div className="border-b border-border/50 pb-3">
                       <p className="font-bold text-foreground">🇮🇳 India R&D Center</p>
-                      <p className="mt-1 text-muted-foreground">Pragati IT Park, Utran, Surat, Gujarat 394105</p>
+                      <p className="mt-1 text-muted-foreground">Office No-324, Center Point Co-operative Society, Bali Sheri, Mahidharpura, Surat-395003</p>
                     </div>
                     {/* <div>
                       <p className="font-bold text-foreground">🇮🇪 Ireland Office</p>

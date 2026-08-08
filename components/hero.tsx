@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, Star, ArrowUpRight, Cpu, Globe, Smartphone, Cloud, CheckCircle2, ShieldCheck, Zap, Sparkles, Terminal, Activity } from "lucide-react"
 
-const AVATARS = ["/avatars/a1.png", "/avatars/a2.png", "/avatars/a3.png"]
+const AVATARS = ["/avatars/male1.png", "/avatars/female.png", "/avatars/male2.png"]
 const ROTATING_WORDS = [
   "Web Platforms",
   "AI Infrastructures",
@@ -103,7 +103,7 @@ export function Hero() {
   const currentTab = SHOWCASE_TABS.find((t) => t.id === activeTab) || SHOWCASE_TABS[0]
 
   return (
-    <section id="top" className="relative min-h-screen overflow-hidden bg-white text-slate-900 pt-8 pb-12 lg:pb-24">
+    <section id="top" className="relative overflow-hidden bg-white text-slate-900 pt-8 pb-10 lg:min-h-screen lg:pb-24">
       {/* Background tech grid + subtle radial glow */}
       <div className="pointer-events-none absolute inset-0 tech-grid-bg opacity-70" aria-hidden="true" />
       <div className="pointer-events-none absolute -top-32 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-gradient-to-b from-blue-50/80 via-indigo-50/40 to-transparent blur-3xl opacity-80" aria-hidden="true" />

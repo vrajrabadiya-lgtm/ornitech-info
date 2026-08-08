@@ -536,16 +536,16 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     metrics: ["Real-Time Seat Selection", "Multi-Event Support", "Secure Payment Gateways"],
     technologies: ["React.js", "Next.js", "Node.js", "PostgreSQL", "AWS", "Payment Gateways"]
   },
-  {
-    id: "ai-face-detection",
-    title: "AI Face Detection & Recognition",
-    client: "Ornitech Internal",
-    category: "AI / Computer Vision",
-    description: "An AI-powered face detection and recognition system for real-time video — detects faces, counts individuals, and identifies known persons using advanced ML models.",
-    image: "/case-studies/face-detection.png",
-    metrics: ["Real-Time Detection", "Multi-Face Tracking", "High Accuracy ML Models"],
-    technologies: ["Python", "OpenCV", "TensorFlow", "FaceNet", "MongoDB", "Cloud Integration"]
-  }
+  // {
+  //   id: "ai-face-detection",
+  //   title: "AI Face Detection & Recognition",
+  //   client: "Ornitech Internal",
+  //   category: "AI / Computer Vision",
+  //   description: "An AI-powered face detection and recognition system for real-time video — detects faces, counts individuals, and identifies known persons using advanced ML models.",
+  //   image: "/case-studies/face-detection.png",
+  //   metrics: ["Real-Time Detection", "Multi-Face Tracking", "High Accuracy ML Models"],
+  //   technologies: ["Python", "OpenCV", "TensorFlow", "FaceNet", "MongoDB", "Cloud Integration"]
+  // }
 ]
 
 export const CAREER_OPENINGS: CareerItem[] = [

@@ -8,7 +8,7 @@ export function CtaBand() {
   const { ref, inView } = useInView(0.2)
 
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-24">
+    <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-16 lg:py-24">
       {/* Liquid background fluid orbs */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="liquid-orb-blue animate-liquid-float-slow absolute -right-24 -top-24 h-[550px] w-[550px] opacity-70" />
