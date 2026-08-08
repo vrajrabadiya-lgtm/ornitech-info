@@ -1,9 +1,17 @@
 import Link from "next/link"
+import Image from "next/image"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { PORTFOLIO_DATA } from "@/lib/site-data"
-import { ArrowRight, ExternalLink, CheckCircle2 } from "lucide-react"
+import shapenticImage from "@/assets/project/1000336675.png"
+import myTicketPassImage from "@/assets/project/1000336671.png"
+import { ArrowRight, CheckCircle2 } from "lucide-react"
+
+const PORTFOLIO_IMAGES = {
+  shapentic: shapenticImage,
+  myticketpass: myTicketPassImage,
+}
 
 export default function PortfolioPage() {
   return (
@@ -27,7 +35,10 @@ export default function PortfolioPage() {
 
         <section className="py-20">
           <div className="mx-auto max-w-7xl px-5 lg:px-8 space-y-16">
-            {PORTFOLIO_DATA.map((project, idx) => (
+            {PORTFOLIO_DATA.map((project) => {
+              const image = PORTFOLIO_IMAGES[project.id as keyof typeof PORTFOLIO_IMAGES] ?? project.image
+
+              return (
               <div
                 key={project.id}
                 className="grid gap-8 overflow-hidden rounded-3xl border border-border bg-card p-6 lg:grid-cols-12 lg:items-center lg:p-8"
@@ -73,15 +84,18 @@ export default function PortfolioPage() {
                   </div>
                 </div>
 
-                <div className="lg:col-span-6 overflow-hidden rounded-2xl border border-border">
-                  <img
-                    src={project.image}
+                <div className="relative aspect-video overflow-hidden rounded-2xl border border-border bg-muted/30 lg:col-span-6">
+                  <Image
+                    src={image}
                     alt={project.title}
-                    className="h-72 w-full object-cover transition-transform duration-300 hover:scale-105"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-300 hover:scale-105"
                   />
                 </div>
               </div>
-            ))}
+              )
+            })}
           </div>
         </section>
 
