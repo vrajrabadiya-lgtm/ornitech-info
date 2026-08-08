@@ -193,6 +193,7 @@ export const SERVICES_DATA: ServiceItem[] = [
       { title: "Testing & Tuning", desc: "Testing edge cases, prompt optimization, and user feedback." }
     ]
   },
+  /*
   {
     slug: "ui-ux-design",
     title: "UI/UX Design",
@@ -214,6 +215,7 @@ export const SERVICES_DATA: ServiceItem[] = [
       { title: "Design System Handoff", desc: "Providing clean Figma tokens, components, and specs for developers." }
     ]
   },
+  */
   {
     slug: "qa-testing",
     title: "QA & Testing Services",
@@ -387,6 +389,7 @@ export const TECH_CATEGORIES: TechCategory[] = [
       { name: "Kubernetes", desc: "Container orchestration at scale", icon: "https://cdn.simpleicons.org/kubernetes/326CE5" }
     ]
   },
+  /*
   {
     slug: "ui-ux-design",
     title: "UI/UX & Design Tools",
@@ -398,6 +401,7 @@ export const TECH_CATEGORIES: TechCategory[] = [
       { name: "Sketch", desc: "Digital design app for macOS", icon: "https://cdn.simpleicons.org/sketch/F7B500" }
     ]
   }
+  */
 ]
 
 export const INDUSTRIES_DATA: IndustryItem[] = [

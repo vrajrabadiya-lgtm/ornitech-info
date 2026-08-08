@@ -26,7 +26,7 @@ export default function AboutPage() {
         </section>
 
         {/* Global Presence */}
-        <section className="py-20">
+        {/* <section className="py-20">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <div className="text-center">
               <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
@@ -60,7 +60,7 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Core Values */}
         <section className="border-t border-border/50 bg-muted/30 py-20">
