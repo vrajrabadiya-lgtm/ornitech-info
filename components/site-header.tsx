@@ -37,12 +37,27 @@ export function SiteHeader() {
   }, [])
 
   useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) setActiveMenu(null)
+    const handlePointerDown = (e: PointerEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setActiveMenu(null)
+        setMobileOpen(false)
+        setMobileSubmenu(null)
+      }
     }
-    document.addEventListener("mousedown", handleClick)
-    return () => document.removeEventListener("mousedown", handleClick)
+    document.addEventListener("pointerdown", handlePointerDown)
+    return () => document.removeEventListener("pointerdown", handlePointerDown)
   }, [])
+
+  useEffect(() => {
+    if (!mobileOpen) return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [mobileOpen])
 
   return (
     <div className={cn(
@@ -279,7 +294,7 @@ export function SiteHeader() {
       </div>
 
       {/* Mobile drawer */}
-      <div className={cn("border-t border-slate-100 overflow-hidden lg:hidden", mobileOpen ? "block" : "hidden")}>
+      <div className={cn("max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-slate-100 lg:hidden", mobileOpen ? "block" : "hidden")}>
         <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
           <Link href="/" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold text-foreground hover:bg-brand/5 hover:text-brand">Home</Link>
           {[
