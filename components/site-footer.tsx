@@ -54,7 +54,7 @@ export function SiteFooter() {
           </Link>
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.6fr]">
+        <div className="grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.6fr]">
           {/* Brand */}
           <div>
             <Logo variant="light" />

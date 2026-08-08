@@ -17,7 +17,7 @@ export function CtaBand() {
 
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         <div className={`${inView ? "animate-blur-in" : "opacity-0"}`}>
-          <div className="glass-card rounded-[2.5rem] px-8 py-16 lg:px-16 lg:py-20 shadow-2xl shadow-slate-200/50 border border-white">
+          <div className="glass-card rounded-[2.5rem] px-5 py-12 sm:px-8 sm:py-16 lg:px-16 lg:py-20 shadow-2xl shadow-slate-200/50 border border-white">
             <div className="mx-auto max-w-3xl text-center">
               <span className="glass-chip inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[11px] font-bold tracking-widest text-blue-600 uppercase border border-blue-100 shadow-sm">
                 <Sparkles className="h-3 w-3" /> Build With Confidence

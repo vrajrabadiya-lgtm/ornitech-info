@@ -115,7 +115,7 @@ export function Hero() {
         </p>
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-5 lg:px-8">
 
         {/* Top Status & Social Proof Bar */}
         <div className="animate-blur-in flex flex-wrap items-center justify-between gap-4 border-b border-slate-200/60 pb-6 pt-4">
@@ -155,7 +155,7 @@ export function Hero() {
             Software Development & Tech Architecture
           </p>
 
-          <h1 className="animate-blur-in animation-delay-100 mt-4 text-[clamp(2.5rem,6.5vw,5.5rem)] font-black leading-[1.05] tracking-tight text-slate-900">
+          <h1 className="animate-blur-in animation-delay-100 mt-4 text-[clamp(2rem,6.5vw,5.5rem)] font-black leading-[1.05] tracking-tight text-slate-900">
             We Engineer Digital Products &amp;
             <br />
             <span
@@ -196,7 +196,7 @@ export function Hero() {
 
             {/* Showcase Tab Navigation */}
             <div className="flex flex-col gap-3 border-b border-slate-100 bg-slate-50/80 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex overflow-x-auto gap-2 scrollbar-hide pb-1 sm:pb-0 sm:flex-wrap sm:items-center">
                 {SHOWCASE_TABS.map((tab) => {
                   const Icon = tab.icon
                   const isActive = activeTab === tab.id
@@ -204,7 +204,7 @@ export function Hero() {
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${isActive
+                      className={`flex shrink-0 items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${isActive
                           ? "bg-white text-blue-600 shadow-sm border border-slate-200/80"
                           : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/50"
                         }`}

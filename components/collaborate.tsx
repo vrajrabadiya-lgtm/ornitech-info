@@ -97,7 +97,7 @@ export function Collaborate() {
           </p>
         </div>
 
-        <div className={`mt-10 glass-card rounded-[2.5rem] p-5 sm:p-10 shadow-2xl shadow-slate-200/50 border border-white transition-all duration-700 delay-200 ${inView ? "animate-scale-in" : "opacity-0 scale-95"}`}>
+        <div className={`mt-10 glass-card rounded-[2.5rem] p-4 sm:p-10 shadow-2xl shadow-slate-200/50 border border-white transition-all duration-700 delay-200 ${inView ? "animate-scale-in" : "opacity-0 scale-95"}`}>
           {submitted ? (
             <div className="flex flex-col items-center gap-4 py-12 text-center">
               <CheckCircle2 className="h-16 w-16 text-blue-600" />

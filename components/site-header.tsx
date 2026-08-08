@@ -52,7 +52,7 @@ export function SiteHeader() {
       <header
         ref={headerRef}
         className={cn(
-          "w-full max-w-6xl rounded-full transition-all duration-300 pointer-events-auto",
+          "w-full max-w-6xl rounded-[2rem] transition-all duration-300 pointer-events-auto",
           "bg-white border border-slate-200/80 shadow-md shadow-blue-900/8"
         )}
         onMouseLeave={() => setActiveMenu(null)}
@@ -279,7 +279,7 @@ export function SiteHeader() {
       </div>
 
       {/* Mobile drawer */}
-      <div className={cn("border-t border-white/40 glass-nav lg:hidden", mobileOpen ? "block" : "hidden")}>
+      <div className={cn("border-t border-slate-100 overflow-hidden lg:hidden", mobileOpen ? "block" : "hidden")}>
         <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
           <Link href="/" onClick={() => setMobileOpen(false)} className="rounded-xl px-3 py-2.5 text-sm font-semibold text-foreground hover:bg-brand/5 hover:text-brand">Home</Link>
           {[

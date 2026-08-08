@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Compass, PenTool, Code2, ShieldCheck, Rocket, LifeBuoy } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 
@@ -15,15 +15,8 @@ const STEPS = [
 
 export function Process() {
   const [active, setActive] = useState(0)
-  const [paused, setPaused] = useState(false)
   const { ref, inView } = useInView(0.2)
   const current = STEPS[active]
-
-  useEffect(() => {
-    if (paused) return
-    const timer = setInterval(() => setActive((v) => (v + 1) % STEPS.length), 3000)
-    return () => clearInterval(timer)
-  }, [paused])
 
   return (
     <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-24">
@@ -56,9 +49,7 @@ export function Process() {
               <button
                 key={s.name}
                 type="button"
-                onClick={() => { setActive(i); setPaused(true) }}
-                onMouseEnter={() => setPaused(true)}
-                onMouseLeave={() => setPaused(false)}
+                onClick={() => setActive(i)}
                 className="group relative flex w-16 flex-col items-center gap-2 text-center sm:w-20"
               >
                 <span className={`relative flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-500 sm:h-16 sm:w-16 ${i === active
@@ -78,7 +69,7 @@ export function Process() {
         <div className="mx-auto mt-8 h-1.5 max-w-xs overflow-hidden rounded-full bg-slate-100 border border-slate-200/60">
           <div
             className="h-full rounded-full bg-blue-600 shadow-sm"
-            style={{ width: `${((active + 1) / STEPS.length) * 100}%`, transition: paused ? "none" : "width 3s linear" }}
+            style={{ width: `${((active + 1) / STEPS.length) * 100}%`, transition: "width 0.3s ease" }}
           />
         </div>
 

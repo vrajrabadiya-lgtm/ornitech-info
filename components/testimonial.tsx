@@ -6,9 +6,9 @@ import { ChevronLeft, ChevronRight, Star } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 
 const REVIEWS = [
-  { quote: "Ornitech felt like an extension of our own team. They shipped a complex marketplace in record time, and the quality held up under real traffic from day one.", name: "Rahul Mehta", role: "CEO, BazaarHub", location: "Mumbai, India", avatar: "https://randomuser.me/api/portraits/men/32.jpg" },
-  { quote: "They took a vague idea and turned it into a polished product our customers love. Communication was clear, and every milestone landed on schedule.", name: "Priya Sharma", role: "Founder, FinPay India", location: "Bangalore, India", avatar: "https://randomuser.me/api/portraits/women/44.jpg" },
-  { quote: "The engineering quality is truly exceptional. Our app has scaled to hundreds of thousands of users without a single major incident or performance issue.", name: "Arjun Patel", role: "CTO, MedEase", location: "Ahmedabad, India", avatar: "https://randomuser.me/api/portraits/men/75.jpg" },
+  { quote: "Ornitech felt like an extension of our own team. They shipped a complex marketplace in record time, and the quality held up under real traffic from day one.", name: "Rahul Mehta", role: "CEO, BazaarHub", location: "Mumbai, India", avatar: "/avatars/male1.png" },
+  { quote: "They took a vague idea and turned it into a polished product our customers love. Communication was clear, and every milestone landed on schedule.", name: "Priya Sharma", role: "Founder, FinPay India", location: "Bangalore, India", avatar: "/avatars/female.png" },
+  { quote: "The engineering quality is truly exceptional. Our app has scaled to hundreds of thousands of users without a single major incident or performance issue.", name: "Arjun Patel", role: "CTO, MedEase", location: "Ahmedabad, India", avatar: "/avatars/male2.png" },
 ]
 
 export function Testimonial() {
