@@ -7,7 +7,7 @@ import { Process } from "@/components/process"
 import { Industries } from "@/components/industries"
 import { CaseStudies } from "@/components/case-studies"
 import { TechStack } from "@/components/tech-stack"
-import { Blog } from "@/components/blog"
+// import { Blog } from "@/components/blog"
 import { Testimonial } from "@/components/testimonial"
 import { Faq } from "@/components/faq"
 import { Collaborate } from "@/components/collaborate"
@@ -26,7 +26,7 @@ export default function HomePage() {
         <Industries />
         <CaseStudies />
         <TechStack />
-        <Blog />
+        {/* <Blog /> */}
         <Testimonial />
         <Faq />
         <Collaborate />

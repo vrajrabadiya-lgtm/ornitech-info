@@ -6,24 +6,38 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 
-const FILTERS = ["All", "Mobile App", "Website", "SaaS Products", "CRM / ERP", "Logo Design"]
+const FILTERS = ["All", "AI / SaaS", "Event Tech", "AI / Computer Vision"]
 
 const CASES = [
   {
-    tag: "HEALTHCARE INDUSTRY",
-    category: "Mobile App",
-    title: "HealthBridge Connect",
-    body: "A patient-provider app unifying appointments, records, and secure messaging in one HIPAA-ready experience.",
-    image: "/case-studies/healthcare-app.png",
-    tint: "bg-emerald-50",
+    tag: "AI / WEB DEVELOPMENT / SAAS",
+    category: "AI / SaaS",
+    title: "Shapentic — AI Website Builder",
+    body: "An AI-powered platform that lets users create modern, fully functional websites simply by entering prompts — no coding or design expertise needed.",
+    image: "/case-studies/shapentic.png",
+    tint: "bg-blue-50",
+    stack: ["React.js", "Next.js", "Node.js", "OpenAI APIs", "MongoDB", "AWS"],
+    link: "https://shapentic.com",
   },
   {
-    tag: "SAAS INDUSTRY",
-    category: "SaaS Products",
-    title: "TextFlow Manager",
-    body: "A team messaging platform that cut response times by 38% with smart routing and a refreshed inbox experience.",
-    image: "/case-studies/saas-app.png",
-    tint: "bg-rose-50",
+    tag: "EVENT TECH / TICKETING / ENTERTAINMENT",
+    category: "Event Tech",
+    title: "MyTicketPass — Smart Ticket Booking",
+    body: "A modern digital platform for seamless ticket booking and live event management — helping users discover events and organizers manage ticket sales efficiently.",
+    image: "/case-studies/myticketpass.png",
+    tint: "bg-violet-50",
+    stack: ["React.js", "Next.js", "Node.js", "PostgreSQL", "AWS", "Payment Gateways"],
+    link: "https://myticketpass.com",
+  },
+  {
+    tag: "AI / COMPUTER VISION / SECURITY",
+    category: "AI / Computer Vision",
+    title: "AI Face Detection & Recognition",
+    body: "An AI-powered face detection and recognition system for real-time video — detects faces, counts individuals, and identifies known persons using advanced ML models.",
+    image: "/case-studies/face-detection.png",
+    tint: "bg-emerald-50",
+    stack: ["Python", "OpenCV", "TensorFlow", "FaceNet", "MongoDB", "Cloud Integration"],
+    link: "/portfolio",
   },
 ]
 
@@ -68,33 +82,39 @@ export function CaseStudies() {
         ))}
       </div>
 
-      <div className="relative mt-10 grid gap-5 md:grid-cols-2">
+      <div className="relative mt-10 flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
         {visible.map((c, i) => (
           <article
             key={c.title}
-            className="glass-card animate-scale-in group overflow-hidden rounded-[2.2rem] transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1 border border-white"
+            className="glass-card animate-scale-in group overflow-hidden rounded-[2.2rem] transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1 border border-white w-[80vw] shrink-0 snap-start md:w-auto"
             style={{ animationDelay: `${i * 100}ms` }}
           >
-            <div className="p-4 sm:p-5 bg-gradient-to-b from-slate-50/60 to-white/40">
+            <div className={`p-4 ${c.tint}`}>
               <div className="relative aspect-[16/10] overflow-hidden rounded-[1.8rem] border border-slate-200/60 shadow-sm">
                 <Image
                   src={c.image || "/placeholder.svg"}
                   alt={c.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
             </div>
-            <div className="p-6 sm:p-8">
+            <div className="p-5 sm:p-6">
               <span className="glass-chip rounded-full px-3 py-1 text-[10px] font-black tracking-widest text-blue-600 border border-blue-100 uppercase">
                 {c.tag}
               </span>
-              <h3 className="mt-3 text-2xl font-black text-slate-900">{c.title}</h3>
-              <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-600">{c.body}</p>
+              <h3 className="mt-3 text-lg font-black text-slate-900">{c.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">{c.body}</p>
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {c.stack.map((s) => (
+                  <span key={s} className="glass-chip rounded-full px-2.5 py-1 text-[10px] font-bold text-slate-600 border border-slate-200/60">{s}</span>
+                ))}
+              </div>
               <Link
-                href="/portfolio"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-blue-600 transition-all hover:gap-3"
+                href={c.link}
+                target={c.link.startsWith("http") ? "_blank" : undefined}
+                className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-blue-600 transition-all hover:gap-3"
               >
                 See case study <ArrowRight className="h-4 w-4" />
               </Link>

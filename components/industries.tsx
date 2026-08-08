@@ -44,14 +44,14 @@ export function Industries() {
         </div>
 
         {/* Cards grid */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0">
           {INDUSTRIES.map((ind, i) => {
             const Icon = ind.icon
             return (
               <Link
                 key={ind.name}
                 href={`/industries/${ind.slug}`}
-                className={`group relative aspect-[3/4] overflow-hidden rounded-3xl glass-hover transition-all duration-700 ${inView ? "animate-fade-up" : "opacity-0 translate-y-8"}`}
+              className={`group relative aspect-[3/4] w-[72vw] shrink-0 snap-start overflow-hidden rounded-3xl glass-hover transition-all duration-700 lg:w-auto ${inView ? "animate-fade-up" : "opacity-0 translate-y-8"}`}
                 style={{ animationDelay: `${i * 100}ms` }}
               >
                 <Image

@@ -39,12 +39,12 @@ export function Blog() {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="mt-12 flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
           {POSTS.map((p, i) => (
             <Link
               key={p.slug}
               href={`/blog/${p.slug}`}
-              className={`group flex flex-col overflow-hidden rounded-3xl glass-card glass-hover transition-all duration-700 ${inView ? "animate-fade-up" : "opacity-0 translate-y-8"}`}
+              className={`group flex flex-col overflow-hidden rounded-3xl glass-card glass-hover transition-all duration-700 w-[80vw] shrink-0 snap-start md:w-auto ${inView ? "animate-fade-up" : "opacity-0 translate-y-8"}`}
               style={{ animationDelay: `${i * 100}ms` }}
             >
               <div className={`relative aspect-[16/9] overflow-hidden bg-gradient-to-br ${p.accent}`}>

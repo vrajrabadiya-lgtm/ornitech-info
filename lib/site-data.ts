@@ -408,7 +408,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     fullDesc: "We build secure healthcare software solutions that streamline patient care, protect sensitive health records (HIPAA & GDPR compliant), and connect providers with patients remotely.",
     iconName: "HeartPulse",
     solutions: ["Electronic Health Records (EHR / EMR)", "Telemedicine & Video Consultation", "Patient Portal & Appointment Booking", "Medical Device IoT Data Sync"],
-    stats: [{ value: "99.99%", label: "HIPAA Security Score" }, { value: "500k+", label: "Patients Served" }]
+    stats: [{ value: "99.9%", label: "HIPAA Security Score" }, { value: "10k+", label: "Patients Served" }]
   },
   {
     slug: "fintech-banking",
@@ -417,7 +417,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     fullDesc: "Powering modern financial software with bank-grade security, instant transactions, PCI-DSS compliance, and automated fraud prevention.",
     iconName: "Landmark",
     solutions: ["Digital Wallets & Payment Gateways", "Loan Origination & Risk Scoring", "Algorithmic Stock Trading Apps", "Neobanking & Multi-Currency Accounts"],
-    stats: [{ value: "$2B+", label: "Transactions Processed" }, { value: "PCI-DSS", label: "Certified Security" }]
+    stats: [{ value: "$5M+", label: "Transactions Processed" }, { value: "PCI-DSS", label: "Certified Security" }]
   },
   {
     slug: "ecommerce-retail",
@@ -426,7 +426,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     fullDesc: "Transform retail operations with high-converting online storefronts, omnichannel inventory management, and custom checkout flows.",
     iconName: "ShoppingBag",
     solutions: ["Headless E-commerce Storefronts", "Multi-Vendor Marketplace Platforms", "Inventory & Warehouse Management", "Personalized Recommendation Engine"],
-    stats: [{ value: "3.5x", label: "Average Conversion Uplift" }, { value: "100k+", label: "Orders Daily" }]
+    stats: [{ value: "2x", label: "Average Conversion Uplift" }, { value: "500+", label: "Orders Daily" }]
   },
   {
     slug: "education-edtech",
@@ -435,7 +435,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     fullDesc: "Empower educators and learners with interactive learning management systems, AI tutoring assistants, and gamified online courses.",
     iconName: "GraduationCap",
     solutions: ["Learning Management Systems (LMS)", "Virtual Live Classroom Software", "AI Test Generator & Automated Grading", "Gamified Student Learning Apps"],
-    stats: [{ value: "1M+", label: "Students Active" }, { value: "98%", label: "Course Completion" }]
+    stats: [{ value: "5k+", label: "Students Active" }, { value: "85%", label: "Course Completion" }]
   },
   {
     slug: "travel-hospitality",
@@ -444,7 +444,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     fullDesc: "Drive bookings and simplify guest experiences with real-time reservation engines, hotel property management, and travel itinerary software.",
     iconName: "Plane",
     solutions: ["Online Booking & Reservation Engine", "Hotel Property Management System (PMS)", "AI Travel Itinerary Planner", "Loyalty & Rewards Program Portal"],
-    stats: [{ value: "10M+", label: "Booked Nights" }, { value: "<500ms", label: "Search Latency" }]
+    stats: [{ value: "50k+", label: "Booked Nights" }, { value: "<500ms", label: "Search Latency" }]
   },
   {
     slug: "real-estate-proptech",
@@ -453,7 +453,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     fullDesc: "Modernizing real estate transactions with interactive property listings, automated tenant screening, and digital contract signing.",
     iconName: "Building2",
     solutions: ["Property Search & Listing Portals", "Tenant & Property Manager CRM", "3D Virtual Tour Integration", "Automated Lease & Rent Collection"],
-    stats: [{ value: "50k+", label: "Properties Listed" }, { value: "40%", label: "Faster Closing" }]
+    stats: [{ value: "500+", label: "Properties Listed" }, { value: "30%", label: "Faster Closing" }]
   },
   {
     slug: "logistics-supply-chain",
@@ -462,7 +462,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     fullDesc: "Gain end-to-end visibility across your supply chain with real-time GPS fleet tracking, automated dispatching, and warehouse inventory control.",
     iconName: "Truck",
     solutions: ["Real-Time Fleet GPS Tracking", "Warehouse Management Systems (WMS)", "Driver Mobile App & Route Optimization", "Freight Rate & Cargo Management"],
-    stats: [{ value: "25%", label: "Fuel Cost Saved" }, { value: "99.2%", label: "On-Time Deliveries" }]
+    stats: [{ value: "15%", label: "Fuel Cost Saved" }, { value: "95%", label: "On-Time Deliveries" }]
   },
   {
     slug: "media-entertainment",
@@ -471,7 +471,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     fullDesc: "Deliver high-definition video and audio streaming with DRM content protection, multi-device sync, and subscription monetization models.",
     iconName: "Clapperboard",
     solutions: ["Video-on-Demand (VOD) & OTT Platforms", "Live Event Streaming & Chat", "Digital Asset Management (DAM)", "Subscription & Pay-Per-View Monetization"],
-    stats: [{ value: "4K", label: "Ultra HD Streaming" }, { value: "10M+", label: "Stream Hours" }]
+    stats: [{ value: "4K", label: "Ultra HD Streaming" }, { value: "50k+", label: "Stream Hours" }]
   },
   {
     slug: "fitness-wellness",
@@ -480,7 +480,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     fullDesc: "Engage fitness enthusiasts with custom workout tracking, Apple Watch / Fitbit IoT sync, and virtual personal trainer coaching apps.",
     iconName: "Dumbbell",
     solutions: ["Workout & Macro Tracking Apps", "Wearable Device Data Integration", "Gym & Studio Membership Software", "Virtual Personal Coaching Video Portal"],
-    stats: [{ value: "85%", label: "User Retention" }, { value: "2M+", label: "Workouts Logged" }]
+    stats: [{ value: "70%", label: "User Retention" }, { value: "100+", label: "Workouts Logged" }]
   },
   {
     slug: "food-restaurant",
@@ -489,7 +489,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     fullDesc: "Streamline restaurant operations with direct-ordering food web apps, POS integrations, and kitchen display systems (KDS).",
     iconName: "UtensilsCrossed",
     solutions: ["Custom Food Delivery Mobile Apps", "Restaurant POS & Kitchen Display System", "Table QR Ordering & Digital Menus", "Inventory & Ingredient Tracker"],
-    stats: [{ value: "0%", label: "Third-Party Commission" }, { value: "30min", label: "Avg Delivery Time" }]
+    stats: [{ value: "0%", label: "Third-Party Commission" }, { value: "45min", label: "Avg Delivery Time" }]
   },
   {
     slug: "manufacturing",
@@ -498,7 +498,7 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     fullDesc: "Digitize factory floors with industrial IoT sensors, automated inventory tracking, and predictive machine maintenance alerts.",
     iconName: "Factory",
     solutions: ["Industrial IoT Sensor Monitoring", "Factory Inventory & Order ERP", "Predictive Machine Maintenance", "Quality Inspection Mobile Dashboards"],
-    stats: [{ value: "35%", label: "Downtime Reduction" }, { value: "ISO 9001", label: "Compliant Systems" }]
+    stats: [{ value: "20%", label: "Downtime Reduction" }, { value: "ISO 9001", label: "Compliant Systems" }]
   },
   {
     slug: "on-demand-marketplace",
@@ -507,50 +507,40 @@ export const INDUSTRIES_DATA: IndustryItem[] = [
     fullDesc: "Launch scalable multi-provider service platforms connecting buyers and sellers with escrow payments, rating systems, and live tracking.",
     iconName: "Store",
     solutions: ["Two-Sided Service Platforms", "Real-Time Provider Matching & Escrow", "In-App Chat & Dispute Management", "Review & Verification Systems"],
-    stats: [{ value: "$100M+", label: "GMV Handled" }, { value: "4.8/5", label: "User Satisfaction" }]
+    stats: [{ value: "$500k+", label: "GMV Handled" }, { value: "4.5/5", label: "User Satisfaction" }]
   }
 ]
 
 export const PORTFOLIO_DATA: PortfolioItem[] = [
   {
-    id: "fintech-pro",
-    title: "Fintech Global Pay — Digital Banking Platform",
-    client: "Global Pay Inc.",
-    category: "Fintech",
-    description: "Multi-currency digital wallet and micro-lending web & mobile application serving over 250,000 active users.",
-    image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80",
-    metrics: ["250k+ Active Users", "$400M Transaction Volume", "99.99% Uptime"],
-    technologies: ["React Native", "Node.js", "PostgreSQL", "AWS"]
+    id: "shapentic",
+    title: "Shapentic — AI Website Builder",
+    client: "Shapentic",
+    category: "AI / SaaS",
+    description: "An AI-powered platform that lets users create modern, fully functional websites simply by entering prompts — no coding or design expertise needed.",
+    image: "/case-studies/shapentic.png",
+    metrics: ["Prompt-to-Website in Seconds", "No-Code Required", "Production-Ready Output"],
+    technologies: ["React.js", "Next.js", "Node.js", "OpenAI APIs", "MongoDB", "AWS"]
   },
   {
-    id: "health-care-connect",
-    title: "MedCare — Telehealth & EHR Solution",
-    client: "HealthFirst Alliance",
-    category: "Healthcare",
-    description: "HIPAA-compliant telemedicine web portal connecting 1,200+ doctors with patients across North America.",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
-    metrics: ["1,200+ Doctors Onboarded", "150k Consultations", "4.9/5 Rating"],
-    technologies: ["Next.js", "Python FastAPI", "WebRTC", "Docker"]
+    id: "myticketpass",
+    title: "MyTicketPass — Smart Ticket Booking",
+    client: "MyTicketPass",
+    category: "Event Tech",
+    description: "A modern digital platform for seamless ticket booking and live event management — helping users discover events and organizers manage ticket sales efficiently.",
+    image: "/case-studies/myticketpass.png",
+    metrics: ["Real-Time Seat Selection", "Multi-Event Support", "Secure Payment Gateways"],
+    technologies: ["React.js", "Next.js", "Node.js", "PostgreSQL", "AWS", "Payment Gateways"]
   },
   {
-    id: "retail-hub",
-    title: "ShopSphere — Headless E-commerce Ecosystem",
-    client: "ShopSphere Global",
-    category: "E-commerce",
-    description: "Ultra-fast headless commerce platform with 1.2s page loads and AI product recommendation engine.",
-    image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80",
-    metrics: ["42% Conversion Increase", "1.2s Page Load", "50k Daily Orders"],
-    technologies: ["Next.js", "TailwindCSS", "Shopify Storefront API", "Stripe"]
-  },
-  {
-    id: "fleet-track",
-    title: "LogiTrack — AI Fleet GPS & Dispatching",
-    client: "TransLogistics",
-    category: "Logistics",
-    description: "Real-time fleet monitoring and driver route optimization platform handling 3,500 active trucks.",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
-    metrics: ["22% Fuel Cost Reduction", "3,500 Fleets Managed", "Real-Time Tracking"],
-    technologies: ["Flutter", "Node.js", "MongoDB", "Google Maps API"]
+    id: "ai-face-detection",
+    title: "AI Face Detection & Recognition",
+    client: "Ornitech Internal",
+    category: "AI / Computer Vision",
+    description: "An AI-powered face detection and recognition system for real-time video — detects faces, counts individuals, and identifies known persons using advanced ML models.",
+    image: "/case-studies/face-detection.png",
+    metrics: ["Real-Time Detection", "Multi-Face Tracking", "High Accuracy ML Models"],
+    technologies: ["Python", "OpenCV", "TensorFlow", "FaceNet", "MongoDB", "Cloud Integration"]
   }
 ]
 
@@ -561,7 +551,7 @@ export const CAREER_OPENINGS: CareerItem[] = [
     department: "Engineering",
     location: "Remote / Surat / Kitchener",
     type: "Full-Time",
-    experience: "4+ Years",
+    experience: "0-1 Years",
     description: "We are seeking a seasoned Full-Stack Engineer to architect and build high-scale web platforms for global clients.",
     responsibilities: [
       "Develop responsive frontends using Next.js, React, and TypeScript.",
@@ -582,7 +572,7 @@ export const CAREER_OPENINGS: CareerItem[] = [
     department: "Engineering",
     location: "Remote / Surat",
     type: "Full-Time",
-    experience: "3+ Years",
+    experience: "0-1 Years",
     description: "Looking for an expert Mobile Developer to create sleek cross-platform iOS and Android applications.",
     responsibilities: [
       "Build native-performing cross-platform mobile apps.",
@@ -602,7 +592,7 @@ export const CAREER_OPENINGS: CareerItem[] = [
     department: "AI & Data Solutions",
     location: "Remote / Kitchener",
     type: "Full-Time",
-    experience: "3+ Years",
+    experience: "0-1 Years",
     description: "Join our core AI team to engineer RAG systems, LLM fine-tuning, and intelligent automation agents.",
     responsibilities: [
       "Design RAG architectures using vector databases (Pinecone, Qdrant).",
