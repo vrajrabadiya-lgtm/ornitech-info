@@ -21,7 +21,7 @@ export function Blog() {
   const { ref, inView } = useInView(0.1)
 
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-24">
+    <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-12">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="liquid-gradient animate-liquid-float-slow absolute left-0 top-0 h-[450px] w-[450px] opacity-35" />
         <div className="liquid-gradient animate-liquid-float absolute right-0 bottom-0 h-[400px] w-[400px] opacity-38" />
@@ -69,3 +69,4 @@ export function Blog() {
     </section>
   )
 }
+

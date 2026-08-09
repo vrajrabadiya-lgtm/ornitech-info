@@ -29,7 +29,7 @@ function Counter({ target, suffix, active }: { target: number; suffix: string; a
 export function Stats() {
   const { ref, inView } = useInView(0.2)
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative mx-auto max-w-7xl px-5 py-24 lg:px-8">
+    <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative mx-auto max-w-7xl px-5 py-12 lg:px-8">
       {/* Liquid fluid background orbs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <div className="liquid-orb-blue animate-liquid-float absolute -right-20 -top-20 h-[450px] w-[450px] opacity-65" />
@@ -58,3 +58,4 @@ export function Stats() {
     </section>
   )
 }
+

@@ -40,7 +40,7 @@ export function Services() {
   const current = SERVICES[active]
 
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-16 lg:py-24">
+    <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-8 lg:py-12">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="liquid-orb-blue animate-liquid-float-slow absolute -right-24 -top-24 h-[550px] w-[550px] opacity-70" />
         <div className="liquid-orb-sky animate-liquid-float absolute -left-24 bottom-0 h-[480px] w-[480px] opacity-60" />
@@ -164,3 +164,4 @@ export function Services() {
     </section>
   )
 }
+

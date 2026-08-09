@@ -107,7 +107,7 @@ export function Collaborate() {
     }`
 
   return (
-    <section id="collaborate" ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-16 lg:py-24">
+    <section id="collaborate" ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-8 lg:py-12">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="liquid-orb-blue animate-liquid-float absolute left-0 top-1/4 h-[480px] w-[480px] opacity-65" />
         <div className="liquid-orb-sky animate-liquid-float-slow absolute right-0 bottom-1/4 h-[420px] w-[420px] opacity-60" />
@@ -270,3 +270,4 @@ export function Collaborate() {
     </section>
   )
 }
+

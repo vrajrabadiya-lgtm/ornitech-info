@@ -51,7 +51,7 @@ export function CaseStudies() {
   const visible = CASES.filter((c) => filter === "All" || c.category === filter)
 
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} className="relative mx-auto max-w-7xl px-5 py-16 lg:py-24 lg:px-8">
+    <section ref={ref as React.RefObject<HTMLElement>} className="relative mx-auto max-w-7xl px-5 py-8 lg:py-12 lg:px-8">
       {/* Ambient liquid background orbs */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="liquid-orb-blue animate-liquid-float absolute -left-24 top-1/4 h-[450px] w-[450px] opacity-60" />
@@ -144,3 +144,4 @@ export function CaseStudies() {
     </section>
   )
 }
+

@@ -28,7 +28,7 @@ export function Testimonial() {
     <section
       ref={ref as React.RefObject<HTMLElement>}
       id="testimonials"
-      className="glass-section relative overflow-hidden py-16 lg:py-24"
+      className="glass-section relative overflow-hidden py-8 lg:py-12"
     >
       {/* Ambient liquid orbs */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
@@ -106,3 +106,4 @@ export function Testimonial() {
     </section>
   )
 }
+
