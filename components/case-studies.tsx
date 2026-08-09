@@ -29,7 +29,7 @@ const CASES = [
     image: myEntryPassImage,
     tint: "bg-violet-50",
     stack: ["React.js", "Next.js", "Node.js", "PostgreSQL", "AWS", "Payment Gateways"],
-    link: "https://myticketpass.com",
+    link: "https://myentrypass.in",
   },
   /*
   {
