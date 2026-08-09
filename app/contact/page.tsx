@@ -13,6 +13,8 @@ type Errors = Partial<Record<"name" | "email" | "phone" | "message", string>>
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState("")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -52,13 +54,34 @@ export default function ContactPage() {
     if (touched[field]) setErrors(validate(updated))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const allTouched = Object.fromEntries(Object.keys(formData).map((k) => [k, true]))
     setTouched(allTouched)
     const e2 = validate(formData)
     setErrors(e2)
-    if (Object.keys(e2).length === 0) setSubmitted(true)
+    if (Object.keys(e2).length > 0) return
+
+    setSubmitting(true)
+    setSubmitError("")
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+      const data = await res.json()
+      if (res.ok && data.success) {
+        setSubmitted(true)
+      } else {
+        setSubmitError(data.errors?.form || "Something went wrong. Please try again.")
+        if (data.errors) setErrors(data.errors)
+      }
+    } catch {
+      setSubmitError("Network error. Please try again.")
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const field = (id: "name" | "email" | "phone" | "message") =>
@@ -210,11 +233,17 @@ export default function ContactPage() {
                       {touched.message && errors.message && <p className="mt-1 text-xs text-red-500">{errors.message}</p>}
                     </div>
 
+                    {submitError && (
+                      <p className="rounded-xl bg-red-50 px-4 py-3 text-xs font-medium text-red-600">
+                        {submitError}
+                      </p>
+                    )}
                     <button
                       type="submit"
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3.5 text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand/90"
+                      disabled={submitting}
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3.5 text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                      Send Message <Send className="h-4 w-4" />
+                      {submitting ? "Sending..." : "Send Message"} <Send className="h-4 w-4" />
                     </button>
                   </form>
                 )}

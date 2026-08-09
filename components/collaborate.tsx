@@ -20,6 +20,8 @@ export function Collaborate() {
   const [budget, setBudget] = useState("$10K – $20K")
   const [agree, setAgree] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState("")
   const { ref, inView } = useInView(0.1)
 
   const [fields, setFields] = useState<Fields>({ name: "", email: "", phone: "", website: "", message: "" })
@@ -61,13 +63,40 @@ export function Collaborate() {
     setErrors((e) => ({ ...e, agree: val ? undefined : "You must accept the privacy policy." }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const allTouched = { name: true, email: true, phone: true, website: true, message: true, agree: true }
     setTouched(allTouched)
     const errs = validate(fields, agree)
     setErrors(errs)
-    if (Object.keys(errs).length === 0) setSubmitted(true)
+    if (Object.keys(errs).length > 0) return
+
+    setSubmitting(true)
+    setSubmitError("")
+    try {
+      const payload = {
+        ...fields,
+        projectType: type,
+        budget,
+        agree,
+      }
+      const res = await fetch("/api/collaborate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+      const data = await res.json()
+      if (res.ok && data.success) {
+        setSubmitted(true)
+      } else {
+        setSubmitError(data.errors?.form || "Something went wrong. Please try again.")
+        if (data.errors) setErrors(data.errors)
+      }
+    } catch {
+      setSubmitError("Network error. Please try again.")
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const cls = (key: keyof Fields) =>
@@ -215,11 +244,17 @@ export function Collaborate() {
 
               {/* Actions */}
               <div className="mt-8 flex flex-wrap justify-center gap-4">
+                {submitError && (
+                  <p className="w-full rounded-xl bg-red-50 px-4 py-3 text-center text-xs font-medium text-red-600">
+                    {submitError}
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-700 hover:gap-3 hover:shadow-xl hover:shadow-blue-600/35"
+                  disabled={submitting}
+                  className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-700 hover:gap-3 hover:shadow-xl hover:shadow-blue-600/35 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Send Message <ArrowRight className="h-4 w-4" />
+                  {submitting ? "Sending..." : "Send Message"} <ArrowRight className="h-4 w-4" />
                 </button>
                 <a
                   href="tel:+14256234723"
