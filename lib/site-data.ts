@@ -382,8 +382,8 @@ export const TECH_CATEGORIES: TechCategory[] = [
     title: "Cloud & DevOps Infrastructure",
     shortDesc: "Cloud hosting, containerization, and continuous delivery platforms.",
     items: [
-      { name: "AWS", desc: "EC2, S3, Lambda, DynamoDB & ECS", icon: "https://cdn.simpleicons.org/amazonaws/232F3E", highlight: true },
-      { name: "Microsoft Azure", desc: "Enterprise cloud compute & app services", icon: "https://cdn.simpleicons.org/microsoftazure/0089D6" },
+      { name: "AWS", desc: "EC2, S3, Lambda, DynamoDB & ECS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg", highlight: true },
+      { name: "Microsoft Azure", desc: "Enterprise cloud compute & app services", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
       { name: "Google Cloud (GCP)", desc: "BigQuery, Kubernetes & Vertex AI", icon: "https://cdn.simpleicons.org/googlecloud/4285F4" },
       { name: "Docker", desc: "Containerized application deployments", icon: "https://cdn.simpleicons.org/docker/2496ED", highlight: true },
       { name: "Kubernetes", desc: "Container orchestration at scale", icon: "https://cdn.simpleicons.org/kubernetes/326CE5" }

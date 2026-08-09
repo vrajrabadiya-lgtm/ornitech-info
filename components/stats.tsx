@@ -23,7 +23,7 @@ function Counter({ target, suffix, active }: { target: number; suffix: string; a
     }, 16)
     return () => clearInterval(timer)
   }, [active, target])
-  return <>{count}{suffix}</>
+  return <span suppressHydrationWarning>{count}{suffix}</span>
 }
 
 export function Stats() {

@@ -16,3 +16,12 @@ data/submissions/
 node_modules
 .next/
 .DS_Store
+.vercel
+
+# Temp / dev only files
+si.json
+preview-admin.html
+preview-thankyou.html
+check-icons.js
+search-icons.js
+scripts/
