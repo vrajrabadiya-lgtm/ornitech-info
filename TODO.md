@@ -1,19 +1,14 @@
-# Task: MongoDB + Gmail Email Integration for Ornitech Forms
+# Email Template Redesign — TODO
 
-## Plan
-Backend is used only for form data submission (contact + collaborate forms). Submissions are stored in MongoDB and trigger two Gmail emails (confirmation to user, details to contact@ornitech.in).
+## Plan Steps
 
-## Steps
-- [x] Install dependencies (mongodb, nodemailer, @types/nodemailer)
-- [x] Create `.env.local` with MongoDB URI + Gmail credentials
-- [x] Update `lib/storage.ts` to use MongoDB instead of file storage
-- [x] Create `lib/email.ts` with nodemailer transport + HTML email templates
-- [x] Update `app/api/contact/route.ts` to save to MongoDB + send emails
-- [x] Update `app/api/collaborate/route.ts` to save to MongoDB + send emails
-- [x] Verify TypeScript compiles without errors (`npx tsc --noEmit`)
-- [x] Frontend forms connected to backend via `fetch()`
-- [x] End-to-end test: POST `/api/contact` → saved to MongoDB + 2 emails sent (verified via `contact-test.json`)
-- [x] End-to-end test: POST `/api/collaborate` → saved to MongoDB + 2 emails sent (verified via `collaborate-test.json`)
-- [x] Validation error path: POST `/api/contact` with invalid data → 400 with field-specific errors (invalid name/email/message)
-- [x] Edge case: POST `/api/contact` with malformed JSON → 500 with form-level error message
-- [x] Validation error path: POST `/api/collaborate` with missing fields → 400 with field-specific errors (name/email/message/agree)
+- [x] `lib/email.ts`
+  - [x] Replace old logo URL (`https://www.ornitech.in/logo.png`) → new logo (`https://www.ornitech.in/transparent.webp`) in both templates
+  - [x] Redesign `buildAdminEmail` to new light/branding theme (white bg, Electric Blue #2563EB + Cyan #06B6D4 accents, navy headings, glass-style cards)
+  - [x] Redesign `buildThankYouEmail` to new light/branding theme (matching style)
+  - [x] Update email subjects/from names to match new brand
+
+## Followup Steps
+
+- [x] Verify TypeScript compiles
+- [x] Render preview of email HTML to confirm new design
