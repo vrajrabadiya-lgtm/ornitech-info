@@ -108,7 +108,7 @@ function buildAdminEmail(opts: {
     <table role="presentation" cellpadding="0" cellspacing="0">
       <tr>
         <td align="center">
-          <img src="https://www.ornitech.in/transparent.webp" alt="Ornitech Logo" style="display:block;height:56px;width:auto;outline:none;border:none;text-decoration:none;" />
+          <img src="https://www.ornitech.in/transparent.png" alt="Ornitech Logo" style="display:block;height:56px;width:auto;outline:none;border:none;text-decoration:none;" />
         </td>
       </tr>
     </table>
@@ -258,7 +258,7 @@ function buildThankYouEmail(opts: {
     <table role="presentation" cellpadding="0" cellspacing="0">
       <tr>
         <td align="center">
-          <img src="https://www.ornitech.in/transparent.webp" alt="Ornitech Logo" style="display:block;height:56px;width:auto;outline:none;border:none;text-decoration:none;" />
+          <img src="https://www.ornitech.in/transparent.png" alt="Ornitech Logo" style="display:block;height:56px;width:auto;outline:none;border:none;text-decoration:none;" />
         </td>
       </tr>
     </table>
@@ -457,7 +457,7 @@ function buildThankYouEmail(opts: {
 
   <!-- Footer -->
   <tr><td align="center" style="padding-top:32px;">
-    <img src="https://www.ornitech.in/transparent.webp" alt="Ornitech Logo" style="display:block;height:32px;width:auto;margin:0 auto 12px;outline:none;border:none;text-decoration:none;" />
+    <img src="https://www.ornitech.in/transparent.png" alt="Ornitech Logo" style="display:block;height:32px;width:auto;margin:0 auto 12px;outline:none;border:none;text-decoration:none;" />
     <p style="margin:0 0 16px;font-size:12px;color:${BRAND.slate};">Building Intelligent Software for the Future.</p>
     <p style="margin:0 0 16px;">
       <a href="https://www.linkedin.com/company/ornitech-solution" style="color:${BRAND.accent};font-size:12px;text-decoration:none;font-weight:500;margin:0 10px;">LinkedIn</a>

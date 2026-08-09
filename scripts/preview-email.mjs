@@ -68,7 +68,7 @@ const adminHtml = `<!DOCTYPE html>
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
 
   <tr><td align="center" style="padding-bottom:32px;">
-    <img src="https://www.ornitech.in/transparent.webp" alt="Ornitech Logo" style="display:block;height:56px;width:auto;outline:none;border:none;text-decoration:none;" />
+    <img src="https://www.ornitech.in/transparent.png" alt="Ornitech Logo" style="display:block;height:56px;width:auto;outline:none;border:none;text-decoration:none;" />
   </td></tr>
 
   <tr><td align="center" style="padding-bottom:12px;">
@@ -160,7 +160,7 @@ const thankYouHtml = `<!DOCTYPE html>
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
 
   <tr><td align="center" style="padding-bottom:32px;">
-    <img src="https://www.ornitech.in/transparent.webp" alt="Ornitech Logo" style="display:block;height:56px;width:auto;outline:none;border:none;text-decoration:none;" />
+    <img src="https://www.ornitech.in/transparent.png" alt="Ornitech Logo" style="display:block;height:56px;width:auto;outline:none;border:none;text-decoration:none;" />
   </td></tr>
 
   <tr><td align="center" style="padding-bottom:8px;">
@@ -284,7 +284,7 @@ const thankYouHtml = `<!DOCTYPE html>
   <tr><td style="height:1px;background:linear-gradient(90deg,transparent,rgba(37,99,235,0.2),rgba(6,182,212,0.2),transparent);"></td></tr>
 
   <tr><td align="center" style="padding-top:32px;">
-    <img src="https://www.ornitech.in/transparent.webp" alt="Ornitech Logo" style="display:block;height:32px;width:auto;margin:0 auto 12px;outline:none;border:none;text-decoration:none;" />
+    <img src="https://www.ornitech.in/transparent.png" alt="Ornitech Logo" style="display:block;height:32px;width:auto;margin:0 auto 12px;outline:none;border:none;text-decoration:none;" />
     <p style="margin:0 0 16px;font-size:12px;color:${BRAND.slate};">Building Intelligent Software for the Future.</p>
     <p style="margin:0 0 16px;">
       <a href="https://www.linkedin.com/company/ornitech-solution" style="color:${BRAND.accent};font-size:12px;text-decoration:none;font-weight:500;margin:0 10px;">LinkedIn</a>

@@ -12,7 +12,7 @@ export function Logo({
   return (
     <span className={cn(styles.logo, className)}>
       <Image
-        src="/transparent.webp"
+        src="/transparent.png"
         alt="Ornitech logo"
         width={200}
         height={56}

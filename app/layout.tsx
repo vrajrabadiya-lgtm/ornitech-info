@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   description:
     'Ornitech builds reliable software, mobile, and web products, partnering with startups and enterprises to ship expert IT solutions that scale.',
   icons: {
-    icon: '/transparent.webp',
-    shortcut: '/transparent.webp',
-    apple: '/transparent.webp',
+    icon: '/transparent.png',
+    shortcut: '/transparent.png',
+    apple: '/transparent.png',
   },
 }
 
