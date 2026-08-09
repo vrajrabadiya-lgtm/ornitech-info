@@ -57,7 +57,7 @@ export function SiteFooter() {
         <div className="grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.6fr]">
           {/* Brand */}
           <div>
-            <Logo variant="light" />
+            <Logo variant="light" footer />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/50">
               Ornitech builds reliable software, mobile, and web products, partnering with startups and enterprises to ship expert IT solutions that scale.
             </p>

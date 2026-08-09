@@ -5,9 +5,11 @@ import styles from "./logo.module.css"
 export function Logo({
   className,
   variant = "dark",
+  footer = false,
 }: {
   className?: string
   variant?: "dark" | "light"
+  footer?: boolean
 }) {
   return (
     <span className={cn(styles.logo, className)}>
@@ -16,7 +18,7 @@ export function Logo({
         alt="Ornitech logo"
         width={200}
         height={56}
-        className={cn(styles.image, variant === "light" && styles.light)}
+        className={cn(footer ? styles.imageFooter : styles.image, variant === "light" && styles.light)}
         priority
       />
     </span>

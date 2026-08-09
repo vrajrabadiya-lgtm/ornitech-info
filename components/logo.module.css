@@ -8,7 +8,15 @@
 .image {
   display: block;
   width: auto;
-  height: 3rem;
+  height: 6rem;
+  object-fit: contain;
+  margin-top: 10px;
+}
+
+.imageFooter {
+  display: block;
+  width: auto;
+  height: 2.5rem;
   object-fit: contain;
 }
 
