@@ -75,7 +75,7 @@ export function SiteHeader() {
         <nav className="mx-auto flex h-[56px] w-full items-center justify-between px-6 lg:px-8 relative">
           {/* Logo */}
           <Link href="/" aria-label="Ornitech home" onMouseEnter={() => setActiveMenu(null)} className="transition-transform duration-200 hover:scale-[1.02]">
-            <Logo className="[&_img]:h-14" />
+            <Logo />
           </Link>
 
           {/* Desktop Nav */}
