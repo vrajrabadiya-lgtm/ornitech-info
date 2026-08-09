@@ -6,10 +6,9 @@
 }
 
 .image {
-  margin-top: 10px;
   display: block;
   width: auto;
-  height: 6rem;
+  height: 3rem;
   object-fit: contain;
 }
 
