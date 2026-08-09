@@ -8,127 +8,109 @@ export const metadata = {
 
 const SECTIONS = [
   {
-    title: "1. Information We Collect",
+    title: "1. Categories of Data We Gather",
     content: [
       {
-        subtitle: "Information You Provide Directly",
-        text: "When you fill out our Contact Us or Let's Collaborate forms, we collect your full name, email address, phone number, company name, website URL, project type, budget range, and project description. This information is used solely to respond to your inquiry and provide our services.",
+        subtitle: "Data Submitted by You",
+        text: "When you complete our inquiry forms — such as \"Contact Us\" or \"Let's Collaborate\" — we capture details like your name, email, phone number, employer/company, website address, the nature of your project, an approximate budget, and a description of your project needs. We use these details exclusively to reply to your request and carry out our services.",
       },
       {
-        subtitle: "Automatically Collected Information",
-        text: "When you visit our website, we automatically collect certain technical information including your IP address, browser type and version, operating system, device type, pages visited, time spent on pages, and referring URLs. This data is collected to improve website performance and user experience.",
+        subtitle: "Data Gathered Automatically",
+        text: "While browsing our site, certain technical details are logged automatically — your IP address, browser make/version, operating system, device category, which pages you view, how long you spend on them, and the site that referred you to us. This helps us optimize site performance and the overall visitor experience.",
       },
       {
-        subtitle: "Cookies & Tracking Technologies",
+        subtitle: "Tracking Tools and Cookies",
         text: "We use essential cookies to ensure the website functions correctly. We may also use analytics cookies (such as Vercel Analytics) to understand how visitors interact with our site. You can control cookie preferences through your browser settings. Disabling cookies may affect certain website functionality.",
       },
     ],
   },
   {
-    title: "2. How We Use Your Information",
+    title: "2. Purposes for Using Your Data",
     content: [
       {
-        subtitle: "Service Delivery",
-        text: "We use your contact information to respond to project inquiries, provide quotes, schedule consultations, and deliver our software development services.",
+        subtitle: "Delivering Our Services",
+        text: "Your contact details allow us to respond to inquiries, prepare estimates, arrange calls or meetings, and carry out the software development work you've requested.",
       },
       {
-        subtitle: "Communication",
-        text: "We may send you emails related to your inquiry, project updates, or service information. We do not send unsolicited marketing emails. You may opt out of any non-essential communications at any time by contacting us.",
+        subtitle: "Staying in Touch",
+        text: "We might contact you regarding your inquiry, updates on ongoing projects, or relevant service information. We don't send unwanted promotional emails, and you can unsubscribe from non-essential messages whenever you like by reaching out to us.",
       },
       {
-        subtitle: "Website Improvement",
-        text: "Anonymized usage data helps us understand which pages are most visited, how users navigate our site, and where we can improve the user experience.",
+        subtitle: "Enhancing the Website",
+        text: "De-identified visitor statistics let us see which pages draw the most traffic, how people move through the site, and what areas could use improvement.",
       },
       {
-        subtitle: "Security & Fraud Prevention",
-        text: "We use IP addresses and technical data to detect and prevent unauthorized access, spam form submissions, and fraudulent activity on our website.",
+        subtitle: "Protecting Against Fraud",
+        text: "IP addresses and other technical markers help us spot and stop unauthorized access attempts, spam submissions, and other fraudulent behavior on our platform.",
       },
     ],
   },
   {
-    title: "3. Data Storage & Security",
+    title: "3. How and Where We Keep Your Data",
     content: [
       {
-        subtitle: "Where Your Data Is Stored",
-        text: "Form submissions are stored in a MongoDB Atlas database hosted on secure cloud infrastructure. Email communications are processed via Gmail SMTP with TLS encryption. Our website is hosted on Vercel's global edge network with HTTPS enforced on all connections.",
+        subtitle: "Storage Locations",
+        text: "Submitted form data lives in a MongoDB Atlas database on secure cloud servers. Emails are routed through Gmail's SMTP service with TLS encryption applied. Our site itself runs on Vercel's edge network, with HTTPS required for every connection.",
       },
       {
-        subtitle: "Security Measures",
-        text: "We implement industry-standard security practices including encrypted data transmission (HTTPS/TLS), environment variable protection for all credentials, input validation and sanitization on all form submissions, and access controls on our database.",
+        subtitle: "Protective Measures",
+        text: "We rely on standard security practices, including encrypted transmission (HTTPS/TLS), keeping credentials safe via environment variables, validating and cleaning all form inputs, and restricting database access to authorized parties only.",
       },
       {
-        subtitle: "Data Retention",
-        text: "We retain form submission data for as long as necessary to fulfill the purpose for which it was collected or as required by applicable law. You may request deletion of your data at any time by contacting us.",
+        subtitle: "How Long We Hold Data",
+        text: "We keep submission records only as long as needed to serve their original purpose, or as long as the law requires. You can ask us to erase your data at any time.",
       },
     ],
   },
   {
-    title: "4. Sharing of Information",
+    title: "4. When and With Whom We Share Data",
     content: [
       {
-        subtitle: "We Do Not Sell Your Data",
-        text: "Ornitech does not sell, trade, rent, or otherwise transfer your personal information to third parties for marketing purposes.",
+        subtitle: "No Sale of Personal Data",
+        text: "We never sell, trade, lease, or otherwise hand over your personal details to outside parties for marketing purposes.",
       },
       {
-        subtitle: "Service Providers",
-        text: "We may share data with trusted third-party service providers who assist in operating our website and services, including MongoDB Atlas (database), Vercel (hosting), and Google (email delivery). These providers are contractually obligated to keep your information confidential.",
+        subtitle: "Third-Party Vendors",
+        text: "We work with a handful of trusted vendors who support our operations — MongoDB Atlas for databases, Vercel for hosting, and Google for email — and each is bound by contract to keep your data confidential.",
       },
       {
-        subtitle: "Legal Requirements",
-        text: "We may disclose your information if required to do so by law or in response to valid legal requests by public authorities.",
+        subtitle: "Legal Obligations",
+        text: "Should the law require it, or should a valid request come from a government authority, we may share your information accordingly.",
       },
     ],
   },
   {
-    title: "5. Your Rights",
+    title: "5. Rights You Can Exercise",
     content: [
       {
-        subtitle: "Access & Correction",
-        text: "You have the right to request access to the personal information we hold about you and to request corrections if any information is inaccurate.",
+        subtitle: "Reviewing and Fixing Your Information",
+        text: "You're entitled to ask what personal data we hold about you and to request that we correct anything inaccurate.",
       },
       {
-        subtitle: "Deletion",
-        text: "You may request that we delete your personal data from our systems. We will comply unless we are required to retain it for legal or legitimate business purposes.",
+        subtitle: "Requesting Removal",
+        text: "You can ask us to erase your personal data from our records, and we'll do so unless a legal or legitimate business reason requires us to keep it.",
       },
       {
-        subtitle: "Withdrawal of Consent",
-        text: "Where we rely on your consent to process personal data, you have the right to withdraw that consent at any time by contacting us at contact@ornitech.in.",
+        subtitle: "Revoking Consent",
+        text: "If our handling of your data depends on your consent, you may withdraw that consent whenever you choose by emailing hr@ornitech.in.",
       },
     ],
   },
   {
-    title: "6. Third-Party Links",
+    title: "6. Links to Outside Sites",
     content: [
       {
         subtitle: "",
-        text: "Our website may contain links to third-party websites including our social media profiles (LinkedIn, GitHub, Instagram). We are not responsible for the privacy practices of those sites and encourage you to review their privacy policies.",
+        text: "Our site may point you toward external destinations, including our profiles on LinkedIn, GitHub, and Instagram. We have no control over how those sites handle privacy, so we suggest reviewing their individual policies.",
       },
     ],
   },
   {
-    title: "7. Children's Privacy",
+    title: "7. Reach Out to Us",
     content: [
       {
         subtitle: "",
-        text: "Our website and services are not directed to individuals under the age of 18. We do not knowingly collect personal information from children. If you believe we have inadvertently collected such information, please contact us immediately.",
-      },
-    ],
-  },
-  {
-    title: "8. Changes to This Policy",
-    content: [
-      {
-        subtitle: "",
-        text: "We may update this Privacy Policy from time to time. The updated version will be indicated by a revised 'Last updated' date at the top of this page. We encourage you to review this policy periodically.",
-      },
-    ],
-  },
-  {
-    title: "9. Contact Us",
-    content: [
-      {
-        subtitle: "",
-        text: "If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:",
+        text: "For any inquiries, concerns, or requests tied to this notice or our handling of data, please get in touch:",
       },
     ],
   },
@@ -173,7 +155,7 @@ export default function PrivacyPolicyPage() {
               <p className="text-sm text-slate-700">
                 <strong>Ornitech</strong><br />
                 Office No-324, Center Point Co-operative Society, Bali Sheri, Mahidharpura, Surat-395003, India<br />
-                Email: <a href="mailto:contact@ornitech.in" className="text-blue-600 hover:underline">contact@ornitech.in</a><br />
+                Email: <a href="mailto:hr@ornitech.in" className="text-blue-600 hover:underline">hr@ornitech.in</a><br />
                 Website: <a href="https://www.ornitech.in" className="text-blue-600 hover:underline">www.ornitech.in</a>
               </p>
             </div>

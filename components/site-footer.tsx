@@ -111,7 +111,7 @@ export function SiteFooter() {
                   <div>
                     <p className="flex items-center gap-2 font-semibold text-white/80">
                       {o.country}
-                      {o.hq && <span className="rounded bg-brand px-1.5 py-0.5 text-[10px] font-bold text-white">HQ</span>}
+                      {(o as { hq?: boolean }).hq && <span className="rounded bg-brand px-1.5 py-0.5 text-[10px] font-bold text-white">HQ</span>}
                     </p>
                     <p className="mt-1 max-w-xs text-white/40">{o.address}</p>
                     <p className="mt-1 text-white/55">{o.phone}</p>
@@ -120,7 +120,7 @@ export function SiteFooter() {
               ))}
               <li className="flex items-center gap-2 text-white/55">
                 <MapPin className="h-4 w-4" />
-                <a href="mailto:contact@ornitech.in" className="hover:text-white transition-colors">contact@ornitech.in</a>
+                <a href="mailto:hr@ornitech.in" className="hover:text-white transition-colors">hr@ornitech.in</a>
               </li>
             </ul>
           </div>

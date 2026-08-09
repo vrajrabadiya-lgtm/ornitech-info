@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 
     await saveSubmission(record)
 
-    // Send confirmation to user + details to contact@ornitech.in
+    // Send confirmation to user + details to hr@ornitech.in
     await sendSubmissionEmails(
       {
         fullName: data.name,

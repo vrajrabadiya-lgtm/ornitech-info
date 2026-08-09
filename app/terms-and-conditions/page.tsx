@@ -8,124 +8,77 @@ export const metadata = {
 
 const SECTIONS = [
   {
-    title: "1. Acceptance of Terms",
+    title: "1. Agreeing to These Terms",
     content: [
       {
         subtitle: "",
-        text: "By accessing or using the Ornitech website (ornitech.in) or any of our software development services, you agree to be bound by these Terms and Conditions. If you do not agree to these Terms, please do not use our website or services.",
+        text: "By visiting or using the Ornitech website or by making use of any of our development services, you're confirming your agreement to these Terms. If you don't accept them, please refrain from using our site or services.",
       },
     ],
   },
   {
-    title: "2. Use of This Website",
+    title: "2. Guidelines for Using the Site",
     content: [
       {
-        subtitle: "Permitted Use",
-        text: "You may use this website for lawful purposes only — to learn about our services, submit project inquiries, read our blog, and contact our team. You agree not to use this website in any way that violates applicable local, national, or international laws or regulations.",
+        subtitle: "Acceptable Use",
+        text: "This website is meant for lawful activities only — browsing our service offerings, sending project inquiries, reading blog content, and reaching out to our team. You agree not to engage in any activity on this site that breaches local, national, or international law.",
       },
       {
-        subtitle: "Prohibited Activities",
-        text: "You must not attempt to gain unauthorized access to any part of our website or its related systems. You must not transmit any unsolicited or unauthorized advertising material, spam, or any other form of solicitation. You must not use automated tools to scrape, crawl, or extract data from this website without our prior written consent.",
-      },
-      {
-        subtitle: "Form Submissions",
-        text: "When submitting information through our contact or collaboration forms, you agree to provide accurate, truthful, and complete information. Submitting false, misleading, or fraudulent information is strictly prohibited.",
+        subtitle: "Submitting Forms",
+        text: "Whenever you fill out our contact or collaboration forms, you're agreeing that the details you provide are accurate, honest, and complete. Providing false, deceptive, or fraudulent details is not permitted under any circumstance.",
       },
     ],
   },
   {
-    title: "3. Services",
+    title: "3. Our Services",
     content: [
       {
-        subtitle: "Service Agreements",
-        text: "The services described on this website (web development, mobile app development, AI development, etc.) are provided under separate written agreements, Statements of Work (SOW), or Master Services Agreements (MSA). Browsing this website does not constitute a service agreement.",
+        subtitle: "Availability of Services",
+        text: "We retain the right to alter, pause, or end any part of our services or website at our discretion, without advance warning. We won't be held responsible to you or anyone else for any such change, pause, or discontinuation.",
       },
       {
-        subtitle: "Service Availability",
-        text: "We reserve the right to modify, suspend, or discontinue any part of our services or website at any time without prior notice. We shall not be liable to you or any third party for any modification, suspension, or discontinuation.",
-      },
-      {
-        subtitle: "Pricing",
-        text: "Any pricing information displayed on this website is indicative only. Final pricing is determined through individual project scoping and mutual agreement. We reserve the right to change our pricing at any time.",
+        subtitle: "Pricing Information",
+        text: "Any prices shown on our website are for general reference only. Actual project costs are established through individual scoping discussions and mutual sign-off. We may adjust our pricing structure at any point.",
       },
     ],
   },
   {
-    title: "4. Intellectual Property",
-    content: [
-      {
-        subtitle: "Website Content",
-        text: "All content on this website including text, graphics, logos, images, and software is the property of Ornitech and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works from our website content without our express written permission.",
-      },
-      {
-        subtitle: "Client Work",
-        text: "Upon full payment of agreed fees for a development engagement, the client retains 100% ownership of all custom source code, designs, and digital assets produced specifically for that engagement, as defined in the applicable project agreement.",
-      },
-      {
-        subtitle: "Ornitech Portfolio Rights",
-        text: "Unless explicitly restricted in a written agreement, Ornitech reserves the right to reference completed projects in our portfolio, case studies, and marketing materials.",
-      },
-    ],
-  },
-  {
-    title: "5. Confidentiality",
+    title: "4. Ownership of Intellectual Property",
     content: [
       {
         subtitle: "",
-        text: "Any non-public information shared by clients during project engagements — including business requirements, technical specifications, proprietary data, and trade secrets — is treated as strictly confidential. Ornitech will not disclose such information to third parties without the client's prior written consent, except as required by law.",
+        text: "Once a client has paid in full for a development project, they gain complete ownership of the custom code, designs, and digital deliverables created specifically for them, in line with what's specified in the relevant project contract.",
       },
     ],
   },
   {
-    title: "6. Disclaimers & Limitation of Liability",
+    title: "5. Disclaimers and Liability Limits",
     content: [
       {
-        subtitle: "Website Accuracy",
-        text: "While we strive to keep the information on this website accurate and up to date, we make no warranties or representations about the accuracy, completeness, or suitability of the information provided. The website is provided on an 'as is' basis.",
+        subtitle: "Accuracy of Website Content",
+        text: "We work to keep this site's information current and correct, but we don't guarantee its accuracy, completeness, or fitness for any particular purpose. The website is offered strictly on an 'as-is' basis.",
       },
       {
-        subtitle: "Limitation of Liability",
-        text: "To the fullest extent permitted by law, Ornitech shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of this website or our services, even if we have been advised of the possibility of such damages.",
-      },
-      {
-        subtitle: "Third-Party Links",
-        text: "Our website may contain links to third-party websites. These links are provided for your convenience only. We have no control over the content of those sites and accept no responsibility for them or for any loss or damage that may arise from your use of them.",
+        subtitle: "External Website Links",
+        text: "You may come across links to outside websites on our site. These are included purely for convenience. We don't oversee the content of those external sites and take no responsibility for them or for any harm that might result from visiting them.",
       },
     ],
   },
   {
-    title: "7. Privacy",
+    title: "6. Handling of Your Privacy",
     content: [
       {
         subtitle: "",
-        text: "Your use of this website is also governed by our Privacy Policy, which is incorporated into these Terms by reference. Please review our Privacy Policy to understand our practices regarding the collection and use of your personal information.",
+        text: "Using this site also means you're subject to our Privacy Policy, which forms part of these Terms by reference. We encourage you to read it to understand how we collect and use your personal data.",
       },
     ],
   },
   {
-    title: "8. Governing Law",
+    title: "7. Get in Touch",
     content: [
       {
         subtitle: "",
-        text: "These Terms and Conditions shall be governed by and construed in accordance with the laws of India. Any disputes arising under or in connection with these Terms shall be subject to the exclusive jurisdiction of the courts located in Surat, Gujarat, India.",
-      },
-    ],
-  },
-  {
-    title: "9. Changes to These Terms",
-    content: [
-      {
-        subtitle: "",
-        text: "We reserve the right to update or modify these Terms and Conditions at any time. Changes will be effective immediately upon posting to the website with a revised 'Last updated' date. Your continued use of the website after any changes constitutes your acceptance of the new Terms.",
-      },
-    ],
-  },
-  {
-    title: "10. Contact Us",
-    content: [
-      {
-        subtitle: "",
-        text: "If you have any questions about these Terms and Conditions, please contact us:",
+        text: "For questions relating to these Terms and Conditions, feel free to reach out to us:",
       },
     ],
   },
@@ -170,7 +123,7 @@ export default function TermsPage() {
               <p className="text-sm text-slate-700">
                 <strong>Ornitech</strong><br />
                 Office No-324, Center Point Co-operative Society, Bali Sheri, Mahidharpura, Surat-395003, India<br />
-                Email: <a href="mailto:contact@ornitech.in" className="text-blue-600 hover:underline">contact@ornitech.in</a><br />
+                Email: <a href="mailto:hr@ornitech.in" className="text-blue-600 hover:underline">hr@ornitech.in</a><br />
                 Website: <a href="https://www.ornitech.in" className="text-blue-600 hover:underline">www.ornitech.in</a>
               </p>
             </div>

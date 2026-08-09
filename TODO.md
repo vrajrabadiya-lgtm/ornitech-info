@@ -1,14 +1,15 @@
-# Email Template Redesign — TODO
+# Ornitech Website Updates — TODO
 
 ## Plan Steps
 
-- [x] `lib/email.ts`
-  - [x] Replace old logo URL (`https://www.ornitech.in/logo.png`) → new logo (`https://www.ornitech.in/transparent.png`) in both templates
-  - [x] Redesign `buildAdminEmail` to new light/branding theme (white bg, Electric Blue #2563EB + Cyan #06B6D4 accents, navy headings, glass-style cards)
-  - [x] Redesign `buildThankYouEmail` to new light/branding theme (matching style)
-  - [x] Update email subjects/from names to match new brand
+- [x] `app/privacy-policy/page.tsx` — Update with new content from WhatsApp
+- [x] `app/terms-and-conditions/page.tsx` — Update with new content from WhatsApp
+- [x] Change emails `contact@ornitech.in` → `hr@ornitech.in` (all files)
+- [x] Add Shapentic poster to homepage
+- [x] Remove Shapentic poster from homepage (client requested removal)
+- [x] Verify TypeScript compiles
+- [x] Update EOD/WEEKLY reports
 
 ## Followup Steps
 
-- [x] Verify TypeScript compiles
-- [x] Render preview of email HTML to confirm new design
+- [x] Verify changes render correctly
