@@ -1,7 +1,22 @@
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata, Viewport } from 'next'
+import { Plus_Jakarta_Sans, Outfit } from 'next/font/google'
 import './globals.css'
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-heading',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Ornitech — Expert AI Solutions & Software Development Services',
@@ -28,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-background overflow-x-hidden">
+    <html lang="en" className={`${plusJakartaSans.variable} ${outfit.variable} bg-background overflow-x-hidden`}>
       <body className="font-sans antialiased overflow-x-hidden pt-20">
         {children}
         {process.env.NODE_ENV === 'production' && (
@@ -41,3 +56,4 @@ export default function RootLayout({
     </html>
   )
 }
+

@@ -5,7 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans), "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-heading), "Outfit", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-highlight: var(--highlight);
@@ -149,6 +150,10 @@
   --sidebar-accent-foreground: oklch(0.16 0.040 255);
   --sidebar-border: oklch(0.920 0.008 255);
   --sidebar-ring: oklch(0.546 0.222 265);
+
+  /* Primary Typography Variables */
+  --font-sans-main: var(--font-sans), "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
+  --font-heading-main: var(--font-heading), "Outfit", "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
 /* Dark mode intentionally disabled — design system light theme only */
@@ -159,8 +164,42 @@
     @apply border-border outline-ring/50;
   }
 
-  body {
-    @apply bg-background text-foreground;
+  html, body {
+    font-family: var(--font-sans-main);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Comprehensive typography rule for all headings, bold text, accordion titles, card headers, buttons, and badges */
+  h1, h2, h3, h4, h5, h6,
+  .font-heading,
+  .font-black,
+  .font-extrabold,
+  .font-bold,
+  .font-semibold,
+  b,
+  strong,
+  button,
+  summary {
+    font-family: var(--font-heading-main);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.028em;
+    font-weight: 700;
+  }
+
+  .font-extrabold, .font-black {
+    letter-spacing: -0.022em;
+  }
+
+  .font-bold {
+    letter-spacing: -0.018em;
+  }
+
+  .font-semibold {
+    letter-spacing: -0.012em;
   }
 }
 

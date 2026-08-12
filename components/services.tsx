@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import { ArrowRight, Check, ChevronDown } from "lucide-react"
+import { ArrowRight, Check, ChevronLeft, ChevronRight } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 
 const SERVICE_SLUGS: Record<string, string> = {
@@ -26,7 +26,6 @@ const SERVICES = [
   { name: "Vibe Coding Development", body: "AI-assisted development using Claude, Cursor, and GitHub Copilot. Experienced engineers ship features faster without compromising code quality.", points: ["AI-Assisted Code Generation", "Automated Test Suite Generation", "Documentation Automation", "AI Code Review", "Codebase Acceleration"] },
   { name: "AI Development Services", body: "From LLM apps to computer vision, we design and ship AI features that solve real business problems.", points: ["LLM & RAG Applications", "Model Fine-Tuning", "Computer Vision", "Predictive Analytics", "MLOps Pipelines"] },
   { name: "AI Integration Services", body: "Embed AI into your existing products and workflows with secure, well-governed integrations.", points: ["OpenAI & Anthropic APIs", "Workflow Automation", "Chatbots & Assistants", "Data Pipeline Integration", "Governance & Safety"] },
-  // { name: "UI/UX Design", body: "Research-driven interfaces and design systems that turn complex products into intuitive experiences.", points: ["User Research", "Wireframes & Prototypes", "Design Systems", "Usability Testing", "Interaction Design"] },
   { name: "QA & Testing Services", body: "Comprehensive quality assurance so your product ships with confidence and stays reliable in production.", points: ["Manual & Exploratory Testing", "Test Automation (Cypress, Playwright)", "Performance & Load Testing", "Security Testing (OWASP)", "CI/CD Test Integration"] },
   { name: "Data Analytics", body: "Turn raw data into decisions with pipelines, dashboards, and analytics your whole team can trust.", points: ["Data Warehousing", "ETL Pipelines", "BI Dashboards", "Data Visualization", "Reporting Automation"] },
   { name: "Dedicated Development Team", body: "A vetted, fully managed team that works as an extension of yours, aligned to your goals and timeline.", points: ["Handpicked Engineers", "Full Project Ownership", "Agile Delivery", "Transparent Reporting", "Flexible Scaling"] },
@@ -35,9 +34,37 @@ const SERVICES = [
 
 export function Services() {
   const [active, setActive] = useState(0)
-  const [mobileOpen, setMobileOpen] = useState<number | null>(0)
   const { ref, inView } = useInView(0.1)
   const current = SERVICES[active]
+
+  const pillContainerRef = useRef<HTMLDivElement>(null)
+  const pillRefs = useRef<(HTMLButtonElement | null)[]>([])
+
+  useEffect(() => {
+    const container = pillContainerRef.current
+    const targetPill = pillRefs.current[active]
+
+    if (container && targetPill) {
+      const containerWidth = container.clientWidth
+      const pillLeft = targetPill.offsetLeft
+      const pillWidth = targetPill.clientWidth
+
+      const scrollToLeft = pillLeft - containerWidth / 2 + pillWidth / 2
+
+      container.scrollTo({
+        left: scrollToLeft,
+        behavior: "smooth",
+      })
+    }
+  }, [active])
+
+  const nextService = () => {
+    setActive((prev) => (prev + 1) % SERVICES.length)
+  }
+
+  const prevService = () => {
+    setActive((prev) => (prev - 1 + SERVICES.length) % SERVICES.length)
+  }
 
   return (
     <section ref={ref as React.RefObject<HTMLElement>} className="glass-section relative overflow-hidden py-8 lg:py-12">
@@ -59,59 +86,109 @@ export function Services() {
           </p>
         </div>
 
-        {/* Mobile accordion */}
-        <div className={`mt-10 flex flex-col gap-3 lg:hidden ${inView ? "animate-blur-in" : "opacity-0"}`}>
-          {SERVICES.map((s, i) => (
-            <div key={s.name} className="glass-card overflow-hidden rounded-[1.5rem] border border-white shadow-md">
-              <button
-                type="button"
-                onClick={() => setMobileOpen(mobileOpen === i ? null : i)}
-                className="flex w-full items-center justify-between px-5 py-4 text-left"
-              >
-                <div className="flex items-center gap-3">
-                  <span className={`h-2 w-2 shrink-0 rounded-full transition-colors duration-300 ${mobileOpen === i ? "bg-blue-600" : "bg-slate-300"}`} />
-                  <span className={`text-sm font-bold transition-colors duration-300 ${mobileOpen === i ? "text-blue-600" : "text-slate-800"}`}>{s.name}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-black text-slate-400">{String(i + 1).padStart(2, "0")}</span>
-                  <ChevronDown className={`h-4 w-4 transition-all duration-300 ${mobileOpen === i ? "rotate-180 text-blue-600" : "text-slate-400"}`} />
-                </div>
-              </button>
-              <div className={`grid transition-all duration-500 ease-in-out ${mobileOpen === i ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-                <div className="overflow-hidden">
-                  <div className="border-t border-slate-100 px-5 pb-5 pt-4">
-                    <p className="text-sm leading-relaxed text-slate-600">{s.body}</p>
-                    <ul className="mt-4 grid grid-cols-2 gap-2">
-                      {s.points.map((p) => (
-                        <li key={p} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
-                          <span className="glass-chip flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-blue-600 border border-blue-100">
-                            <Check className="h-3 w-3 stroke-[3]" />
-                          </span>
-                          {p}
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      href={`/services/${SERVICE_SLUGS[s.name]}`}
-                      className="mt-4 inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-xs font-bold text-white shadow-md transition-all hover:gap-3 hover:bg-blue-700"
-                    >
-                      Learn more <ArrowRight className="h-3.5 w-3.5" />
-                    </Link>
-                  </div>
-                </div>
+        {/* Redesigned Mobile View Layout */}
+        <div className={`mt-8 flex flex-col gap-5 lg:hidden ${inView ? "animate-blur-in" : "opacity-0"}`}>
+          {/* Mobile Horizontal Scrollable Pill Slider */}
+          <div ref={pillContainerRef} className="flex gap-2 overflow-x-auto pb-2 pt-1 scrollbar-hide -mx-5 px-5">
+            {SERVICES.map((s, i) => {
+              const isActive = i === active
+              return (
+                <button
+                  key={s.name}
+                  ref={(el) => { pillRefs.current[i] = el }}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${
+                    isActive
+                      ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/25 scale-[1.02]"
+                      : "glass-chip text-slate-700 border border-slate-200/80 hover:text-blue-600"
+                  }`}
+                >
+                  <span className={`text-[10px] font-black opacity-80 ${isActive ? "text-blue-100" : "text-slate-400"}`}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span>{s.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Mobile Interactive Active Detail Card */}
+          <div className="glass-card overflow-hidden rounded-[2rem] p-6 shadow-xl shadow-slate-200/50 border border-white relative">
+            {/* Top Bar with counter & Next/Prev arrows */}
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+              <div className="flex items-center gap-2">
+                <span className="glass-chip rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-widest text-blue-600 border border-blue-100">
+                  {String(active + 1).padStart(2, "0")} / {String(SERVICES.length).padStart(2, "0")}
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={prevService}
+                  aria-label="Previous service"
+                  className="glass-chip flex h-8 w-8 items-center justify-center rounded-full text-slate-700 hover:text-blue-600 transition-colors border border-slate-200/80"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={nextService}
+                  aria-label="Next service"
+                  className="glass-chip flex h-8 w-8 items-center justify-center rounded-full text-slate-700 hover:text-blue-600 transition-colors border border-slate-200/80"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
               </div>
             </div>
-          ))}
+
+            {/* Service Details */}
+            <div key={current.name} className="animate-fade-in pt-5">
+              <h3 className="text-2xl font-black text-slate-900" style={{ letterSpacing: "-0.02em" }}>
+                {current.name}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                {current.body}
+              </p>
+
+              {/* Points grid */}
+              <div className="mt-5 grid grid-cols-1 gap-2.5">
+                {current.points.map((p) => (
+                  <div key={p} className="flex items-center gap-2.5 rounded-xl bg-slate-50/80 p-2.5 border border-slate-100">
+                    <span className="glass-chip flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-blue-600 border border-blue-100 shadow-sm">
+                      <Check className="h-3 w-3 stroke-[3]" />
+                    </span>
+                    <span className="text-xs font-semibold text-slate-800">{p}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <Link
+                  href={`/services/${SERVICE_SLUGS[current.name]}`}
+                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-5 py-3 text-xs font-bold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-700"
+                >
+                  Learn more <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <Link
+                  href="/services"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full glass-chip px-4 py-3 text-xs font-bold text-slate-800 border border-slate-200/80 transition-all hover:text-blue-600"
+                >
+                  All Services <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Desktop sidebar layout */}
+        {/* Desktop sidebar layout (Windows / Desktop: NO hover change, ONLY click change) */}
         <div className={`mt-10 hidden lg:grid lg:grid-cols-[280px_1fr] gap-6 ${inView ? "animate-blur-in" : "opacity-0"}`}>
           <div className="glass-card flex flex-col gap-1.5 rounded-[2rem] p-3.5 shadow-xl shadow-slate-200/40 border border-white/90">
             {SERVICES.map((s, i) => (
               <button
                 key={s.name}
                 type="button"
-                onMouseEnter={() => setActive(i)}
                 onClick={() => setActive(i)}
                 aria-pressed={i === active}
                 className={`group flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-bold transition-colors duration-200 ${
@@ -164,4 +241,5 @@ export function Services() {
     </section>
   )
 }
+
 
