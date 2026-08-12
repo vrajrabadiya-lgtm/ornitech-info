@@ -98,7 +98,7 @@ export function Services() {
                   ref={(el) => { pillRefs.current[i] = el }}
                   type="button"
                   onClick={() => setActive(i)}
-                  className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${
+                  className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 cursor-pointer ${
                     isActive
                       ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/25 scale-[1.02]"
                       : "glass-chip text-slate-700 border border-slate-200/80 hover:text-blue-600"
@@ -127,7 +127,7 @@ export function Services() {
                   type="button"
                   onClick={prevService}
                   aria-label="Previous service"
-                  className="glass-chip flex h-8 w-8 items-center justify-center rounded-full text-slate-700 hover:text-blue-600 transition-colors border border-slate-200/80"
+                  className="glass-chip flex h-8 w-8 items-center justify-center rounded-full text-slate-700 hover:text-blue-600 transition-colors border border-slate-200/80 cursor-pointer"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
@@ -135,7 +135,7 @@ export function Services() {
                   type="button"
                   onClick={nextService}
                   aria-label="Next service"
-                  className="glass-chip flex h-8 w-8 items-center justify-center rounded-full text-slate-700 hover:text-blue-600 transition-colors border border-slate-200/80"
+                  className="glass-chip flex h-8 w-8 items-center justify-center rounded-full text-slate-700 hover:text-blue-600 transition-colors border border-slate-200/80 cursor-pointer"
                 >
                   <ChevronRight className="h-4 w-4" />
                 </button>
@@ -191,7 +191,7 @@ export function Services() {
                 type="button"
                 onClick={() => setActive(i)}
                 aria-pressed={i === active}
-                className={`group flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-bold transition-colors duration-200 ${
+                className={`group flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-bold transition-colors duration-200 cursor-pointer ${
                   i === active
                     ? "glass-chip text-blue-600 shadow-md shadow-blue-500/10 border-white"
                     : "text-slate-600 hover:bg-white/60 hover:text-slate-900"

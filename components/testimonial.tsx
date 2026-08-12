@@ -74,7 +74,7 @@ export function Testimonial() {
                 type="button"
                 onClick={prev}
                 aria-label="Previous"
-                className="glass-chip flex h-10 w-10 items-center justify-center rounded-full text-slate-700 transition-all hover:text-blue-600 border border-slate-200/80 shadow-sm"
+                className="glass-chip flex h-10 w-10 items-center justify-center rounded-full text-slate-700 transition-all hover:text-blue-600 border border-slate-200/80 shadow-sm cursor-pointer"
               >
                 <ChevronLeft className="h-4 w-4 stroke-[2.5]" />
               </button>
@@ -82,7 +82,7 @@ export function Testimonial() {
                 type="button"
                 onClick={next}
                 aria-label="Next"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white shadow-md shadow-blue-600/25 transition-all hover:bg-blue-700"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white shadow-md shadow-blue-600/25 transition-all hover:bg-blue-700 cursor-pointer"
               >
                 <ChevronRight className="h-4 w-4 stroke-[2.5]" />
               </button>
@@ -98,7 +98,7 @@ export function Testimonial() {
               type="button"
               onClick={() => setCurrent(idx)}
               aria-label={`Review ${idx + 1}`}
-              className={`h-2 rounded-full transition-all duration-300 ${idx === current ? "w-7 bg-blue-600 shadow-sm" : "w-2 bg-slate-200 hover:bg-blue-300"}`}
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${idx === current ? "w-7 bg-blue-600 shadow-sm" : "w-2 bg-slate-200 hover:bg-blue-300"}`}
             />
           ))}
         </div>

@@ -141,7 +141,7 @@ export function Collaborate() {
                   <div className="mt-4 flex flex-wrap gap-2">
                     {PROJECT_TYPES.map((t) => (
                       <button key={t} type="button" onClick={() => setType(t)}
-                        className={`rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ${type === t ? "bg-blue-600 text-white shadow-md shadow-blue-600/25 border border-blue-500 scale-105" : "glass-chip text-slate-600 hover:text-blue-600 border-slate-200/80"}`}>
+                        className={`rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 cursor-pointer ${type === t ? "bg-blue-600 text-white shadow-md shadow-blue-600/25 border border-blue-500 scale-105" : "glass-chip text-slate-600 hover:text-blue-600 border-slate-200/80"}`}>
                         {t}
                       </button>
                     ))}
@@ -153,7 +153,7 @@ export function Collaborate() {
                   <div className="mt-4 flex flex-wrap gap-2">
                     {BUDGETS.map((b) => (
                       <button key={b} type="button" onClick={() => setBudget(b)}
-                        className={`rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ${budget === b ? "bg-blue-600 text-white shadow-md shadow-blue-600/25 border border-blue-500 scale-105" : "glass-chip text-slate-600 hover:text-blue-600 border-slate-200/80"}`}>
+                        className={`rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 cursor-pointer ${budget === b ? "bg-blue-600 text-white shadow-md shadow-blue-600/25 border border-blue-500 scale-105" : "glass-chip text-slate-600 hover:text-blue-600 border-slate-200/80"}`}>
                         {b}
                       </button>
                     ))}
@@ -252,7 +252,7 @@ export function Collaborate() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-700 hover:gap-3 hover:shadow-xl hover:shadow-blue-600/35 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-700 hover:gap-3 hover:shadow-xl hover:shadow-blue-600/35 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
                 >
                   {submitting ? "Sending..." : "Send Message"} <ArrowRight className="h-4 w-4" />
                 </button>

@@ -121,7 +121,7 @@ export function TechStack() {
                 key={t}
                 type="button"
                 onClick={() => { setActive(t); setPaused(true) }}
-                className={`rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-300 ${
+                className={`rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-300 cursor-pointer ${
                   active === t
                     ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25 border border-blue-500 scale-105"
                     : "glass-chip text-slate-600 hover:text-blue-600 border-slate-200/80"
@@ -155,7 +155,7 @@ export function TechStack() {
                 <button
                   type="button"
                   onClick={() => setQuickView(true)}
-                  className="animate-scale-in glass-hover flex items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-blue-200 bg-blue-50/50 px-4 py-3.5 text-sm font-bold text-blue-600 transition-colors hover:border-blue-400 hover:bg-blue-50"
+                  className="animate-scale-in glass-hover flex items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-blue-200 bg-blue-50/50 px-4 py-3.5 text-sm font-bold text-blue-600 transition-colors hover:border-blue-400 hover:bg-blue-50 cursor-pointer"
                   style={{ animationDelay: `${7 * 40}ms` }}
                 >
                   View All <ArrowRight className="h-4 w-4" />
@@ -169,12 +169,12 @@ export function TechStack() {
       {/* Quick View Modal */}
       {quickView && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 cursor-pointer"
           style={{ backgroundColor: "rgba(15,23,42,0.55)", backdropFilter: "blur(6px)" }}
           onClick={() => setQuickView(false)}
         >
           <div
-            className="glass-card relative w-full max-w-3xl max-h-[82vh] overflow-y-auto rounded-[2rem] p-8 shadow-2xl border border-white"
+            className="glass-card relative w-full max-w-3xl max-h-[82vh] overflow-y-auto rounded-[2rem] p-8 shadow-2xl border border-white cursor-default"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal header */}
@@ -193,7 +193,7 @@ export function TechStack() {
                 <button
                   type="button"
                   onClick={() => setQuickView(false)}
-                  className="glass-chip flex h-9 w-9 items-center justify-center rounded-full text-slate-500 hover:text-slate-900 border border-slate-200 transition-colors"
+                  className="glass-chip flex h-9 w-9 items-center justify-center rounded-full text-slate-500 hover:text-slate-900 border border-slate-200 transition-colors cursor-pointer"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -225,7 +225,7 @@ export function TechStack() {
                   key={t}
                   type="button"
                   onClick={() => setActive(t)}
-                  className={`rounded-full px-4 py-1.5 text-xs font-bold transition-colors ${
+                  className={`rounded-full px-4 py-1.5 text-xs font-bold transition-colors cursor-pointer ${
                     active === t
                       ? "bg-blue-600 text-white"
                       : "glass-chip text-slate-600 hover:text-blue-600 border-slate-200/80"

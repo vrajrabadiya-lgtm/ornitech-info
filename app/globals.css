@@ -171,6 +171,20 @@
     text-rendering: optimizeLegibility;
   }
 
+  button,
+  a,
+  [role="button"],
+  [type="button"],
+  [type="reset"],
+  [type="submit"],
+  summary,
+  select,
+  input[type="checkbox"],
+  input[type="radio"],
+  label[for] {
+    cursor: pointer;
+  }
+
   /* Comprehensive typography rule for all headings, bold text, accordion titles, card headers, buttons, and badges */
   h1, h2, h3, h4, h5, h6,
   .font-heading,

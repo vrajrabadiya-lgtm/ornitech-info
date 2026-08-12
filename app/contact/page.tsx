@@ -188,7 +188,7 @@ export default function ContactPage() {
                             key={s}
                             type="button"
                             onClick={() => handleChange("service", s)}
-                            className={`rounded-xl border px-3 py-2.5 text-xs font-semibold transition-colors text-left ${
+                            className={`rounded-xl border px-3 py-2.5 text-xs font-semibold transition-colors text-left cursor-pointer ${
                               formData.service === s
                                 ? "border-brand bg-brand text-brand-foreground"
                                 : "border-border bg-background text-foreground hover:border-brand hover:text-brand"
@@ -208,7 +208,7 @@ export default function ContactPage() {
                             key={b}
                             type="button"
                             onClick={() => handleChange("budget", b)}
-                            className={`rounded-xl border px-3 py-2.5 text-xs font-semibold transition-colors ${
+                            className={`rounded-xl border px-3 py-2.5 text-xs font-semibold transition-colors cursor-pointer ${
                               formData.budget === b
                                 ? "border-brand bg-brand text-brand-foreground"
                                 : "border-border bg-background text-foreground hover:border-brand hover:text-brand"
@@ -241,7 +241,7 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3.5 text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3.5 text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
                     >
                       {submitting ? "Sending..." : "Send Message"} <Send className="h-4 w-4" />
                     </button>

@@ -204,7 +204,7 @@ export function Hero() {
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`flex shrink-0 items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${isActive
+                      className={`flex shrink-0 items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all cursor-pointer ${isActive
                           ? "bg-white text-blue-600 shadow-sm border border-slate-200/80"
                           : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/50"
                         }`}

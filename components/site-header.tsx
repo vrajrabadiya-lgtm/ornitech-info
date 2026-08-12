@@ -51,19 +51,48 @@ export function SiteHeader() {
   useEffect(() => {
     if (!mobileOpen) return
 
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = "hidden"
+    const scrollY = window.scrollY
+    const html = document.documentElement
+    const body = document.body
+
+    // Lock both html and body, and use fixed positioning to prevent iOS bounce scroll
+    html.style.overflow = "hidden"
+    body.style.overflow = "hidden"
+    body.style.position = "fixed"
+    body.style.top = `-${scrollY}px`
+    body.style.left = "0"
+    body.style.right = "0"
 
     return () => {
-      document.body.style.overflow = previousOverflow
+      html.style.overflow = ""
+      body.style.overflow = ""
+      body.style.position = ""
+      body.style.top = ""
+      body.style.left = ""
+      body.style.right = ""
+      window.scrollTo(0, scrollY)
     }
   }, [mobileOpen])
 
   return (
-    <div className={cn(
-      "fixed top-0 left-0 right-0 z-50 flex justify-center px-3 transition-all duration-500 ease-in-out pointer-events-none sm:px-4",
-      hidden ? "lg:-translate-y-full lg:opacity-0" : "translate-y-3 opacity-100 sm:translate-y-4"
-    )}>
+    <>
+      {/* Blurred Backdrop Overlay for Mobile Menu */}
+      <div
+        className={cn(
+          "fixed inset-0 z-40 bg-slate-950/40 backdrop-blur-md transition-all duration-300 lg:hidden pointer-events-auto",
+          mobileOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+        )}
+        onClick={() => {
+          setMobileOpen(false)
+          setMobileSubmenu(null)
+        }}
+        aria-hidden="true"
+      />
+
+      <div className={cn(
+        "fixed top-0 left-0 right-0 z-50 flex justify-center px-3 transition-all duration-500 ease-in-out pointer-events-none sm:px-4",
+        hidden ? "lg:-translate-y-full lg:opacity-0" : "translate-y-3 opacity-100 sm:translate-y-4"
+      )}>
       <header
         ref={headerRef}
         className={cn(
@@ -127,7 +156,7 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            className="glass-chip inline-flex h-10 w-10 items-center justify-center rounded-full lg:hidden"
+            className="glass-chip inline-flex h-10 w-10 items-center justify-center rounded-full lg:hidden cursor-pointer"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -304,7 +333,7 @@ export function SiteHeader() {
             { key: "company", label: "Company", href: "/about", items: [["About Us", "/about"], ["Careers", "/careers"], ["Blog", "/blog"], ["Portfolio", "/portfolio"], ["Contact", "/contact"]] },
           ].map(({ key, label, href, items }) => (
             <div key={key}>
-              <button onClick={() => setMobileSubmenu(mobileSubmenu === key ? null : key)} className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-semibold text-foreground hover:bg-brand/5 hover:text-brand">
+              <button onClick={() => setMobileSubmenu(mobileSubmenu === key ? null : key)} className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-semibold text-foreground hover:bg-brand/5 hover:text-brand cursor-pointer">
                 <span>{label}</span>
                 <ChevronDown className={cn("h-4 w-4 transition-transform", mobileSubmenu === key && "rotate-180")} />
               </button>
@@ -326,5 +355,6 @@ export function SiteHeader() {
       </div>
     </header>
     </div>
+    </>
   )
 }

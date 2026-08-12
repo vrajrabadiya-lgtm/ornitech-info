@@ -50,7 +50,7 @@ export function Process() {
                 key={s.name}
                 type="button"
                 onClick={() => setActive(i)}
-                className="group relative flex w-16 flex-col items-center gap-2 text-center sm:w-20"
+                className="group relative flex w-16 flex-col items-center gap-2 text-center sm:w-20 cursor-pointer"
               >
                 <span className={`relative flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-500 sm:h-16 sm:w-16 ${i === active
                     ? "glass-card text-blue-600 scale-110 shadow-xl shadow-blue-500/20 border-white"

@@ -24,7 +24,7 @@ function FaqItem({ f, isOpen, onToggle, delay }: { f: typeof FAQS[0]; isOpen: bo
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
-        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer"
       >
         <span className={`text-base font-extrabold transition-colors duration-200 ${isOpen ? "text-blue-600" : "text-slate-900"}`}>
           {f.q}
