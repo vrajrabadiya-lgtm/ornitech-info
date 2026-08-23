@@ -3,6 +3,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata, Viewport } from 'next'
 import { Plus_Jakarta_Sans, Outfit } from 'next/font/google'
 import './globals.css'
+import { VoiceAssistant } from '@/components/voice-assistant'
+
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -46,7 +48,9 @@ export default function RootLayout({
     <html lang="en" className={`${plusJakartaSans.variable} ${outfit.variable} bg-background overflow-x-hidden`}>
       <body className="font-sans antialiased overflow-x-hidden pt-20">
         {children}
+        <VoiceAssistant />
         {process.env.NODE_ENV === 'production' && (
+
           <>
             <Analytics />
             <SpeedInsights />
