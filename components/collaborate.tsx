@@ -88,6 +88,11 @@ export function Collaborate() {
       const data = await res.json()
       if (res.ok && data.success) {
         setSubmitted(true)
+        if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
+          (window as any).gtag("event", "conversion", {
+            send_to: "AW-18473466393/4W1UCLKc_a8dEJn06uhE",
+          })
+        }
       } else {
         setSubmitError(data.errors?.form || "Something went wrong. Please try again.")
         if (data.errors) setErrors(data.errors)
