@@ -1,9 +1,22 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { ShieldCheck, Award, Globe, Users, HeartHandshake, Zap, ArrowRight } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "About Ornitech — Leading IT & Software Agency in Surat",
+  description:
+    "Learn about Ornitech, our engineering mission, global footprint, and leadership. Founded by Ronak Talaviya in Surat, Gujarat.",
+  keywords: [
+    "about ornitech",
+    "IT company in surat",
+    "software company surat gujarat",
+    "ronak talaviya",
+  ],
+}
 
 export default function AboutPage() {
   return (

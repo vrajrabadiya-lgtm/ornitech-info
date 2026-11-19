@@ -152,7 +152,7 @@ export function Hero() {
         {/* Hero Central Header */}
         <div className="mt-12 text-center lg:mt-16">
           <p className="animate-blur-in text-xs font-bold uppercase tracking-[0.35em] text-blue-600">
-            Software Development & Tech Architecture
+            Top Software Development &amp; IT Company in Surat
           </p>
 
           <h1 className="animate-blur-in animation-delay-100 mt-4 text-[clamp(2rem,6.5vw,5.5rem)] font-black leading-[1.05] tracking-tight text-slate-900">
@@ -167,7 +167,7 @@ export function Hero() {
           </h1>
 
           <p className="animate-blur-in animation-delay-200 mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-slate-600">
-            Ornitech is a premium software development studio. We design, architect, and ship production-grade platforms with high reliability, security, and velocity.
+            Ornitech is the premier software development company in Surat, Gujarat. We architect, design, and ship production-grade web platforms, mobile apps, and custom AI solutions with enterprise velocity.
           </p>
 
           {/* Action CTAs */}

@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
@@ -7,6 +8,19 @@ import { ArrowRight, Sparkles, Globe, Smartphone, Code2, Zap, Cpu, Bot, Layout, 
 
 const ICON_MAP: Record<string, React.ElementType> = {
   Globe, Smartphone, Code2, Zap, Cpu, Bot, Layout, CheckCircle2, Shield, BarChart3, Users, UserPlus
+}
+
+export const metadata: Metadata = {
+  title: "Software & IT Services in Surat | Web, Mobile, AI & Cloud Engineering",
+  description:
+    "Explore Ornitech's comprehensive software services in Surat: Custom Software, Web Development, Mobile Apps (iOS & Android), AI Integration, and Dedicated Developer Teams.",
+  keywords: [
+    "software development services surat",
+    "web development services surat",
+    "mobile app development services surat",
+    "AI integration services surat",
+    "IT consulting surat",
+  ],
 }
 
 export default function ServicesPage() {
