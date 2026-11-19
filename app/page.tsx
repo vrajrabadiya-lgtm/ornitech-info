@@ -9,6 +9,7 @@ import { CaseStudies } from "@/components/case-studies"
 import { TechStack } from "@/components/tech-stack"
 // import { Blog } from "@/components/blog"
 import { Testimonial } from "@/components/testimonial"
+import { FounderSpotlight } from "@/components/founder-spotlight"
 import { Faq } from "@/components/faq"
 import { Collaborate } from "@/components/collaborate"
 import { SiteFooter } from "@/components/site-footer"
@@ -28,6 +29,7 @@ export default function HomePage() {
         <TechStack />
         {/* <Blog /> */}
         <Testimonial />
+        <FounderSpotlight />
         <Faq />
         <Collaborate />
       </main>

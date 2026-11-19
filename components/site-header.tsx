@@ -5,7 +5,7 @@ import Link from "next/link"
 import {
   ChevronDown, Menu, X, ArrowRight,
   HeartPulse, Landmark, ShoppingBag, GraduationCap, Plane, Building2, Truck, Clapperboard, Dumbbell, UtensilsCrossed, Factory, Store,
-  Users, UserPlus, Briefcase, LayoutGrid, BookOpen, Mail
+  Users, UserPlus, Briefcase, LayoutGrid, BookOpen, Mail, Award
 } from "lucide-react"
 import { Logo } from "@/components/logo"
 import { cn } from "@/lib/utils"
@@ -302,11 +302,12 @@ export function SiteHeader() {
               <div className="grid grid-cols-2 gap-4 p-6">
                 {[
                   { href: "/about", Icon: Users, color: "bg-blue-100 text-blue-600", label: "About Us", desc: "Our story, mission, and the team" },
+                  { href: "/founder", Icon: Award, color: "bg-indigo-100 text-indigo-600", label: "Founder", desc: "Ronak Talaviya, Founder & CEO" },
                   { href: "/contact", Icon: UserPlus, color: "bg-orange-100 text-orange-600", label: "Hire Us", desc: "Bring our engineers onto your project" },
                   { href: "/careers", Icon: Briefcase, color: "bg-emerald-100 text-emerald-600", label: "Careers", desc: "Open roles. Join our team." },
                   { href: "/portfolio", Icon: LayoutGrid, color: "bg-purple-100 text-purple-600", label: "Portfolio", desc: "Case studies and work we're proud of" },
                   { href: "/blog", Icon: BookOpen, color: "bg-amber-100 text-amber-600", label: "Blog", desc: "Insights, tutorials, engineering articles" },
-                  { href: "/contact", Icon: Mail, color: "bg-cyan-100 text-cyan-600", label: "Contact", desc: "Offices in Canada, India, and Ireland" },
+                  { href: "/contact", Icon: Mail, color: "bg-cyan-100 text-cyan-600", label: "Contact", desc: "Get in touch with our team" },
                 ].map(({ href, Icon, color, label, desc }) => (
                   <Link key={label} href={href} onClick={() => setActiveMenu(null)} className="group/item flex items-start gap-3 rounded-2xl p-3 transition-colors hover:bg-white/40 hover:backdrop-blur-md">
                     <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${color}`}><Icon className="h-4 w-4" /></span>
@@ -330,7 +331,7 @@ export function SiteHeader() {
             { key: "services", label: "Services", href: "/services", items: [["Web Development", "/services/web-development"], ["Mobile App Development", "/services/mobile-app-development"], ["Software Development", "/services/software-development"], ["AI Development Services", "/services/ai-development-services"], ["AI Integration Services", "/services/ai-integration-services"], ["QA & Testing", "/services/qa-testing"], ["Data Analytics", "/services/data-analytics"], ["Dedicated Team", "/services/dedicated-development-team"], ["Staff Augmentation", "/services/staff-augmentation"]] },
             { key: "technologies", label: "Technologies", href: "/technologies", items: [["Front-End", "/technologies/front-end"], ["Back-End", "/technologies/back-end"], ["Database", "/technologies/database"], ["Mobile App", "/technologies/mobile"], ["Cloud Services", "/technologies/cloud-services"]] },
             { key: "industries", label: "Industries", href: "/industries", items: [["Healthcare & MedTech", "/industries/healthcare-medtech"], ["Fintech & Banking", "/industries/fintech-banking"], ["E-commerce & Retail", "/industries/ecommerce-retail"], ["Education & EdTech", "/industries/education-edtech"], ["Travel & Hospitality", "/industries/travel-hospitality"], ["Logistics", "/industries/logistics-supply-chain"], ["Fitness & Wellness", "/industries/fitness-wellness"], ["Food & Restaurant", "/industries/food-restaurant"]] },
-            { key: "company", label: "Company", href: "/about", items: [["About Us", "/about"], ["Careers", "/careers"], ["Blog", "/blog"], ["Portfolio", "/portfolio"], ["Contact", "/contact"]] },
+            { key: "company", label: "Company", href: "/about", items: [["About Us", "/about"], ["Founder", "/founder"], ["Careers", "/careers"], ["Blog", "/blog"], ["Portfolio", "/portfolio"], ["Contact", "/contact"]] },
           ].map(({ key, label, href, items }) => (
             <div key={key}>
               <button onClick={() => setMobileSubmenu(mobileSubmenu === key ? null : key)} className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-semibold text-foreground hover:bg-brand/5 hover:text-brand cursor-pointer">

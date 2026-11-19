@@ -8,6 +8,7 @@ import { useInView } from "@/hooks/use-in-view"
 
 const COMPANY_LINKS = [
   { label: "About Us", href: "/about" },
+  { label: "Founder", href: "/founder" },
   { label: "Technologies", href: "/technologies" },
   { label: "Careers", href: "/careers" },
   { label: "Blog", href: "/blog" },
@@ -63,6 +64,11 @@ export function SiteFooter() {
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/50">
               Ornitech builds reliable software, mobile, and web products, partnering with startups and enterprises to ship expert IT solutions that scale.
             </p>
+            <Link href="/founder" className="mt-4 inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs transition-colors hover:bg-white/10 hover:border-white/20">
+              <span className="text-white/40">Founder:</span>
+              <span className="font-semibold text-white/90">Ronak Talaviya</span>
+              <ArrowRight className="h-3 w-3 text-white/40" />
+            </Link>
             <div className="mt-3 space-y-2.5 text-sm">
               <Link href="/privacy-policy" className="flex items-center gap-2 text-white/50 transition-all hover:text-white hover:translate-x-1">
                 <ShieldCheck className="h-4 w-4" /> Privacy Policy
@@ -145,7 +151,7 @@ export function SiteFooter() {
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-6 border-t border-white/10 py-8 sm:flex-row mt-4">
           <p className="text-sm text-white/40">
-            Copyright © 2026 All Rights Reserved By <span className="font-semibold text-white/70">Ornitech</span>
+            Copyright © 2026 All Rights Reserved By <span className="font-semibold text-white/70">Ornitech</span> • Founded by <span className="font-medium text-white/80">Ronak Talaviya</span>
           </p>
           <div className="flex gap-2.5">
             {[

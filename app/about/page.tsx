@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
@@ -102,6 +103,52 @@ export default function AboutPage() {
                 <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
                   Vetted senior engineers hand-picked for your product domain requirements.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Founder & Leadership */}
+        <section className="py-20 lg:py-28 bg-background border-t border-border/50">
+          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+            <div className="text-center">
+              <span className="rounded-full border border-brand/20 bg-brand/10 px-4 py-1.5 text-xs font-semibold text-brand">
+                Leadership
+              </span>
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+                Meet Our <span className="text-brand">Founder</span>
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
+                Engineering excellence, visionary architecture, and hands-on technical direction.
+              </p>
+            </div>
+
+            <div className="mt-14 mx-auto max-w-3xl overflow-hidden rounded-3xl border border-border bg-card p-8 sm:p-12 shadow-xl shadow-slate-200/40">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-8">
+                <div className="relative h-32 w-32 sm:h-40 sm:w-40 shrink-0 overflow-hidden rounded-2xl border-2 border-brand/20 shadow-xl shadow-brand/10">
+                  <Image
+                    src="/ronak-talaviya.jpg"
+                    alt="Ronak Talaviya - Founder & CEO of Ornitech"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 640px) 128px, 160px"
+                    priority
+                  />
+                </div>
+                <div className="text-center sm:text-left space-y-3">
+                  <div>
+                    <h3 className="text-2xl font-black text-foreground">Ronak Talaviya</h3>
+                    <p className="text-sm font-semibold text-brand">Founder &amp; Chief Executive Officer</p>
+                  </div>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    &ldquo;At Ornitech, we set out to build software that creates lasting value for our clients. By combining modern engineering practices with deep domain architecture, we help companies turn ambitious concepts into rock-solid software products.&rdquo;
+                  </p>
+                  <div className="pt-2 flex flex-wrap justify-center sm:justify-start gap-2 text-xs">
+                    <span className="rounded-full bg-muted px-3 py-1 font-medium text-foreground">System Architecture</span>
+                    <span className="rounded-full bg-muted px-3 py-1 font-medium text-foreground">Cloud &amp; AI Integration</span>
+                    <span className="rounded-full bg-muted px-3 py-1 font-medium text-foreground">Product Strategy</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
