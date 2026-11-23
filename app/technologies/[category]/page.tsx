@@ -5,11 +5,26 @@ import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { TECH_CATEGORIES } from "@/lib/site-data"
 import { ArrowLeft, CheckCircle2, ArrowRight } from "lucide-react"
+import { pageMetadata } from "@/lib/seo"
+import type { Metadata } from "next"
 
 export function generateStaticParams() {
   return TECH_CATEGORIES.map((c) => ({
     category: c.slug,
   }))
+}
+
+export async function generateMetadata(props: { params: Promise<{ category: string }> }): Promise<Metadata> {
+  const { category } = await props.params
+  const technology = TECH_CATEGORIES.find((item) => item.slug === category)
+
+  if (!technology) return { title: "Technology Not Found" }
+
+  return pageMetadata({
+    title: technology.title,
+    description: technology.shortDesc,
+    path: `/technologies/${technology.slug}`,
+  })
 }
 
 export default async function TechCategoryPage(props: { params: Promise<{ category: string }> }) {

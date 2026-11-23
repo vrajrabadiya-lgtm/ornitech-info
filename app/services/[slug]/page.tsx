@@ -5,11 +5,26 @@ import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { SERVICES_DATA } from "@/lib/site-data"
 import { ArrowLeft, CheckCircle2, ArrowRight, Layers, Cpu, Shield, Sparkles } from "lucide-react"
+import { pageMetadata } from "@/lib/seo"
+import type { Metadata } from "next"
 
 export function generateStaticParams() {
   return SERVICES_DATA.map((s) => ({
     slug: s.slug,
   }))
+}
+
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await props.params
+  const service = SERVICES_DATA.find((item) => item.slug === slug)
+
+  if (!service) return { title: "Service Not Found" }
+
+  return pageMetadata({
+    title: `${service.title} in Surat`,
+    description: service.shortDesc,
+    path: `/services/${service.slug}`,
+  })
 }
 
 export default async function ServiceDetailPage(props: { params: Promise<{ slug: string }> }) {

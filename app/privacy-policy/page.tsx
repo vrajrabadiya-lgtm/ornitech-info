@@ -1,10 +1,12 @@
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata = {
-  title: "Privacy Policy | Ornitech",
-  description: "Learn how Ornitech collects, uses, and protects your personal information.",
-}
+export const metadata = pageMetadata({
+  title: "Privacy Policy",
+  description: "Learn how Ornitech collects, uses, and protects information submitted through this website.",
+  path: "/privacy-policy",
+})
 
 const SECTIONS = [
   {

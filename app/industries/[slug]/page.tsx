@@ -5,11 +5,26 @@ import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { INDUSTRIES_DATA } from "@/lib/site-data"
 import { ArrowLeft, CheckCircle2, ArrowRight } from "lucide-react"
+import { pageMetadata } from "@/lib/seo"
+import type { Metadata } from "next"
 
 export function generateStaticParams() {
   return INDUSTRIES_DATA.map((i) => ({
     slug: i.slug,
   }))
+}
+
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await props.params
+  const industry = INDUSTRIES_DATA.find((item) => item.slug === slug)
+
+  if (!industry) return { title: "Industry Not Found" }
+
+  return pageMetadata({
+    title: `${industry.title} Software Solutions`,
+    description: industry.shortDesc,
+    path: `/industries/${industry.slug}`,
+  })
 }
 
 export default async function IndustryDetailPage(props: { params: Promise<{ slug: string }> }) {

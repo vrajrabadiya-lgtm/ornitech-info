@@ -4,6 +4,14 @@ import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { TECH_CATEGORIES } from "@/lib/site-data"
 import { ArrowRight, Code, Server, Database, Smartphone, Cloud, Layout } from "lucide-react"
+import { pageMetadata } from "@/lib/seo"
+
+export const metadata = pageMetadata({
+  title: "Web, Mobile and Cloud Technologies We Use",
+  description:
+    "Explore the frameworks, programming languages, databases and cloud platforms Ornitech uses to build web and mobile software.",
+  path: "/technologies",
+})
 
 export default function TechnologiesPage() {
   return (

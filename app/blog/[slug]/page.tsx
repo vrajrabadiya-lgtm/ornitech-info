@@ -5,11 +5,28 @@ import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { BLOG_POSTS } from "@/lib/site-data"
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react"
+import { pageMetadata } from "@/lib/seo"
+import type { Metadata } from "next"
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((p) => ({
     slug: p.slug,
   }))
+}
+
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await props.params
+  const post = BLOG_POSTS.find((item) => item.slug === slug)
+
+  if (!post) return { title: "Article Not Found" }
+
+  return pageMetadata({
+    title: post.title,
+    description: post.excerpt,
+    path: `/blog/${post.slug}`,
+    image: post.image,
+    type: "article",
+  })
 }
 
 export default async function BlogPostPage(props: { params: Promise<{ slug: string }> }) {
@@ -20,11 +37,37 @@ export default async function BlogPostPage(props: { params: Promise<{ slug: stri
     notFound()
   }
 
+  const publishedAt = new Date(post.date).toISOString()
+  const modifiedAt = new Date(post.updatedAt ?? post.date).toISOString()
+  const articleStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.image,
+    datePublished: publishedAt,
+    dateModified: modifiedAt,
+    mainEntityOfPage: `https://www.ornitech.in/blog/${post.slug}`,
+    author: {
+      "@type": "Person",
+      name: post.author.name,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Ornitech",
+      url: "https://www.ornitech.in",
+    },
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
 
       <main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleStructuredData).replace(/</g, "\\u003c") }}
+        />
         <article className="py-16 lg:py-24">
           <div className="mx-auto max-w-4xl px-5 lg:px-8">
             <Link
@@ -49,6 +92,11 @@ export default async function BlogPostPage(props: { params: Promise<{ slug: stri
               <span className="flex items-center gap-1">
                 <Calendar className="h-4 w-4 text-brand" /> {post.date}
               </span>
+              {post.updatedAt ? (
+                <span className="flex items-center gap-1">
+                  Updated {post.updatedAt}
+                </span>
+              ) : null}
               <span className="flex items-center gap-1">
                 <Clock className="h-4 w-4 text-brand" /> {post.readTime}
               </span>
@@ -62,12 +110,24 @@ export default async function BlogPostPage(props: { params: Promise<{ slug: stri
               <p className="text-base font-medium text-foreground">
                 {post.excerpt}
               </p>
-              <p>
-                Building production software requires careful architectural planning, robust continuous integration, and clean domain isolation. Whether scaling web services or embedding generative AI features, engineering teams must maintain security compliance, comprehensive automated testing, and zero-downtime deployment pipelines.
-              </p>
-              <p>
-                At Ornitech, we specialize in delivering enterprise-ready code bases engineered for high availability, low latency, and rapid iteration. Contact our team today to learn how we can partner on your next software initiative.
-              </p>
+              {post.content.split("\n\n").map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+
+              {post.sources?.length ? (
+                <aside className="border-t border-border/60 pt-6">
+                  <h2 className="text-base font-bold text-foreground">Official documentation</h2>
+                  <ul className="mt-3 list-inside list-disc space-y-2">
+                    {post.sources.map((source) => (
+                      <li key={source.url}>
+                        <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-brand underline underline-offset-2">
+                          {source.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </aside>
+              ) : null}
             </div>
           </div>
         </article>

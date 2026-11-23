@@ -3,10 +3,15 @@ import Script from "next/script"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { CheckCircle2, ArrowRight } from "lucide-react"
+import { pageMetadata } from "@/lib/seo"
 
 export const metadata = {
-  title: "Thank You | Ornitech",
-  description: "Thank you for getting in touch with Ornitech. We will get back to you shortly.",
+  ...pageMetadata({
+    title: "Thanks for Contacting Us",
+    description: "Your message has been received by Ornitech.",
+    path: "/thank-you",
+  }),
+  robots: { index: false, follow: true },
 }
 
 export default function ThankYouPage() {

@@ -1,10 +1,12 @@
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata = {
-  title: "Terms and Conditions | Ornitech",
-  description: "Read the terms and conditions governing your use of the Ornitech website and services.",
-}
+export const metadata = pageMetadata({
+  title: "Terms and Conditions",
+  description: "Read the terms governing use of the Ornitech website and its software development services.",
+  path: "/terms-and-conditions",
+})
 
 const SECTIONS = [
   {

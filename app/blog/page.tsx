@@ -4,6 +4,14 @@ import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { BLOG_POSTS } from "@/lib/site-data"
 import { ArrowRight, Clock, Calendar } from "lucide-react"
+import { pageMetadata } from "@/lib/seo"
+
+export const metadata = pageMetadata({
+  title: "Software Development and AI Articles",
+  description:
+    "Read Ornitech articles about web development, AI architecture, mobile apps and software engineering.",
+  path: "/blog",
+})
 
 export default function BlogPage() {
   return (

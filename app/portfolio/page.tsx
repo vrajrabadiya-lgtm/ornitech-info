@@ -7,6 +7,14 @@ import { PORTFOLIO_DATA } from "@/lib/site-data"
 import shapenticImage from "@/assets/project/1000336675.png"
 import myTicketPassImage from "@/assets/project/1000336671.png"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
+import { pageMetadata } from "@/lib/seo"
+
+export const metadata = pageMetadata({
+  title: "Software Projects and Case Studies",
+  description:
+    "Explore Ornitech projects across AI website creation and event ticketing, with the technologies used to build each product.",
+  path: "/portfolio",
+})
 
 const PORTFOLIO_IMAGES = {
   shapentic: shapenticImage,

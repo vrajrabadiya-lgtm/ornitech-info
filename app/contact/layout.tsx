@@ -1,16 +1,12 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Contact Ornitech — Get a Free Project Quote | Software Company in Surat",
+export const metadata: Metadata = pageMetadata({
+  title: "Discuss Your Software Project",
   description:
-    "Get in touch with Ornitech in Surat, Gujarat. Speak with our software architects to get a free estimate and timeline for your web, mobile, or AI product.",
-  keywords: [
-    "contact ornitech",
-    "hire software developers surat",
-    "software company in surat address",
-    "software development quote surat",
-  ],
-}
+    "Contact Ornitech in Surat, Gujarat to discuss a web, mobile, business software or AI project and request an estimate.",
+  path: "/contact",
+})
 
 export default function ContactLayout({
   children,

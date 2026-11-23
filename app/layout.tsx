@@ -23,32 +23,14 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.ornitech.in'),
   title: {
-    default: 'Ornitech — Best Software Development & IT Company in Surat',
+    default: 'Software Development Company in Surat | Ornitech',
     template: '%s | Ornitech',
   },
   description:
-    'Ornitech is the best software development company in Surat, Gujarat. We build cutting-edge web applications, mobile apps, enterprise software, AI solutions, and cloud architectures for startups and global enterprises.',
+    'Ornitech is a software development company in Surat, Gujarat, building web and mobile apps, business software, AI integrations and cloud solutions.',
   applicationName: 'Ornitech',
   authors: [{ name: 'Ronak Talaviya', url: 'https://www.ornitech.in/founder' }],
   generator: 'Next.js',
-  keywords: [
-    'best software company in surat',
-    'software development company in surat',
-    'top IT company in surat',
-    'web development company in surat',
-    'mobile app development company in surat',
-    'IT company in gujarat',
-    'custom software development surat',
-    'AI development services surat',
-    'hire dedicated developers surat',
-    'react nextjs development company',
-    'flutter mobile app developers surat',
-    'full stack web development agency surat',
-    'cloud and devops services surat',
-    'software agency surat',
-    'Ornitech',
-    'Ronak Talaviya',
-  ],
   creator: 'Ronak Talaviya',
   publisher: 'Ornitech',
   formatDetection: {
@@ -56,31 +38,27 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  alternates: {
-    canonical: 'https://www.ornitech.in',
-  },
   openGraph: {
-    title: 'Ornitech — Best Software Development & IT Company in Surat',
+    title: 'Software Development Company in Surat | Ornitech',
     description:
-      'Partner with Ornitech, Surat’s premier IT and software development agency. Custom web & mobile applications, AI solutions, and scalable cloud systems.',
-    url: 'https://www.ornitech.in',
+      'Ornitech builds custom web and mobile applications, business software, AI integrations and cloud systems from Surat, Gujarat.',
     siteName: 'Ornitech',
     images: [
       {
         url: '/transparent.png',
         width: 1200,
         height: 630,
-        alt: 'Ornitech — Best Software Development Company in Surat',
+        alt: 'Ornitech software development team in Surat',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ornitech — Best Software Development & IT Company in Surat',
+    title: 'Software Development Company in Surat | Ornitech',
     description:
-      'Surat’s premier software development and IT agency. Custom web, mobile, and AI solutions.',
+      'Web and mobile app development, business software and AI integration from Ornitech in Surat, Gujarat.',
     images: ['/transparent.png'],
     creator: '@ornitech',
   },
@@ -123,7 +101,7 @@ const jsonLd = {
       logo: 'https://www.ornitech.in/transparent.png',
       image: 'https://www.ornitech.in/ronak-talaviya.jpg',
       description:
-        'Ornitech is the premier software development and IT company in Surat, Gujarat. We engineer custom web applications, mobile platforms, enterprise systems, and AI solutions.',
+        'Ornitech is a software development company based in Surat, Gujarat. The team builds web and mobile applications, business software and AI integrations.',
       telephone: '+918200867325',
       email: 'hr@ornitech.in',
       founder: {
@@ -171,7 +149,6 @@ const jsonLd = {
         { '@type': 'City', name: 'Surat' },
         { '@type': 'State', name: 'Gujarat' },
         { '@type': 'Country', name: 'India' },
-        { '@type': 'AdministrativeArea', name: 'Worldwide' },
       ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',

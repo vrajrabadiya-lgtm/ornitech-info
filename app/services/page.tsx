@@ -5,23 +5,18 @@ import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { SERVICES_DATA } from "@/lib/site-data"
 import { ArrowRight, Sparkles, Globe, Smartphone, Code2, Zap, Cpu, Bot, Layout, CheckCircle2, Shield, BarChart3, Users, UserPlus } from "lucide-react"
+import { pageMetadata } from "@/lib/seo"
 
 const ICON_MAP: Record<string, React.ElementType> = {
   Globe, Smartphone, Code2, Zap, Cpu, Bot, Layout, CheckCircle2, Shield, BarChart3, Users, UserPlus
 }
 
-export const metadata: Metadata = {
-  title: "Software & IT Services in Surat | Web, Mobile, AI & Cloud Engineering",
+export const metadata: Metadata = pageMetadata({
+  title: "Software Development Services in Surat",
   description:
-    "Explore Ornitech's comprehensive software services in Surat: Custom Software, Web Development, Mobile Apps (iOS & Android), AI Integration, and Dedicated Developer Teams.",
-  keywords: [
-    "software development services surat",
-    "web development services surat",
-    "mobile app development services surat",
-    "AI integration services surat",
-    "IT consulting surat",
-  ],
-}
+    "Explore Ornitech services in Surat: custom software, web and mobile app development, AI integration, cloud engineering and dedicated development teams.",
+  path: "/services",
+})
 
 export default function ServicesPage() {
   return (

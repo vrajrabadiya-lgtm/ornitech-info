@@ -14,23 +14,14 @@ import { FounderSpotlight } from "@/components/founder-spotlight"
 import { Faq } from "@/components/faq"
 import { Collaborate } from "@/components/collaborate"
 import { SiteFooter } from "@/components/site-footer"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Ornitech — Best Software Development Company in Surat | Custom Web & Mobile Apps",
+export const metadata: Metadata = pageMetadata({
+  title: "Software Development Company in Surat | Web, Mobile & AI",
   description:
-    "Looking for the best software company in Surat? Ornitech delivers world-class custom software development, mobile apps (iOS & Android), AI solutions, and web development. Contact us for a free quote.",
-  keywords: [
-    "best software company in surat",
-    "software development company in surat",
-    "top IT company in surat",
-    "web development company in surat",
-    "mobile app development in surat",
-    "software company near me surat",
-    "IT services surat gujarat",
-    "hire software developers in surat",
-    "custom software development company india",
-  ],
-}
+    "Ornitech is a Surat software development company building custom web apps, mobile apps, business software and AI solutions for startups and growing businesses.",
+  path: "/",
+})
 
 export default function HomePage() {
   return (

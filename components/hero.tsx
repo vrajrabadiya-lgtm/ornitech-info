@@ -7,11 +7,10 @@ import { ArrowRight, Star, ArrowUpRight, Cpu, Globe, Smartphone, Cloud, CheckCir
 
 const AVATARS = ["/avatars/male1.png", "/avatars/female.png", "/avatars/male2.png"]
 const ROTATING_WORDS = [
-  "Web Platforms",
-  "AI Infrastructures",
-  "Mobile Products",
-  "Cloud Solutions",
-  "Enterprise Software"
+  "Web & Mobile Apps",
+  "AI Products",
+  "Cloud Systems",
+  "Business Software"
 ]
 
 const SHOWCASE_TABS = [
@@ -126,7 +125,7 @@ export function Hero() {
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 border border-emerald-200/80">
               <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
-              Available for Q3/Q4 Projects
+              Open to New Projects
             </span>
           </div>
 
@@ -152,11 +151,11 @@ export function Hero() {
         {/* Hero Central Header */}
         <div className="mt-12 text-center lg:mt-16">
           <p className="animate-blur-in text-xs font-bold uppercase tracking-[0.35em] text-blue-600">
-            Top Software Development &amp; IT Company in Surat
+            Software Development Company in Surat
           </p>
 
           <h1 className="animate-blur-in animation-delay-100 mt-4 text-[clamp(2rem,6.5vw,5.5rem)] font-black leading-[1.05] tracking-tight text-slate-900">
-            We Engineer Digital Products &amp;
+            We Build Custom
             <br />
             <span
               className="inline-block bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-500 bg-clip-text text-transparent transition-all duration-300"
@@ -167,7 +166,7 @@ export function Hero() {
           </h1>
 
           <p className="animate-blur-in animation-delay-200 mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-slate-600">
-            Ornitech is the premier software development company in Surat, Gujarat. We architect, design, and ship production-grade web platforms, mobile apps, and custom AI solutions with enterprise velocity.
+            Ornitech is a software development company in Surat, Gujarat. We design and build custom websites, web apps, mobile apps, business software, and AI integrations for startups and growing businesses.
           </p>
 
           {/* Action CTAs */}

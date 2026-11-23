@@ -4,6 +4,14 @@ import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { CAREER_OPENINGS } from "@/lib/site-data"
 import { ArrowRight, MapPin, Briefcase, Clock, Sparkles } from "lucide-react"
+import { pageMetadata } from "@/lib/seo"
+
+export const metadata = pageMetadata({
+  title: "Software Engineering Careers at Ornitech",
+  description:
+    "Explore current software engineering, mobile development and AI roles with Ornitech. See role details and contact our team to apply.",
+  path: "/careers",
+})
 
 export default function CareersPage() {
   return (

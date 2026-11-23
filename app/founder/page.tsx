@@ -18,12 +18,14 @@ import {
   Award
 } from "lucide-react"
 import { FaLinkedin } from "react-icons/fa"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata = {
-  title: "Ronak Talaviya — Founder & CEO | Ornitech",
+export const metadata = pageMetadata({
+  title: "Ronak Talaviya, Founder and CEO",
   description:
-    "Meet Ronak Talaviya, Founder & CEO of Ornitech. Discover our engineering vision, technical architecture standards, and product philosophy.",
-}
+    "Meet Ronak Talaviya, founder of Ornitech, and learn about the team's approach to software engineering, AI integration and product development.",
+  path: "/founder",
+})
 
 export default function FounderPage() {
   return (

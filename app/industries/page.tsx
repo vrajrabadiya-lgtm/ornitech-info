@@ -4,10 +4,18 @@ import { SiteFooter } from "@/components/site-footer"
 import { CtaBand } from "@/components/cta-band"
 import { INDUSTRIES_DATA } from "@/lib/site-data"
 import { ArrowRight, CheckCircle2, Building2, HeartPulse, Landmark, ShoppingBag, GraduationCap, Plane, Truck, Clapperboard, Dumbbell, UtensilsCrossed, Factory, Store } from "lucide-react"
+import { pageMetadata } from "@/lib/seo"
 
 const ICON_MAP: Record<string, React.ElementType> = {
   HeartPulse, Landmark, ShoppingBag, GraduationCap, Plane, Building2, Truck, Clapperboard, Dumbbell, UtensilsCrossed, Factory, Store
 }
+
+export const metadata = pageMetadata({
+  title: "Industry Software Solutions",
+  description:
+    "See how Ornitech builds software for healthcare, finance, retail, education, logistics, manufacturing and other industries.",
+  path: "/industries",
+})
 
 export default function IndustriesPage() {
   return (

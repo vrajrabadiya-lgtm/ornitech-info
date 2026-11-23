@@ -56,10 +56,12 @@ export interface BlogPost {
   excerpt: string
   content: string
   date: string
+  updatedAt?: string
   readTime: string
   author: { name: string; role: string; avatar: string }
   category: string
   image: string
+  sources?: { title: string; url: string }[]
 }
 
 export const SERVICES_DATA: ServiceItem[] = [
@@ -615,34 +617,49 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "building-scalable-nextjs-16-apps",
     title: "Building High-Scale Next.js 16 Web Applications in 2026",
-    excerpt: "Discover best practices for Turbopack, Server Actions, and dynamic streaming to build lightning-fast web applications.",
-    content: "Next.js 16 brings powerful enhancements to full-stack web development...",
+    excerpt: "A practical checklist for building maintainable Next.js App Router applications, from rendering choices to metadata and performance.",
+    content: "Start with the route and the user. Public pages such as service descriptions can often be rendered on the server and cached, while pages that depend on a signed-in user's data need careful dynamic handling. In the App Router, Server Components are the default; add Client Components where browser interaction is needed rather than moving an entire page to the client.\n\nTreat caching as a product and security decision. Confirm which data is safe to reuse, and keep private or user-specific responses from leaking between visitors. Use loading and error states for slower operations, and link between internal pages with Next.js navigation so visitors can move through the site without losing context.\n\nBefore launch, check page titles, descriptions, canonical URLs, social previews, robots rules and the sitemap. Then measure real page performance and improve the largest opportunities first: appropriately sized images, font loading, third-party scripts and unnecessary client-side JavaScript. Recheck after deployment because production behavior can differ from a local development session.",
     date: "August 2, 2026",
+    updatedAt: "November 22, 2026",
     readTime: "6 min read",
     author: { name: "Ankit Patel", role: "Principal Architect", avatar: "/avatars/sophia.png" },
     category: "Web Development",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+    sources: [
+      { title: "Next.js production checklist", url: "https://nextjs.org/docs/app/guides/production-checklist" },
+      { title: "Next.js metadata and Open Graph", url: "https://nextjs.org/docs/app/getting-started/metadata-and-og-images" },
+    ],
   },
   {
     slug: "ai-rag-architecture-guide",
     title: "Enterprise RAG Architecture: Combining Vector Search with LLMs",
-    excerpt: "A technical guide to implementing Retrieval-Augmented Generation for proprietary enterprise datasets with zero data leaks.",
-    content: "Generative AI is revolutionizing enterprise knowledge management...",
+    excerpt: "A practical guide to retrieving relevant business documents for AI answers, with attention to permissions, evaluation and operational tradeoffs.",
+    content: "A retrieval-augmented generation system has two jobs: find useful source material for a question, then give that material to a model as context for its answer. The document pipeline matters as much as the model. Preserve titles, sections and access-control metadata when preparing files, and split long documents into chunks that keep related information together.\n\nAt question time, retrieve only material the current user is allowed to see. Semantic search can find conceptually related passages even when the wording differs; exact text matching can help with identifiers and product names. A hybrid approach may be useful, but it should be compared against a representative set of real questions rather than assumed to be better.\n\nEvaluate retrieval and answers separately. Check whether the right source appears in the results, whether the response is supported by that source, and whether the system handles missing evidence by saying it does not know. Track latency and cost too. RAG can improve grounding, but it does not guarantee correctness or replace permissions, data governance and review for high-impact decisions.",
     date: "July 28, 2026",
+    updatedAt: "November 22, 2026",
     readTime: "8 min read",
     author: { name: "David Miller", role: "AI Solutions Lead", avatar: "/avatars/a1.png" },
     category: "AI Solutions",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
+    sources: [
+      { title: "OpenAI Retrieval guide", url: "https://developers.openai.com/api/docs/guides/retrieval" },
+      { title: "OpenAI guide to including relevant context", url: "https://developers.openai.com/api/docs/guides/prompt-engineering#include-relevant-context-information" },
+    ],
   },
   {
     slug: "flutter-vs-react-native-2026",
-    title: "Flutter vs React Native in 2026: Which Framework Should You Choose?",
-    excerpt: "Comparing performance, developer experience, third-party ecosystem, and native platform integration for cross-platform apps.",
-    content: "When launching a new cross-platform mobile application...",
+    title: "Choosing a Cross-Platform Mobile App Framework in 2026",
+    excerpt: "Compare Flutter and React Native against your team's skills, platform needs, design goals and integration requirements before choosing a stack.",
+    content: "Start with the product requirements, not a popularity ranking. List the platforms you need to support, the device features the app must use, the design system it should follow, and the libraries or native code your team already depends on. Then check how well each candidate supports those needs.\n\nReact Native lets teams build Android and iOS interfaces with React concepts and platform-backed components, and it provides ways to connect JavaScript to native modules and views. Flutter uses Dart and a composable widget system that it renders through its own framework. Those differences affect how a team approaches UI consistency, platform conventions and integration with existing native applications.\n\nBuild a small proof of concept around the hardest screen or device integration before committing. Test accessibility, startup time, animation and behavior on real devices, and check the maintenance status of essential packages. The best choice is the framework your team can support while meeting the product's platform, performance and delivery requirements.",
     date: "July 15, 2026",
+    updatedAt: "November 22, 2026",
     readTime: "7 min read",
     author: { name: "Sarah Jenkins", role: "Lead Mobile Developer", avatar: "/avatars/a2.png" },
     category: "Mobile Apps",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80",
+    sources: [
+      { title: "React Native native platform guide", url: "https://reactnative.dev/docs/native-platform" },
+      { title: "Flutter architectural overview", url: "https://docs.flutter.dev/resources/architectural-overview" },
+    ],
   }
 ]
