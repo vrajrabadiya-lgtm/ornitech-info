@@ -2,7 +2,6 @@ import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata, Viewport } from 'next'
 import { Plus_Jakarta_Sans, Outfit } from 'next/font/google'
-import Script from 'next/script'
 import './globals.css'
 import { VoiceAssistant } from '@/components/voice-assistant'
 
@@ -228,30 +227,31 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* Google Tag Manager */}
-        <Script
+        {/* Google Tag Manager (gtm.js) */}
+        <script
           async
           src="https://www.googletagmanager.com/gtm.js?id=GTM-MNWS9VGS"
-          strategy="afterInteractive"
         />
 
         {/* Google tag (gtag.js) */}
-        <Script
+        <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=GTM-TJQBS3NZ"
-          strategy="afterInteractive"
         />
-        <Script id="google-tags" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+        <script
+          id="google-tags-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
 
-            gtag('config', 'G-YRW251ZDNY');
-            gtag('config', 'GTM-TJQBS3NZ');
-            gtag('config', 'AW-18473466393');
-          `}
-        </Script>
+              gtag('config', 'G-YRW251ZDNY');
+              gtag('config', 'GTM-TJQBS3NZ');
+              gtag('config', 'AW-18473466393');
+            `,
+          }}
+        />
       </head>
       <body className="font-sans antialiased overflow-x-hidden pt-20">
         {/* Google Tag Manager (noscript) */}
