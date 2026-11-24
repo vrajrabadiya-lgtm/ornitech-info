@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowRight, Phone, CheckCircle2 } from "lucide-react"
+import { ArrowRight, Phone, CheckCircle2, AlertCircle, Loader2, RefreshCw } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 
 const PROJECT_TYPES = ["AI/ML", "Website", "Mobile App", "Web App", "Landing Page", "SaaS Product", "UI/UX Design"]
@@ -133,10 +133,39 @@ export function Collaborate() {
 
         <div className={`mt-10 glass-card rounded-[2.5rem] p-4 sm:p-10 shadow-2xl shadow-slate-200/50 border border-white transition-all duration-700 delay-200 ${inView ? "animate-scale-in" : "opacity-0 scale-95"}`}>
           {submitted ? (
-            <div className="flex flex-col items-center gap-4 py-12 text-center">
-              <CheckCircle2 className="h-16 w-16 text-blue-600" />
-              <h3 className="text-3xl font-black text-slate-900">Message Sent!</h3>
-              <p className="text-slate-600 font-medium">We&apos;ll get back to you within 24 hours.</p>
+            <div className="flex flex-col items-center gap-5 py-12 px-4 text-center max-w-xl mx-auto animate-fade-in">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500 text-white shadow-xl shadow-emerald-500/25 ring-8 ring-emerald-100">
+                <CheckCircle2 className="h-10 w-10" />
+              </div>
+              <h3 className="text-3xl font-black text-slate-900" style={{ letterSpacing: "-0.02em" }}>
+                Project Details Received!
+              </h3>
+              <p className="text-base leading-relaxed text-slate-600">
+                Thank you, <strong className="text-slate-800">{fields.name || "there"}</strong>! We&apos;ve received your request for a <strong className="text-blue-600">{type}</strong> project. Our engineering leads will review your requirements and reach out to <strong className="text-slate-800">{fields.email}</strong> within 24 hours.
+              </p>
+
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSubmitted(false)
+                    setFields({ name: "", email: "", phone: "", website: "", message: "" })
+                    setAgree(false)
+                    setTouched({})
+                    setErrors({})
+                    setSubmitError("")
+                  }}
+                  className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-xs font-bold text-white shadow-md hover:bg-slate-800 transition-all cursor-pointer"
+                >
+                  <RefreshCw className="h-3.5 w-3.5" /> Submit Another Request
+                </button>
+                <a
+                  href="tel:+918200867325"
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-xs font-bold text-slate-700 shadow-sm hover:border-emerald-300 hover:text-emerald-700 transition-all"
+                >
+                  <Phone className="h-3.5 w-3.5 text-emerald-600" /> Call Directly: +91 82008 67325
+                </a>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate>
@@ -250,19 +279,36 @@ export function Collaborate() {
               {/* Actions */}
               <div className="mt-8 flex flex-wrap justify-center gap-4">
                 {submitError && (
-                  <p className="w-full rounded-xl bg-red-50 px-4 py-3 text-center text-xs font-medium text-red-600">
-                    {submitError}
-                  </p>
+                  <div className="w-full rounded-2xl border border-red-200 bg-red-50/90 p-4 flex items-start gap-3 text-red-800 text-left">
+                    <AlertCircle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
+                    <div className="text-xs space-y-1">
+                      <p className="font-bold">Unable to submit proposal request</p>
+                      <p className="text-red-700 leading-relaxed">{submitError}</p>
+                      <p className="text-[11px] text-red-600 pt-1">
+                        You can also email us directly at{" "}
+                        <a href="mailto:hr@ornitech.in" className="underline font-semibold">hr@ornitech.in</a>
+                        {" "}or call <a href="tel:+918200867325" className="underline font-semibold">+91 82008 67325</a>.
+                      </p>
+                    </div>
+                  </div>
                 )}
                 <button
                   type="submit"
                   disabled={submitting}
                   className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-700 hover:gap-3 hover:shadow-xl hover:shadow-blue-600/35 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
                 >
-                  {submitting ? "Sending..." : "Send Message"} <ArrowRight className="h-4 w-4" />
+                  {submitting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" /> Submitting Request...
+                    </>
+                  ) : (
+                    <>
+                      Send Message <ArrowRight className="h-4 w-4" />
+                    </>
+                  )}
                 </button>
                 <a
-                  href="tel:+14256234723"
+                  href="tel:+918200867325"
                   className="glass-chip inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-slate-800 transition-all hover:text-blue-600 hover:gap-3 border border-slate-200/80"
                 >
                   <Phone className="h-4 w-4 stroke-[2.2]" /> Book a Call

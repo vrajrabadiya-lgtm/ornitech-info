@@ -4,7 +4,7 @@ import { useState } from "react"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { Faq } from "@/components/faq"
-import { Mail, Phone, Send, CheckCircle2 } from "lucide-react"
+import { Mail, Phone, Send, CheckCircle2, AlertCircle, Loader2, RefreshCw } from "lucide-react"
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PHONE_RE = /^[+]?[\d\s\-().]{7,20}$/
@@ -122,12 +122,35 @@ export default function ContactPage() {
                 <p className="mt-1 text-xs text-muted-foreground">We usually respond within 24 hours.</p>
 
                 {submitted ? (
-                  <div className="mt-8 rounded-2xl bg-brand/10 p-8 text-center">
-                    <CheckCircle2 className="mx-auto h-12 w-12 text-brand" />
-                    <h3 className="mt-4 text-xl font-bold text-foreground">Thank You for Reaching Out!</h3>
-                    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                      We have received your message and our team will get back to you shortly at {formData.email}.
+                  <div className="mt-8 rounded-2xl border border-emerald-200/80 bg-gradient-to-b from-emerald-50/90 via-emerald-50/40 to-white p-8 sm:p-10 text-center shadow-lg shadow-emerald-500/5 animate-fade-in">
+                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/25 ring-8 ring-emerald-100">
+                      <CheckCircle2 className="h-8 w-8" />
+                    </div>
+                    <h3 className="mt-5 text-2xl font-black text-slate-900">Message Received Successfully!</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600 max-w-md mx-auto">
+                      Thank you, <strong>{formData.name || "there"}</strong>! We have received your inquiry for <strong>{formData.service}</strong> and our team will get back to you at <strong>{formData.email}</strong> within 24 business hours.
                     </p>
+
+                    <div className="mt-8 flex flex-wrap items-center justify-center gap-3 pt-6 border-t border-emerald-100/80">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSubmitted(false)
+                          setFormData({ name: "", email: "", phone: "", company: "", service: "Web Development", budget: "$10k - $25k", message: "" })
+                          setTouched({})
+                          setErrors({})
+                        }}
+                        className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-2.5 text-xs font-bold text-white shadow-md hover:bg-slate-800 transition-all cursor-pointer"
+                      >
+                        <RefreshCw className="h-3.5 w-3.5" /> Send Another Message
+                      </button>
+                      <a
+                        href="tel:+918200867325"
+                        className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-2.5 text-xs font-bold text-slate-700 shadow-sm hover:border-emerald-300 hover:text-emerald-700 transition-all"
+                      >
+                        <Phone className="h-3.5 w-3.5 text-emerald-600" /> Call Directly: +91 82008 67325
+                      </a>
+                    </div>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-5">
@@ -239,16 +262,33 @@ export default function ContactPage() {
                     </div>
 
                     {submitError && (
-                      <p className="rounded-xl bg-red-50 px-4 py-3 text-xs font-medium text-red-600">
-                        {submitError}
-                      </p>
+                      <div className="rounded-2xl border border-red-200 bg-red-50/90 p-4 flex items-start gap-3 text-red-800 text-left">
+                        <AlertCircle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
+                        <div className="text-xs space-y-1">
+                          <p className="font-bold">Unable to send message</p>
+                          <p className="text-red-700 leading-relaxed">{submitError}</p>
+                          <p className="text-[11px] text-red-600 pt-1">
+                            You can also email us directly at{" "}
+                            <a href="mailto:hr@ornitech.in" className="underline font-semibold">hr@ornitech.in</a>
+                            {" "}or call <a href="tel:+918200867325" className="underline font-semibold">+91 82008 67325</a>.
+                          </p>
+                        </div>
+                      </div>
                     )}
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3.5 text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3.5 text-sm font-semibold text-brand-foreground transition-all hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer shadow-md shadow-brand/20"
                     >
-                      {submitting ? "Sending..." : "Send Message"} <Send className="h-4 w-4" />
+                      {submitting ? (
+                        <>
+                          <Loader2 className="h-4 w-4 animate-spin" /> Sending Your Inquiry...
+                        </>
+                      ) : (
+                        <>
+                          Send Message <Send className="h-4 w-4" />
+                        </>
+                      )}
                     </button>
                   </form>
                 )}
