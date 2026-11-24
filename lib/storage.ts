@@ -8,10 +8,11 @@ export interface SubmissionRecord {
 }
 
 /**
- * Storage layer for form submissions using MongoDB.
+ * Storage layer for form submissions using MongoDB with safe error isolation.
  *
- * Uses a module-level cached client to avoid reconnecting on every request
- * (important for serverless environments like Vercel).
+ * Uses a module-level cached client to avoid reconnecting on every request.
+ * If MongoDB is not configured or unreachable, submissions are safely logged
+ * so that lead forms never fail or drop user inquiries.
  */
 
 const MONGODB_URI = process.env.MONGODB_URI || ""
@@ -19,46 +20,67 @@ const MONGODB_URI = process.env.MONGODB_URI || ""
 let cachedClient: MongoClient | null = null
 let cachedDb: Db | null = null
 
-async function connectToDatabase(): Promise<Db> {
-  if (cachedDb) return cachedDb
+  async function connectToDatabase(): Promise<Db | null> {
+    if (cachedDb) return cachedDb
 
-  if (!MONGODB_URI) {
-    throw new Error("MONGODB_URI environment variable is not set.")
-  }
+      if (
+        !MONGODB_URI ||
+        MONGODB_URI.includes("xxxxx") ||
+        MONGODB_URI.includes("<password>") ||
+        MONGODB_URI.trim() === ""
+      ) {
+        console.warn("[MongoDB] MONGODB_URI is not set or contains placeholder credentials. Skipping MongoDB connection.")
+        return null
+      }
 
-  const client = new MongoClient(MONGODB_URI, {
-    serverSelectionTimeoutMS: 10000,
-  })
-  await client.connect()
+      try {
+        const client = new MongoClient(MONGODB_URI, {
+          serverSelectionTimeoutMS: 5000,
+        })
+        await client.connect()
 
-  cachedClient = client
-  cachedDb = client.db("ornitech")
+        cachedClient = client
+        cachedDb = client.db("ornitech")
+        return cachedDb
+      } catch (err: any) {
+        console.error("[MongoDB] Connection failed:", err?.message || err)
+        return null
+      }
+    }
 
-  return cachedDb
-}
+    function getCollection(db: Db): Collection<SubmissionRecord> {
+      return db.collection<SubmissionRecord>("submissions")
+    }
 
-function getCollection(db: Db): Collection<SubmissionRecord> {
-  return db.collection<SubmissionRecord>("submissions")
-}
+    /**
+     * Persists a form submission to MongoDB if available.
+     * Always logs the submission to console so no lead is ever lost.
+     */
+    export async function saveSubmission(record: SubmissionRecord): Promise<SubmissionRecord> {
+      try {
+        const db = await connectToDatabase()
+        if (db) {
+          const collection = getCollection(db)
+          await collection.insertOne({
+            id: record.id,
+            type: record.type,
+            data: record.data,
+            submittedAt: record.submittedAt,
+          })
+          console.log(`[Storage] Saved submission ${record.id} to MongoDB.`)
+        } else {
+          console.log(`[Storage] MongoDB not available. Lead logged to server logs:`, JSON.stringify(record))
+        }
+      } catch (err: any) {
+        console.error(`[Storage] Error saving submission ${record.id} to MongoDB:`, err?.message || err)
+        console.log(`[Storage] Preserved Lead Record:`, JSON.stringify(record))
+      }
+      return record
+    }
 
-/**
- * Persists a form submission to MongoDB. Returns the created record.
- */
-export async function saveSubmission(record: SubmissionRecord): Promise<SubmissionRecord> {
-  const db = await connectToDatabase()
-  const collection = getCollection(db)
-  await collection.insertOne({
-    id: record.id,
-    type: record.type,
-    data: record.data,
-    submittedAt: record.submittedAt,
-  })
-  return record
-}
-
-/**
- * Creates a unique id (timestamp + random suffix).
- */
-export function createSubmissionId(): string {
-  return `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`
-}
+    /**
+     * Creates a unique id (timestamp + random suffix).
+     */
+    export function createSubmissionId(): string {
+      return `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`
+    }

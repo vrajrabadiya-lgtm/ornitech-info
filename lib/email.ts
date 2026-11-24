@@ -492,45 +492,67 @@ export interface EmailPayload {
 
 /**
  * Sends two emails:
- *  1. Admin notification → contact@ornitech.in (full details)
+ *  1. Admin notification → process.env.GMAIL_USER (full details)
  *  2. Confirmation → user's email (thank you + submission copy)
  */
 export async function sendSubmissionEmails(
   payload: EmailPayload,
   request?: Request
-): Promise<void> {
-  const headers = request?.headers ?? new Headers()
-  const ip = (headers.get("x-forwarded-for")?.split(",")[0]?.trim()) || "Unknown"
-  const country = headers.get("x-vercel-ip-country") || "Unknown"
-  const userAgent = headers.get("user-agent") || ""
-  const { browser, os, device } = parseUserAgent(userAgent)
-  const submittedAt = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "full", timeStyle: "medium" })
+): Promise < boolean > {
+    const user = process.env.GMAIL_USER
+  const pass = process.env.GMAIL_PASS
 
-  const adminHtml = buildAdminEmail({ ...payload, submittedAt, ip, country, browser, os, device })
-  const thankYouHtml = buildThankYouEmail(payload)
-
-  const adminMail = {
-    from: `"Ornitech Contact API" <${process.env.GMAIL_USER}>`,
-    replyTo: payload.email,
-    to: process.env.GMAIL_USER,
-    subject: `🚀 New Project Inquiry from ${payload.fullName} | Ornitech`,
-    html: adminHtml,
-    text: `New Contact: ${payload.fullName} (${payload.email}) - Company: ${payload.company || "N/A"} - Message: ${payload.message}`,
+      if(!user || !pass || pass === "your-gmail-app-password" || pass.trim() === "") {
+    console.warn("[Email] GMAIL_USER or GMAIL_PASS is not configured (or is using a placeholder).")
+    console.log("[Email] Lead inquiry preserved in server logs:", JSON.stringify(payload))
+    return false
   }
 
-  const thankYouMail = {
-    from: `"Ornitech" <${process.env.GMAIL_USER}>`,
-    to: payload.email,
-    subject: `Your Innovation Journey Starts Today 🚀 | Ornitech`,
-    html: thankYouHtml,
-    text: `Hi ${payload.fullName}, thank you for contacting Ornitech! We've received your inquiry and our team will get back to you within 24 business hours. - Team Ornitech`,
+    try {
+      const headers = request?.headers ?? new Headers()
+    const ip = (headers.get("x-forwarded-for")?.split(",")[0]?.trim()) || "Unknown"
+    const country = headers.get("x-vercel-ip-country") || "Unknown"
+    const userAgent = headers.get("user-agent") || ""
+    const { browser, os, device } = parseUserAgent(userAgent)
+    const submittedAt = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "full", timeStyle: "medium" })
+
+    const adminHtml = buildAdminEmail({ ...payload, submittedAt, ip, country, browser, os, device })
+    const thankYouHtml = buildThankYouEmail(payload)
+
+    const adminMail = {
+        from: `"Ornitech Contact API" <${user}>`,
+        replyTo: payload.email,
+        to: user,
+        subject: `🚀 New Project Inquiry from ${payload.fullName} | Ornitech`,
+        html: adminHtml,
+        text: `New Contact: ${payload.fullName} (${payload.email}) - Company: ${payload.company || "N/A"} - Message: ${payload.message}`,
+      }
+
+    const thankYouMail = {
+        from: `"Ornitech" <${user}>`,
+        to: payload.email,
+        subject: `Your Innovation Journey Starts Today 🚀 | Ornitech`,
+        html: thankYouHtml,
+        text: `Hi ${payload.fullName}, thank you for contacting Ornitech! We've received your inquiry and our team will get back to you within 24 business hours. - Team Ornitech`,
+      }
+
+    await transporter.sendMail(adminMail)
+    try {
+        await transporter.sendMail(thankYouMail)
+      } catch(thankYouErr: any) {
+        console.warn("[Email] Admin notification delivered, but confirmation email to user failed:", thankYouErr?.message)
+      }
+
+    console.log(`[Email] Successfully delivered inquiry notification for ${payload.fullName}`)
+    return true
+    } catch(err: any) {
+      console.error("[Email] Nodemailer delivery failed:", err?.message || err)
+      console.log("[Email] Preserved Inquiry Details:", JSON.stringify(payload))
+      return false
+    }
   }
 
-  await transporter.sendMail(adminMail)
-  await transporter.sendMail(thankYouMail)
-}
-
-export { transporter }
+  export { transporter }
 
 
 

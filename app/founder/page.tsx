@@ -10,7 +10,6 @@ import {
   Zap,
   ArrowRight,
   Mail,
-  Linkedin,
   Terminal,
   CheckCircle2,
   Cpu,
